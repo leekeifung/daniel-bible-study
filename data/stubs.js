@@ -1,29 +1,115 @@
 // ==========================================
-// 未開放課程的佔位符 (Coming Soon Stubs)
-// 當新的課程 .js 檔被載入後，這裡的同 ID 佔位會自動被跳過
+// stubs.js — 課程結構 (依照 OT366 建議安排)
+// 已有完整內容的課由各自的 lessonXX.js 載入
+// 此檔案只建立尚未有完整內容的課堂 stub
 // ==========================================
+
+// --- 第二課：但以理書 2 ---
 (function() {
-    var stubs = [
-        { id:'lesson2', title:'第二課', subtitle:'尼布甲尼撒的夢', ref:'但以理書 第2章', description:'巨像之夢的解釋與預言的意義', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson3', title:'第三課', subtitle:'火窯的考驗', ref:'但以理書 第3章', description:'沙得拉、米煞、亞伯尼歌的信心', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson4', title:'第四課', subtitle:'尼布甲尼撒的教訓', ref:'但以理書 第4章', description:'驕傲的代價與悔改的恩典', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson5', title:'第五課', subtitle:'伯沙撒的筵席', ref:'但以理書 第5章', description:'牆上的文字與巴比倫的終結', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson6', title:'第六課', subtitle:'獅子坑', ref:'但以理書 第6章', description:'但以理的忠誠與神的保護', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson7', title:'第七課', subtitle:'四獸的異象', ref:'但以理書 第7章', description:'歷史的走向與神國的降臨', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson8', title:'第八課', subtitle:'公綿羊與公山羊', ref:'但以理書 第8章', description:'波斯與希臘帝國的預言', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson9', title:'第九課', subtitle:'但以理的禱告', ref:'但以理書 第9章', description:'七十個七的預言與認罪禱告', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson10', title:'第十課', subtitle:'大爭戰的異象（上）', ref:'但以理書 第10章', description:'靈界的爭戰與神的啟示', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson11', title:'第十一課', subtitle:'大爭戰的異象（下）', ref:'但以理書 第11章', description:'南北王的爭戰與歷史的詳細預言', comingSoon:true, verses:[], questions:null, quiz:[] },
-        { id:'lesson12', title:'第十二課', subtitle:'末後的盼望', ref:'但以理書 第12章', description:'復活的應許與忠信的獎賞', comingSoon:true, verses:[], questions:null, quiz:[] }
-    ];
-    window.LESSONS_DATA = window.LESSONS_DATA || [];
-    stubs.forEach(function(stub) {
-        var exists = false;
-        for (var i = 0; i < window.LESSONS_DATA.length; i++) {
-            if (window.LESSONS_DATA[i].id === stub.id) { exists = true; break; }
-        }
-        if (!exists) {
-            window.LESSONS_DATA.push(stub);
-        }
+    // 跳過已由 lesson02.js 載入的課
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson02')) return;
+    window.LESSONS_DATA.push({
+        id: 'lesson02',
+        title: '第二課',
+        subtitle: '外邦君王與至高神的國度',
+        ref: '但以理書 2:1-49',
+        date: '4月26日',
+        description: '尼布甲尼撒的巨像夢——四個帝國與神永遠國度的框架。參考 OT366 Unit 3。',
+        chapterTitle: '但以理書第二章',
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 自修閱讀：但以理書 3-6 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'selfstudy')) return;
+    window.LESSONS_DATA.push({
+        id: 'selfstudy',
+        title: '📚 自修閱讀',
+        subtitle: '忠信者的見證',
+        ref: '但以理書 3-6章',
+        date: '4月26日 – 5月24日（自修期間）',
+        description: '自修閱讀第3-6章。請特別注意「重複的句型 (Repetition)」以及「君王的驕傲與降卑」主題（對應 OT366 Unit 4-7）。',
+        chapterTitle: '但以理書第三至六章',
+        isSelfStudy: true,
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 第三課：但以理書 7 & 8 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson03')) return;
+    window.LESSONS_DATA.push({
+        id: 'lesson03',
+        title: '第三課',
+        subtitle: '屬天視角的歷史——四獸與公綿羊/公山羊',
+        ref: '但以理書 7:1-28, 8:1-27',
+        date: '5月24日',
+        description: '進入啟示文學。將第7章與第8章合併講解，連結回第2章的巨像（The Big Picture）。參考 OT366 Unit 8 & 9。',
+        chapterTitle: '但以理書第七至八章',
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 第四課：但以理書 9 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson04')) return;
+    window.LESSONS_DATA.push({
+        id: 'lesson04',
+        title: '第四課',
+        subtitle: '但以理的祈禱與七十個七',
+        ref: '但以理書 9:1-27',
+        date: '5月31日',
+        description: '探討耶利米書的70年、但以理的認罪禱告，以及「七十個七」的末世論與歷史性詮釋。參考 OT366 Unit 10。',
+        chapterTitle: '但以理書第九章',
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 第五課：但以理書 10 & 11 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson05')) return;
+    window.LESSONS_DATA.push({
+        id: 'lesson05',
+        title: '第五課',
+        subtitle: '屬靈爭戰與南北朝的衝突',
+        ref: '但以理書 10:1-11:45',
+        date: '6月21日',
+        description: '屬靈爭戰的背景以及南方王與北方王的詳細歷史預言。參考 OT366 Unit 11 前半。',
+        chapterTitle: '但以理書第十至十一章',
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 第六課：但以理書 12 & 全書總結 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson06')) return;
+    window.LESSONS_DATA.push({
+        id: 'lesson06',
+        title: '第六課',
+        subtitle: '末世的結局與全書總結',
+        ref: '但以理書 12:1-13',
+        date: '6月28日',
+        description: '復活的神學以及全書總結——將第1-6章的敘事與第7-12章的預言結合，帶出對今日信徒的意義。參考 OT366 Unit 11 後半 & Conclusion。',
+        chapterTitle: '但以理書第十二章',
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
     });
 })();
