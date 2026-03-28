@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>但以理書研經課程 | 富山平安福音堂</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif; background: #f0f2f5; color: #333; }
+
+        /* === NAVBAR === */
+        .navbar { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .navbar-brand { font-size: 18px; font-weight: bold; }
+        .navbar-user { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+        .btn-logout { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 14px; }
+        .btn-logout:hover { background: rgba(255,255,255,0.3); }
+
+        /* === AUTH === */
+        .auth-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
+        .auth-card { background: white; border-radius: 16px; overflow: hidden; width: 420px; max-width: 95vw; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .auth-header { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 32px; text-align: center; }
+        .auth-header h1 { font-size: 24px; margin-bottom: 8px; }
+        .auth-header p { opacity: 0.8; font-size: 14px; }
+        .auth-tabs { display: flex; border-bottom: 2px solid #e0e0e0; }
+        .auth-tab { flex: 1; padding: 14px; text-align: center; cursor: pointer; font-weight: 600; color: #666; border-bottom: 3px solid transparent; transition: 0.3s; }
+        .auth-tab.active { color: #1a237e; border-bottom-color: #1a237e; }
+        .auth-form { padding: 24px; }
+        .auth-form input { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; margin-bottom: 12px; }
+        .auth-form input:focus { outline: none; border-color: #1a237e; box-shadow: 0 0 0 3px rgba(26,35,126,0.1); }
+        .auth-form button { width: 100%; padding: 14px; background: #1a237e; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .auth-form button:hover { background: #283593; }
+        .auth-msg { font-size: 13px; margin-bottom: 12px; padding: 8px; border-radius: 6px; display: none; }
+        .auth-msg.error { background: #ffebee; color: #c62828; display: block; }
+        .auth-msg.success { background: #e8f5e9; color: #2e7d32; display: block; }
+        .forgot-pw { text-align: center; margin-top: 8px; }
+        .forgot-pw a { color: #1a237e; font-size: 13px; cursor: pointer; text-decoration: underline; }
+
+        /* === DASHBOARD === */
+        .dashboard { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .progress-card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .progress-bar-bg { background: #e0e0e0; border-radius: 20px; height: 28px; overflow: hidden; margin: 12px 0; }
+        .progress-bar-fill { background: linear-gradient(90deg, #43a047, #66bb6a); height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 13px; transition: width 0.5s; min-width: 40px; }
+        .progress-stats { color: #666; font-size: 14px; }
+        .section-title { font-size: 20px; margin-bottom: 16px; }
+
+        .lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .lesson-card { background: white; border-radius: 12px; padding: 20px; border-left: 4px solid #1a237e; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: 0.3s; }
+        .lesson-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .lesson-card.completed { border-left-color: #43a047; }
+        .lesson-card.coming-soon { opacity: 0.55; cursor: default; border-left-color: #bbb; }
+        .lesson-card.coming-soon:hover { transform: none; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .lesson-card h3 { color: #1a237e; font-size: 16px; margin-bottom: 4px; }
+        .lesson-card .ref { color: #888; font-size: 13px; margin-bottom: 8px; }
+        .lesson-card .desc { color: #555; font-size: 14px; margin-bottom: 12px; line-height: 1.5; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .badge-done { background: #e8f5e9; color: #2e7d32; }
+        .badge-wip { background: #fff3e0; color: #e65100; }
+        .badge-score { background: #e3f2fd; color: #1565c0; margin-left: 6px; }
+        .badge-locked { background: #f5f5f5; color: #999; }
+
+        /* === LESSON VIEW === */
+        .lesson-view { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .btn-back { background: none; border: 1px solid #1a237e; color: #1a237e; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; margin-bottom: 12px; display: inline-block; }
+        .btn-back:hover { background: #1a237e; color: white; }
+        .lesson-header { background: white; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .lesson-header h1 { color: #1a237e; font-size: 22px; }
+        .lesson-header p { color: #666; margin-top: 4px; }
+
+        .lesson-tabs { display: flex; background: white; border-radius: 12px; overflow: hidden; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .lesson-tab { flex: 1; padding: 14px; text-align: center; cursor: pointer; font-weight: 600; color: #666; border-bottom: 3px solid transparent; transition: 0.3s; font-size: 15px; }
+        .lesson-tab.active { color: #1a237e; border-bottom-color: #1a237e; background: #f5f7ff; }
+        .lesson-tab:hover { background: #f5f5f5; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* === SCRIPTURE === */
+        .scripture-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .scripture-box h2 { color: #1a237e; font-size: 18px; margin-bottom: 4px; }
+        .scripture-box .sub { color: #888; font-size: 13px; margin-bottom: 16px; }
+        .hl-legend { display: flex; gap: 16px; flex-wrap: wrap; padding: 12px; background: #f9f9f9; border-radius: 8px; font-size: 13px; margin-bottom: 16px; align-items: center; }
+        .hl-legend span { display: flex; align-items: center; gap: 4px; }
+        .hl-dot { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+        .verse { padding: 6px 8px; margin: 2px 0; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; display: block; line-height: 1.9; font-size: 16px; position: relative; }
+        .verse:hover { outline: 2px solid #ccc; }
+        .verse sup { color: #1a237e; font-weight: bold; margin-right: 4px; font-size: 11px; }
+        .verse.hl-yellow { background: #fff9c4 !important; }
+        .verse.hl-blue { background: #bbdefb !important; }
+        .verse.hl-green { background: #c8e6c9 !important; }
+
+        .hl-popup { position: absolute; background: white; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.18); padding: 8px; display: none; z-index: 200; white-space: nowrap; }
+        .hl-popup button { padding: 6px 12px; margin: 2px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+        .hl-popup .hy { background: #fff9c4; } .hl-popup .hy:hover { background: #fff176; }
+        .hl-popup .hb { background: #bbdefb; } .hl-popup .hb:hover { background: #90caf9; }
+        .hl-popup .hg { background: #c8e6c9; } .hl-popup .hg:hover { background: #a5d6a7; }
+        .hl-popup .hx { background: #ffcdd2; } .hl-popup .hx:hover { background: #ef9a9a; }
+
+        .btn-mark-read { margin-top: 20px; padding: 12px 24px; background: #43a047; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; }
+        .btn-mark-read:hover { background: #388e3c; }
+        .btn-mark-read.done { background: #a5d6a7; color: #1b5e20; }
+
+        /* === QUESTIONS === */
+        .questions-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .q-section { margin-bottom: 28px; }
+        .q-section h3 { color: #1a237e; font-size: 17px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; margin-bottom: 16px; }
+        .q-section.reflection h3 { color: #00897b; }
+        .q-section.sharing h3 { color: #e65100; }
+        .q-item { margin-bottom: 20px; padding: 16px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #1a237e; }
+        .q-item.reflection { border-left-color: #00897b; }
+        .q-item.sharing { border-left-color: #e65100; }
+        .q-item .q-text { font-size: 15px; font-weight: 600; margin-bottom: 6px; line-height: 1.6; }
+        .q-item .q-hint { font-size: 13px; color: #888; margin-bottom: 10px; font-style: italic; }
+        .q-item textarea { width: 100%; min-height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize: vertical; font-family: inherit; line-height: 1.6; }
+        .q-item textarea:focus { outline: none; border-color: #1a237e; }
+        .save-ind { font-size: 12px; color: #43a047; margin-top: 4px; opacity: 0; transition: opacity 0.3s; }
+        .save-ind.show { opacity: 1; }
+        .ref-toggle { background: none; border: 1px solid #7986cb; color: #3f51b5; padding: 4px 12px; border-radius: 12px; cursor: pointer; font-size: 12px; margin-top: 8px; }
+        .ref-toggle:hover { background: #e8eaf6; }
+        .ref-answer { display: none; margin-top: 10px; padding: 12px; background: #e8eaf6; border-radius: 6px; font-size: 13px; color: #333; line-height: 1.8; }
+        .ref-answer.show { display: block; }
+
+        /* === QUIZ === */
+        .quiz-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .quiz-q { margin-bottom: 24px; padding: 16px; background: #f9fafb; border-radius: 8px; }
+        .quiz-q h4 { margin-bottom: 12px; font-size: 15px; line-height: 1.6; }
+        .quiz-opt { display: block; padding: 10px 14px; margin: 4px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 14px; }
+        .quiz-opt:hover { background: #f0f0f0; }
+        .quiz-opt.selected { background: #e3f2fd; border-color: #1a237e; }
+        .quiz-opt.correct { background: #e8f5e9 !important; border-color: #43a047 !important; }
+        .quiz-opt.wrong { background: #ffebee !important; border-color: #d32f2f !important; }
+        .btn-quiz { padding: 12px 32px; background: #1a237e; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 12px; }
+        .btn-quiz:hover { background: #283593; }
+        .btn-quiz:disabled { background: #bbb; cursor: default; }
+        .quiz-result { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 18px; font-weight: bold; text-align: center; display: none; }
+        .quiz-result.pass { background: #e8f5e9; color: #2e7d32; }
+        .quiz-result.fail { background: #fff3e0; color: #e65100; }
+
+        /* === COMING SOON === */
+        .coming-soon { text-align: center; padding: 60px 24px; color: #999; }
+        .coming-soon .icon { font-size: 48px; margin-bottom: 16px; }
+        .coming-soon h3 { color: #666; margin-bottom: 8px; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 600px) {
+            .lesson-grid { grid-template-columns: 1fr; }
+            .navbar { padding: 10px 16px; }
+            .navbar-brand { font-size: 15px; }
+            .lesson-tab { padding: 10px 4px; font-size: 13px; }
+            .hl-legend { flex-direction: column; gap: 8px; }
+            .verse { font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== AUTH SCREEN ========== -->
+<div id="auth-screen" class="auth-screen">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>📖 但以理書研經課程</h1>
+            <p>富山平安福音堂</p>
+        </div>
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchAuthTab('login')">登入</div>
+            <div class="auth-tab" onclick="switchAuthTab('register')">註冊</div>
+        </div>
+        <!-- Login -->
+        <div id="login-form" class="auth-form">
+            <div id="login-msg"></div>
+            <input type="email" id="login-email" placeholder="電郵地址">
+            <input type="password" id="login-password" placeholder="密碼" onkeydown="if(event.key==='Enter')doLogin()">
+            <button onclick="doLogin()">登入</button>
+            <div class="forgot-pw"><a onclick="doForgotPassword()">忘記密碼？</a></div>
+        </div>
+        <!-- Register -->
+        <div id="register-form" class="auth-form" style="display:none">
+            <div id="register-msg"></div>
+            <input type="text" id="reg-name" placeholder="顯示名稱">
+            <input type="email" id="reg-email" placeholder="電郵地址">
+            <input type="password" id="reg-password" placeholder="密碼（至少6位）" onkeydown="if(event.key==='Enter')doRegister()">
+            <button onclick="doRegister()">註冊</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MAIN APP ========== -->
+<div id="app" style="display:none">
+    <nav class="navbar">
+        <div class="navbar-brand">📖 但以理書研經課程</div>
+        <div class="navbar-user">
+            <span id="user-name">👤</span>
+            <button class="btn-logout" onclick="doLogout()">登出</button>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div id="dashboard-view" class="dashboard">
+        <div class="progress-card">
+            <h2>📊 學習進度</h2>
+            <div class="progress-bar-bg">
+                <div id="prog-bar" class="progress-bar-fill" style="width:0%">0%</div>
+            </div>
+            <div id="prog-stats" class="progress-stats"></div>
+        </div>
+        <h2 class="section-title">📚 課程列表</h2>
+        <div id="lesson-grid" class="lesson-grid"></div>
+    </div>
+
+    <!-- Lesson View -->
+    <div id="lesson-view" class="lesson-view" style="display:none">
+        <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
+        <div id="lv-header" class="lesson-header"></div>
+        <div class="lesson-tabs" id="lv-tabs">
+            <div class="lesson-tab active" data-tab="scripture">📖 經文</div>
+            <div class="lesson-tab" data-tab="questions">✏️ 查經問題</div>
+            <div class="lesson-tab" data-tab="quiz">📝 測驗</div>
+        </div>
+        <div id="tab-scripture" class="tab-content active"></div>
+        <div id="tab-questions" class="tab-content"></div>
+        <div id="tab-quiz" class="tab-content"></div>
+    </div>
+</div>
+
+<!-- Highlight Popup (global) -->
+<div id="hl-popup" class="hl-popup">
+    <button class="hy" onclick="setHL('yellow')">🟡 重要</button>
+    <button class="hb" onclick="setHL('blue')">🔵 不明白</button>
+    <button class="hg" onclick="setHL('green')">🟢 感動</button>
+    <button class="hx" onclick="setHL(null)">✕ 清除</button>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script type="module">
+
+// ==========================================
+// FIREBASE SETUP — 請替換為你自己的 config
+// ==========================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    // ⚠️ 請從你現有的 index.html 複製你的 Firebase config 到這裡
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ==========================================
+// LESSON DATA
+// ==========================================
+const LESSONS = [
+{
+    id: 'intro', title: '導論', subtitle: '但以理書簡介',
+    ref: '課程介紹',
+    description: '但以理書的歷史背景、文學結構與神學主題',
+    comingSoon: true, verses: [], questions: null, quiz: []
+},
+{
+    id: 'lesson1', title: '第一課', subtitle: '但以理的立志',
+    ref: '但以理書 第1章', description: '導論與身分認同 — 但以理在巴比倫的考驗中如何堅守信仰',
+    chapterTitle: '但以理在尼布甲尼撒的宮廷裏',
+    comingSoon: false,
+    verses: [
+        '猶大王約雅敬在位第三年，巴比倫王尼布甲尼撒來到耶路撒冷，將城圍困。',
+        '主將猶大王約雅敬和上帝殿中的一些器皿交在他的手中。他就把他們帶到示拿地他神明的廟裏，將器皿收入他神明的庫房中。',
+        '王吩咐太監長亞施毗拿，從以色列人的王室後裔和貴族中帶進幾個人來，',
+        '就是沒有殘疾、相貌俊美、通達各樣學問、知識聰明俱備、足能在王宮侍立的少年，要教他們迦勒底的文字和語言。',
+        '王從自己所用的膳和所飲的酒中，派給他們每日的分量，養育他們三年，好叫他們期滿以後侍立在王面前。',
+        '他們中間有猶大人但以理、哈拿尼雅、米沙利和亞撒利雅。',
+        '太監長給他們另外起名，稱但以理為伯提沙撒，稱哈拿尼雅為沙得拉，稱米沙利為米煞，稱亞撒利雅為亞伯尼歌。',
+        '但以理卻立志，不以王的膳和王所飲的酒玷污自己，於是懇求太監長容他不使自己玷污。',
+        '上帝使但以理在太監長眼前蒙恩，得憐憫。',
+        '太監長對但以理說：「我懼怕我主我王，他已經派給你們飲食，何必讓他見你們的面貌比你們同年齡的少年憔悴呢？這樣，你們就使我的頭在王那裏不保了。」',
+        '但以理對太監長所派監管但以理、哈拿尼雅、米沙利、亞撒利雅的管理者說：',
+        '「請你考驗僕人們十天，給我們素菜吃，清水喝，',
+        '然後你親自觀察我們的面貌和那用王膳的少年的面貌；就照你所觀察的待你的僕人吧！」',
+        '管理者准許他們這件事，考驗他們十天。',
+        '過了十天，他們的身材看來比所有享用王膳的少年更加俊美健壯，',
+        '於是管理者撤去王派給他們用的膳和所飲的酒，只給他們素菜。',
+        '這四個少年，上帝在各樣文字學問上賜給他們知識和聰明；但以理又明白各樣異象和夢兆。',
+        '王吩咐帶他們進宮的日子到了，太監長就把他們帶到尼布甲尼撒面前。',
+        '王與他們談論，在所有少年中找不到人能與但以理、哈拿尼雅、米沙利、亞撒利雅相比，於是他們就在王面前侍立。',
+        '王考問他們一切智慧和聰明的事，發現他們比全國所有的術士和巫師勝過十倍。',
+        '到居魯士王元年，但以理還健在。'
+    ],
+    questions: {
+        observation: [
+            { id:'obs1', text:'請找出三處「神主動給予」(God Gave) 的經文 (留意希伯來文 נָתַן natan)，並說明每處發生了什麼事。', hint:'提示：留意 1:2, 1:9, 1:17 中「交付／使／賜給」的用詞。',
+              reference:'<b>1:2</b>「主將猶大王約雅敬…<b>交付</b>他手」— 耶路撒冷被圍困，王被擄，聖殿器皿被帶走。<br><b>1:9</b>「神<b>使</b>但以理在太監長眼前蒙恩」— 但以理提出不吃王膳時，神預備了太監長的心。<br><b>1:17</b>「神在各樣文字學問上<b>賜給</b>他們聰明知識」— 四個少年人在巴比倫接受教育的結果。<br><br><b>小結：</b>三次「God Gave」確立全書主題 — 神是幕後掌權者，是祂在推動歷史，而非巴比倫王。' },
+            { id:'obs2', text:'巴比倫王的「改造計畫」包括哪三方面？每方面的目的是什麼？', hint:'提示：從名字、教育、飲食三方面思考。',
+              reference:'<b>1. 改名 (Identity)：</b>將含有以色列神名 (El/Yah) 的名字改為巴比倫神祇的名字，象徵新的歸屬。<br><b>2. 教育 (Worldview)：</b>學習迦勒底語言與文學（神話、歷史、宗教），灌輸巴比倫世界觀。<br><b>3. 飲食 (Loyalty)：</b>派定王的膳和酒，象徵接受王的供應與恩寵，進入效忠關係。' },
+            { id:'obs3', text:'但以理在哪一方面提出反對？他具體採取了什麼行動步驟？', hint:'注意他的態度與方式。',
+              reference:'但以理接受了改名和教育，唯獨在<b>「飲食」</b>上反對。<br>行動步驟：<br>1. <b>立志</b> — 內心先有堅定決心 (Resolved)<br>2. <b>請求</b> — 向太監長求情，而非對抗<br>3. <b>協商</b> — 提出10天測試方案（素菜+清水），用事實證明結果。' }
+        ],
+        interpretation: [
+            { id:'int1', text:'1:2「主將…交付」對當時被擄的以色列人有什麼神學衝擊？這句話如何同時帶來安慰和挑戰？', hint:'想想聖殿被毀、君王被擄對信仰意味著什麼。',
+              reference:'<b>神學衝擊：</b>聖殿被毀、君王被擄意味著信仰支柱的崩塌，彷彿巴比倫的神戰勝了耶和華。<br><b>安慰：</b>「主將…交付」表明這不是神無能或失控，而是神<b>主動的作為</b>（審判與管教），安慰百姓神仍在掌權。<br><b>挑戰：</b>要從「神的視角」而非「人的成敗」來看待歷史。' },
+            { id:'int2', text:'但以理為何單單拒絕飲食，卻接受改名和教育？「不吃王膳」的更深層神學意義是什麼？', hint:'思考「神聖餵養」(Divine Nurture) vs.「人的餵養」(Human Nurture) 的對比。',
+              reference:'根據 OT366，這不僅是潔淨禮儀的問題，更深層的神學意義是<b>「神聖餵養」與「人的餵養」</b>的對立。<br>接受王膳象徵完全依賴王作為生命源頭，進入受王供養、對王效忠的盟約關係。<br>但以理拒絕，是宣告<b>「唯有神是我的供應者」</b>— 即便在異教宮廷中，維持他生命的仍是神，而非巴比倫王。' },
+            { id:'int3', text:'十天測試後「更加俊美」— 這是提倡素食主義嗎？這個結果有什麼神學聲明？', hint:'想想這與全書的「神掌權」主題有什麼關聯。',
+              reference:'這不是提倡素食的醫學奇蹟，而是一個<b>神學聲明</b>：但以理和朋友們的健康與智慧<b>並非來自巴比倫的食物或教育</b>，而是來自神的恩典。<br>這再次呼應全書核心 — 神擁有絕對的主權，祂能在任何環境下保守並提升祂的僕人。' }
+        ],
+        application: [
+            { id:'app1', text:'現代社會如何試圖「重新定義」你的身分和價值？你的「底線」在哪裡？', hint:'例如：世界說「你的價值 = 薪水/職位/按讚數」。',
+              reference:'<b>引導方向：</b>鼓勵分享社會如何「重新定義」我們。<br><b>關鍵應用：</b>像但以理一樣，我們可能無法改變環境（職場規則、社會文化），但可以劃出「底線」— 在商業決策中堅持誠實、在忙碌中堅持主日敬拜，這就是現代版的「不玷污自己」。' },
+            { id:'app2', text:'你是否過度依賴「人的手段」來換取安全感？請分享一個願意信靠神供應的經歷。', hint:'例如：過度加班犧牲健康、為討好人而妥協原則。',
+              reference:'<b>引導方向：</b>反思是否過度依賴人的手段換取安全感。<br><b>關鍵應用：</b>分享當你放下「人的手段」單單信靠神時，神如何供應（不一定是物質，可能是心中的平安或出人意外的解決方案），這就是體驗「神聖餵養」。' },
+            { id:'app3', text:'如果你目前的困難是「神交付/允許」的，你會如何重新看待它？', hint:'從「受害者心態」到「管家心態」的轉變。',
+              reference:'<b>引導方向：</b>幫助重新詮釋「失敗」或「低谷」。<br><b>關鍵應用：</b>如果困難是「神交付」的（神允許的），那它就不是為了毀滅我，而是有神的目的（煉淨生命、為將來的見證）。這種眼光能讓我們從「受害者心態」轉變為「管家心態」— 在困難中尋求神的心意。' }
+        ]
+    },
+    quiz: [
+        { q:'但以理書第1章中，「神主動給予」(God gave / נָתַן) 出現了幾次？', opts:['1次','2次','3次','4次'], ans:2 },
+        { q:'巴比倫王用哪些方式同化被擄的少年人？', opts:['改名、教育、飲食','改名、婚姻、宗教','教育、軍訓、飲食','改名、教育、勞動'], ans:0 },
+        { q:'但以理在什麼事上立志不玷污自己？', opts:['學習迦勒底文字','參拜巴比倫神明','王的膳和酒','更改名字'], ans:2 },
+        { q:'但以理提出的素食測試為期多少天？', opts:['3天','7天','10天','30天'], ans:2 },
+        { q:'根據但以理書1:17，神賜給四個少年什麼？', opts:['財富和權力','知識和聰明','健康和長壽','勇氣和力量'], ans:1 }
+    ]
+},
+{
+    id:'lesson2', title:'第二課', subtitle:'尼布甲尼撒的夢',
+    ref:'但以理書 第2章', description:'巨像之夢的解釋與預言的意義',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson3', title:'第三課', subtitle:'火窯的考驗',
+    ref:'但以理書 第3章', description:'沙得拉、米煞、亞伯尼歌的信心',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson4', title:'第四課', subtitle:'尼布甲尼撒的教訓',
+    ref:'但以理書 第4章', description:'驕傲的代價與悔改的恩典',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson5', title:'第五課', subtitle:'伯沙撒的筵席',
+    ref:'但以理書 第5章', description:'牆上的文字與巴比倫的終結',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson6', title:'第六課', subtitle:'獅子坑',
+    ref:'但以理書 第6章', description:'但以理的忠誠與神的保護',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson7', title:'第七課', subtitle:'四獸的異象',
+    ref:'但以理書 第7章', description:'歷史的走向與神國的降臨',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson8', title:'第八課', subtitle:'公綿羊與公山羊',
+    ref:'但以理書 第8章', description:'波斯與希臘帝國的預言',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson9', title:'第九課', subtitle:'但以理的禱告',
+    ref:'但以理書 第9章', description:'七十個七的預言與認罪禱告',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson10', title:'第十課', subtitle:'大爭戰的異象（上）',
+    ref:'但以理書 第10章', description:'靈界的爭戰與神的啟示',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson11', title:'第十一課', subtitle:'大爭戰的異象（下）',
+    ref:'但以理書 第11章', description:'南北王的爭戰與歷史的詳細預言',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+},
+{
+    id:'lesson12', title:'第十二課', subtitle:'末後的盼望',
+    ref:'但以理書 第12章', description:'復活的應許與忠信的獎賞',
+    comingSoon:true, verses:[], questions:null, quiz:[]
+}
+];
+
+// ==========================================
+// STATE
+// ==========================================
+let currentUser = null;
+let userData = {};      // { progress:{}, highlights:{}, notes:{} }
+let currentLessonId = null;
+let hlVerse = null;     // currently selected verse for highlighting
+
+// ==========================================
+// AUTH FUNCTIONS
+// ==========================================
+function showMsg(id, text, type) {
+    const el = document.getElementById(id);
+    el.className = 'auth-msg ' + type;
+    el.textContent = text;
+    el.style.display = 'block';
+}
+
+window.switchAuthTab = function(tab) {
+    document.querySelectorAll('.auth-tab').forEach((t,i) => {
+        t.classList.toggle('active', (tab==='login' ? i===0 : i===1));
+    });
+    document.getElementById('login-form').style.display = tab==='login' ? 'block' : 'none';
+    document.getElementById('register-form').style.display = tab==='register' ? 'block' : 'none';
+};
+
+window.doLogin = async function() {
+    const email = document.getElementById('login-email').value.trim();
+    const pw = document.getElementById('login-password').value;
+    if(!email||!pw) return showMsg('login-msg','請填寫電郵和密碼','error');
+    try {
+        await signInWithEmailAndPassword(auth, email, pw);
+    } catch(e) {
+        showMsg('login-msg','登入失敗：'+e.message,'error');
+    }
+};
+
+window.doRegister = async function() {
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const pw = document.getElementById('reg-password').value;
+    if(!name||!email||!pw) return showMsg('register-msg','請填寫所有欄位','error');
+    if(pw.length<6) return showMsg('register-msg','密碼需至少6位','error');
+    try {
+        const cred = await createUserWithEmailAndPassword(auth, email, pw);
+        await updateProfile(cred.user, { displayName: name });
+        await setDoc(doc(db,'users',cred.user.uid), {
+            displayName: name, email: email,
+            progress: {}, highlights: {}, notes: {}
+        });
+    } catch(e) {
+        showMsg('register-msg','註冊失敗：'+e.message,'error');
+    }
+};
+
+window.doForgotPassword = async function() {
+    const email = document.getElementById('login-email').value.trim();
+    if(!email) return showMsg('login-msg','請先填寫電郵地址，再點「忘記密碼」','error');
+    try {
+        await sendPasswordResetEmail(auth, email);
+        showMsg('login-msg','重置密碼的電郵已發送到 '+email+'，請檢查收件箱（及垃圾郵件）。','success');
+    } catch(e) {
+        showMsg('login-msg','發送失敗：'+e.message,'error');
+    }
+};
+
+window.doLogout = async function() {
+    await signOut(auth);
+};
+
+// ==========================================
+// AUTH STATE OBSERVER
+// ==========================================
+onAuthStateChanged(auth, async (user) => {
+    if(user) {
+        currentUser = user;
+        document.getElementById('auth-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        document.getElementById('user-name').textContent = '👤 ' + (user.displayName || user.email);
+        await loadUserData();
+        renderDashboard();
+    } else {
+        currentUser = null;
+        document.getElementById('auth-screen').style.display = 'flex';
+        document.getElementById('app').style.display = 'none';
+    }
+});
+
+// ==========================================
+// FIRESTORE — LOAD / SAVE
+// ==========================================
+async function loadUserData() {
+    try {
+        const snap = await getDoc(doc(db,'users',currentUser.uid));
+        if(snap.exists()) {
+            userData = snap.data();
+        } else {
+            userData = { displayName: currentUser.displayName, email: currentUser.email, progress:{}, highlights:{}, notes:{} };
+            await setDoc(doc(db,'users',currentUser.uid), userData);
+        }
+        if(!userData.progress) userData.progress = {};
+        if(!userData.highlights) userData.highlights = {};
+        if(!userData.notes) userData.notes = {};
+    } catch(e) { console.error('Load error:', e); }
+}
+
+async function saveUserData() {
+    if(!currentUser) return;
+    try {
+        await setDoc(doc(db,'users',currentUser.uid), userData, {merge:true});
+    } catch(e) { console.error('Save error:', e); }
+}
+
+// ==========================================
+// DASHBOARD
+// ==========================================
+function renderDashboard() {
+    const total = LESSONS.filter(l => !l.comingSoon).length;
+    let done = 0;
+    let totalScore = 0, scored = 0;
+    LESSONS.forEach(l => {
+        const p = userData.progress[l.id];
+        if(p && p.completed) { done++; }
+        if(p && p.quizScore != null) { totalScore += p.quizScore; scored++; }
+    });
+    const pct = total > 0 ? Math.round(done/total*100) : 0;
+    document.getElementById('prog-bar').style.width = pct+'%';
+    document.getElementById('prog-bar').textContent = pct+'%';
+    let statsHtml = `已完成：${done} / ${total} 課`;
+    if(scored > 0) statsHtml += `&nbsp;&nbsp;&nbsp;&nbsp;平均測驗分數：${Math.round(totalScore/scored)}%`;
+    document.getElementById('prog-stats').innerHTML = statsHtml;
+
+    const grid = document.getElementById('lesson-grid');
+    grid.innerHTML = '';
+    LESSONS.forEach(l => {
+        const p = userData.progress[l.id] || {};
+        const isComplete = p.completed;
+        const card = document.createElement('div');
+        card.className = 'lesson-card' + (isComplete ? ' completed' : '') + (l.comingSoon ? ' coming-soon' : '');
+        let statusHtml = '';
+        if(l.comingSoon) {
+            statusHtml = '<span class="badge badge-locked">🔒 即將推出</span>';
+        } else if(isComplete) {
+            statusHtml = '<span class="badge badge-done">✅ 已完成</span>';
+            if(p.quizScore != null) statusHtml += `<span class="badge badge-score">測驗：${p.quizScore}%</span>`;
+        } else {
+            statusHtml = '<span class="badge badge-wip">📖 進行中</span>';
+        }
+        card.innerHTML = `<h3>${l.title}：${l.subtitle}</h3><div class="ref">${l.ref}</div><div class="desc">${l.description}</div><div>${statusHtml}</div>`;
+        if(!l.comingSoon) card.onclick = () => openLesson(l.id);
+        grid.appendChild(card);
+    });
+}
+
+// ==========================================
+// LESSON VIEW
+// ==========================================
+function openLesson(id) {
+    currentLessonId = id;
+    const lesson = LESSONS.find(l => l.id === id);
+    if(!lesson || lesson.comingSoon) return;
+
+    document.getElementById('dashboard-view').style.display = 'none';
+    document.getElementById('lesson-view').style.display = 'block';
+
+    document.getElementById('lv-header').innerHTML = `<h1>${lesson.title}：${lesson.subtitle}</h1><p>${lesson.ref} — ${lesson.description}</p>`;
+
+    renderScripture(lesson);
+    renderQuestions(lesson);
+    renderQuiz(lesson);
+    showLessonTab('scripture');
+}
+
+window.goBack = function() {
+    document.getElementById('lesson-view').style.display = 'none';
+    document.getElementById('dashboard-view').style.display = 'block';
+    currentLessonId = null;
+    renderDashboard();
+};
+
+// Tab switching
+document.getElementById('lv-tabs').addEventListener('click', (e) => {
+    const tab = e.target.dataset?.tab;
+    if(tab) showLessonTab(tab);
+});
+
+function showLessonTab(tab) {
+    document.querySelectorAll('#lv-tabs .lesson-tab').forEach(t => t.classList.toggle('active', t.dataset.tab===tab));
+    ['scripture','questions','quiz'].forEach(t => {
+        document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+    });
+    // Close highlight popup when switching tabs
+    document.getElementById('hl-popup').style.display = 'none';
+}
+
+// ==========================================
+// SCRIPTURE TAB
+// ==========================================
+function renderScripture(lesson) {
+    const container = document.getElementById('tab-scripture');
+    if(lesson.verses.length === 0) {
+        container.innerHTML = '<div class="coming-soon"><div class="icon">📖</div><h3>經文內容準備中</h3><p>請稍候，內容即將更新。</p></div>';
+        return;
+    }
+    const highlights = (userData.highlights && userData.highlights[lesson.id]) || {};
+    const isRead = userData.progress[lesson.id]?.scriptureRead;
+
+    let html = `<div class="scripture-box">`;
+    html += `<h2>📖 ${lesson.chapterTitle || ''}</h2>`;
+    html += `<div class="sub">和合本修訂版 (RCUV) — ${lesson.ref}</div>`;
+    html += `<div class="hl-legend">
+        <b>螢光筆：</b>
+        <span><span class="hl-dot" style="background:#fff9c4;border:1px solid #f9a825"></span> 重要</span>
+        <span><span class="hl-dot" style="background:#bbdefb;border:1px solid #42a5f5"></span> 不明白</span>
+        <span><span class="hl-dot" style="background:#c8e6c9;border:1px solid #66bb6a"></span> 感動/有用</span>
+        <span style="color:#999;font-size:12px">（點擊經文即可標記）</span>
+    </div>`;
+    html += `<div class="verses-area">`;
+    lesson.verses.forEach((v, i) => {
+        const vnum = i + 1;
+        const hlClass = highlights[vnum] ? ' hl-'+highlights[vnum] : '';
+        html += `<span class="verse${hlClass}" data-v="${vnum}"><sup>${vnum}</sup>${v}</span>`;
+    });
+    html += `</div>`;
+    html += `<button class="btn-mark-read${isRead?' done':''}" onclick="markRead()" id="btn-read">${isRead?'✅ 已完成閱讀':'📖 標記已完成閱讀'}</button>`;
+    html += `</div>`;
+    container.innerHTML = html;
+
+    // Attach verse click handlers
+    container.querySelectorAll('.verse').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hlVerse = parseInt(el.dataset.v);
+            const popup = document.getElementById('hl-popup');
+            const rect = el.getBoundingClientRect();
+            popup.style.display = 'block';
+            popup.style.position = 'fixed';
+            popup.style.top = (rect.bottom + 4) + 'px';
+            popup.style.left = Math.min(rect.left, window.innerWidth - 280) + 'px';
+        });
+    });
+}
+
+// Close popup on outside click
+document.addEventListener('click', (e) => {
+    if(!e.target.closest('.verse') && !e.target.closest('.hl-popup')) {
+        document.getElementById('hl-popup').style.display = 'none';
+    }
+});
+
+window.setHL = async function(color) {
+    if(!currentLessonId || hlVerse == null) return;
+    if(!userData.highlights[currentLessonId]) userData.highlights[currentLessonId] = {};
+    if(color) {
+        userData.highlights[currentLessonId][hlVerse] = color;
+    } else {
+        delete userData.highlights[currentLessonId][hlVerse];
+    }
+    // Update UI
+    const el = document.querySelector(`.verse[data-v="${hlVerse}"]`);
+    if(el) {
+        el.classList.remove('hl-yellow','hl-blue','hl-green');
+        if(color) el.classList.add('hl-'+color);
+    }
+    document.getElementById('hl-popup').style.display = 'none';
+    await saveUserData();
+};
+
+window.markRead = async function() {
+    if(!currentLessonId) return;
+    if(!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
+    userData.progress[currentLessonId].scriptureRead = true;
+    const btn = document.getElementById('btn-read');
+    btn.textContent = '✅ 已完成閱讀';
+    btn.classList.add('done');
+    await saveUserData();
+};
+
+// ==========================================
+// QUESTIONS TAB
+// ==========================================
+function renderQuestions(lesson) {
+    const container = document.getElementById('tab-questions');
+    if(!lesson.questions) {
+        container.innerHTML = '<div class="coming-soon"><div class="icon">✏️</div><h3>查經問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
+        return;
+    }
+    const notes = (userData.notes && userData.notes[lesson.id]) || {};
+    const sections = [
+        { key:'observation', title:'一、觀察與經文梳理', cls:'', icon:'🔍' },
+        { key:'interpretation', title:'二、解釋與深入討論', cls:'reflection', icon:'💡' },
+        { key:'application', title:'三、生活應用與反思', cls:'sharing', icon:'❤️' }
+    ];
+
+    let html = '<div class="questions-box">';
+    sections.forEach(sec => {
+        const qs = lesson.questions[sec.key];
+        if(!qs || qs.length === 0) return;
+        html += `<div class="q-section ${sec.cls}"><h3>${sec.icon} ${sec.title}</h3>`;
+        qs.forEach((q, i) => {
+            const saved = notes[q.id] || '';
+            html += `<div class="q-item ${sec.cls}">
+                <div class="q-text">${i+1}. ${q.text}</div>
+                ${q.hint ? '<div class="q-hint">'+q.hint+'</div>' : ''}
+                <textarea data-qid="${q.id}" placeholder="在此寫下你的想法和筆記...">${saved}</textarea>
+                <div class="save-ind" id="save-${q.id}">✓ 已儲存</div>
+                ${q.reference ? `<button class="ref-toggle" onclick="toggleRef('${q.id}')">📋 查看參考答案</button><div class="ref-answer" id="ref-${q.id}">${q.reference}</div>` : ''}
+            </div>`;
+        });
+        html += '</div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+
+    // Auto-save notes on typing (debounced)
+    let saveTimers = {};
+    container.querySelectorAll('textarea').forEach(ta => {
+        ta.addEventListener('input', () => {
+            const qid = ta.dataset.qid;
+            clearTimeout(saveTimers[qid]);
+            saveTimers[qid] = setTimeout(async () => {
+                if(!userData.notes[lesson.id]) userData.notes[lesson.id] = {};
+                userData.notes[lesson.id][qid] = ta.value;
+                await saveUserData();
+                const ind = document.getElementById('save-'+qid);
+                if(ind) { ind.classList.add('show'); setTimeout(()=>ind.classList.remove('show'), 2000); }
+            }, 1200);
+        });
+    });
+}
+
+window.toggleRef = function(qid) {
+    const el = document.getElementById('ref-'+qid);
+    if(el) el.classList.toggle('show');
+};
+
+// ==========================================
+// QUIZ TAB
+// ==========================================
+let quizAnswers = {};
+let quizSubmitted = false;
+
+function renderQuiz(lesson) {
+    quizAnswers = {};
+    quizSubmitted = false;
+    const container = document.getElementById('tab-quiz');
+    if(!lesson.quiz || lesson.quiz.length === 0) {
+        container.innerHTML = '<div class="coming-soon"><div class="icon">📝</div><h3>測驗準備中</h3><p>請稍候，測驗即將更新。</p></div>';
+        return;
+    }
+    const prevScore = userData.progress[lesson.id]?.quizScore;
+
+    let html = '<div class="quiz-box">';
+    html += '<h2>📝 課後測驗</h2>';
+    if(prevScore != null) html += `<p style="color:#43a047;margin:8px 0">上次成績：${prevScore}%</p>`;
+    html += '<p style="color:#888;font-size:13px;margin-bottom:16px">請選擇最佳答案：</p>';
+
+    lesson.quiz.forEach((q, qi) => {
+        html += `<div class="quiz-q" id="qq-${qi}"><h4>${qi+1}. ${q.q}</h4>`;
+        q.opts.forEach((opt, oi) => {
+            html += `<label class="quiz-opt" data-qi="${qi}" data-oi="${oi}" onclick="pickQuiz(${qi},${oi})">${String.fromCharCode(65+oi)}. ${opt}</label>`;
+        });
+        html += '</div>';
+    });
+    html += `<button class="btn-quiz" id="btn-submit-quiz" onclick="submitQuiz()">提交答案</button>`;
+    html += `<div class="quiz-result" id="quiz-result"></div>`;
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+window.pickQuiz = function(qi, oi) {
+    if(quizSubmitted) return;
+    quizAnswers[qi] = oi;
+    document.querySelectorAll(`[data-qi="${qi}"]`).forEach(el => {
+        el.classList.toggle('selected', parseInt(el.dataset.oi) === oi);
+    });
+};
+
+window.submitQuiz = async function() {
+    if(quizSubmitted) return;
+    const lesson = LESSONS.find(l => l.id === currentLessonId);
+    if(!lesson) return;
+    const total = lesson.quiz.length;
+    const answered = Object.keys(quizAnswers).length;
+    if(answered < total) { alert('請回答所有問題！'); return; }
+
+    quizSubmitted = true;
+    let correct = 0;
+    lesson.quiz.forEach((q, qi) => {
+        const picked = quizAnswers[qi];
+        const isCorrect = picked === q.ans;
+        if(isCorrect) correct++;
+        document.querySelectorAll(`[data-qi="${qi}"]`).forEach(el => {
+            const oi = parseInt(el.dataset.oi);
+            if(oi === q.ans) el.classList.add('correct');
+            else if(oi === picked && !isCorrect) el.classList.add('wrong');
+        });
+    });
+
+    const score = Math.round(correct/total*100);
+    const result = document.getElementById('quiz-result');
+    result.style.display = 'block';
+    result.className = 'quiz-result ' + (score >= 60 ? 'pass' : 'fail');
+    result.textContent = `你的分數：${score}%（${correct}/${total}）` + (score >= 60 ? ' 🎉' : ' — 請再加油！');
+
+    document.getElementById('btn-submit-quiz').disabled = true;
+
+    // Save
+    if(!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
+    userData.progress[currentLessonId].quizScore = score;
+    userData.progress[currentLessonId].completed = true;
+    userData.progress[currentLessonId].completedAt = new Date().toISOString();
+    await saveUserData();
+};
+
+</script>
+</body>
+</html>
