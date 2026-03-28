@@ -8,14 +8,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif; background: #f0f2f5; color: #333; }
 
-        /* === NAVBAR === */
         .navbar { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
         .navbar-brand { font-size: 18px; font-weight: bold; }
         .navbar-user { display: flex; align-items: center; gap: 12px; font-size: 14px; }
         .btn-logout { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 14px; }
         .btn-logout:hover { background: rgba(255,255,255,0.3); }
 
-        /* === AUTH === */
         .auth-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
         .auth-card { background: white; border-radius: 16px; overflow: hidden; width: 420px; max-width: 95vw; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
         .auth-header { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 32px; text-align: center; }
@@ -35,7 +33,6 @@
         .forgot-pw { text-align: center; margin-top: 8px; }
         .forgot-pw a { color: #1a237e; font-size: 13px; cursor: pointer; text-decoration: underline; }
 
-        /* === DASHBOARD === */
         .dashboard { max-width: 1200px; margin: 0 auto; padding: 24px; }
         .progress-card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .progress-bar-bg { background: #e0e0e0; border-radius: 20px; height: 28px; overflow: hidden; margin: 12px 0; }
@@ -58,7 +55,6 @@
         .badge-score { background: #e3f2fd; color: #1565c0; margin-left: 6px; }
         .badge-locked { background: #f5f5f5; color: #999; }
 
-        /* === LESSON VIEW === */
         .lesson-view { max-width: 900px; margin: 0 auto; padding: 24px; }
         .btn-back { background: none; border: 1px solid #1a237e; color: #1a237e; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; margin-bottom: 12px; display: inline-block; }
         .btn-back:hover { background: #1a237e; color: white; }
@@ -73,7 +69,6 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* === SCRIPTURE === */
         .scripture-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .scripture-box h2 { color: #1a237e; font-size: 18px; margin-bottom: 4px; }
         .scripture-box .sub { color: #888; font-size: 13px; margin-bottom: 16px; }
@@ -99,7 +94,6 @@
         .btn-mark-read:hover { background: #388e3c; }
         .btn-mark-read.done { background: #a5d6a7; color: #1b5e20; }
 
-        /* === QUESTIONS === */
         .questions-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .q-section { margin-bottom: 28px; }
         .q-section h3 { color: #1a237e; font-size: 17px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; margin-bottom: 16px; }
@@ -119,7 +113,6 @@
         .ref-answer { display: none; margin-top: 10px; padding: 12px; background: #e8eaf6; border-radius: 6px; font-size: 13px; color: #333; line-height: 1.8; }
         .ref-answer.show { display: block; }
 
-        /* === QUIZ === */
         .quiz-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .quiz-q { margin-bottom: 24px; padding: 16px; background: #f9fafb; border-radius: 8px; }
         .quiz-q h4 { margin-bottom: 12px; font-size: 15px; line-height: 1.6; }
@@ -135,12 +128,31 @@
         .quiz-result.pass { background: #e8f5e9; color: #2e7d32; }
         .quiz-result.fail { background: #fff3e0; color: #e65100; }
 
-        /* === COMING SOON === */
         .coming-soon { text-align: center; padding: 60px 24px; color: #999; }
         .coming-soon .icon { font-size: 48px; margin-bottom: 16px; }
         .coming-soon h3 { color: #666; margin-bottom: 8px; }
 
-        /* === RESPONSIVE === */
+        /* Intro Content Styles */
+        .intro-content { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .intro-section { margin-bottom: 24px; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; }
+        .intro-section-header { background: linear-gradient(135deg, #e8eaf6, #f5f5f5); padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .intro-section-header h3 { color: #1a237e; font-size: 16px; margin: 0; }
+        .intro-section-header .arrow { font-size: 18px; transition: transform 0.3s; color: #666; }
+        .intro-section-header .arrow.open { transform: rotate(180deg); }
+        .intro-section-body { padding: 16px 18px; line-height: 1.9; font-size: 15px; display: none; }
+        .intro-section-body.open { display: block; }
+        .intro-section-body p { margin-bottom: 12px; }
+        .intro-section-body ul, .intro-section-body ol { margin: 8px 0 12px 20px; }
+        .intro-section-body li { margin-bottom: 6px; line-height: 1.7; }
+        .intro-section-body strong { color: #1a237e; }
+        .intro-section-body .chiasm-box { background: #f0fff0; border: 1px solid #a5d6a7; border-radius: 8px; padding: 16px; margin: 12px 0; }
+        .intro-section-body .chiasm-box .level { padding: 2px 0; }
+        .intro-section-body .highlight-box { background: #fff8e1; border-left: 4px solid #ff8f00; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+        .intro-section.appendix .intro-section-header { background: linear-gradient(135deg, #fce4ec, #f5f5f5); }
+        .intro-section.appendix .intro-section-header h3 { color: #880e4f; }
+        .bib-list { font-size: 13px; color: #555; }
+        .bib-list li { margin-bottom: 4px; }
+
         @media (max-width: 600px) {
             .lesson-grid { grid-template-columns: 1fr; }
             .navbar { padding: 10px 16px; }
@@ -148,12 +160,12 @@
             .lesson-tab { padding: 10px 4px; font-size: 13px; }
             .hl-legend { flex-direction: column; gap: 8px; }
             .verse { font-size: 15px; }
+            .intro-section-body { font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ========== AUTH SCREEN ========== -->
 <div id="auth-screen" class="auth-screen">
     <div class="auth-card">
         <div class="auth-header">
@@ -164,7 +176,6 @@
             <div class="auth-tab active" onclick="switchAuthTab('login')">登入</div>
             <div class="auth-tab" onclick="switchAuthTab('register')">註冊</div>
         </div>
-        <!-- Login -->
         <div id="login-form" class="auth-form">
             <div id="login-msg"></div>
             <input type="email" id="login-email" placeholder="電郵地址">
@@ -172,7 +183,6 @@
             <button onclick="doLogin()">登入</button>
             <div class="forgot-pw"><a onclick="doForgotPassword()">忘記密碼？</a></div>
         </div>
-        <!-- Register -->
         <div id="register-form" class="auth-form" style="display:none">
             <div id="register-msg"></div>
             <input type="text" id="reg-name" placeholder="顯示名稱">
@@ -183,7 +193,6 @@
     </div>
 </div>
 
-<!-- ========== MAIN APP ========== -->
 <div id="app" style="display:none">
     <nav class="navbar">
         <div class="navbar-brand">📖 但以理書研經課程</div>
@@ -192,8 +201,6 @@
             <button class="btn-logout" onclick="doLogout()">登出</button>
         </div>
     </nav>
-
-    <!-- Dashboard -->
     <div id="dashboard-view" class="dashboard">
         <div class="progress-card">
             <h2>📊 學習進度</h2>
@@ -205,14 +212,12 @@
         <h2 class="section-title">📚 課程列表</h2>
         <div id="lesson-grid" class="lesson-grid"></div>
     </div>
-
-    <!-- Lesson View -->
     <div id="lesson-view" class="lesson-view" style="display:none">
         <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
         <div id="lv-header" class="lesson-header"></div>
         <div class="lesson-tabs" id="lv-tabs">
-            <div class="lesson-tab active" data-tab="scripture">📖 經文</div>
-            <div class="lesson-tab" data-tab="questions">✏️ 查經問題</div>
+            <div class="lesson-tab active" data-tab="scripture" id="tab-label-scripture">📖 經文</div>
+            <div class="lesson-tab" data-tab="questions">✏️ 討論問題</div>
             <div class="lesson-tab" data-tab="quiz">📝 測驗</div>
         </div>
         <div id="tab-scripture" class="tab-content active"></div>
@@ -221,7 +226,6 @@
     </div>
 </div>
 
-<!-- Highlight Popup (global) -->
 <div id="hl-popup" class="hl-popup">
     <button class="hy" onclick="setHL('yellow')">🟡 重要</button>
     <button class="hb" onclick="setHL('blue')">🔵 不明白</button>
@@ -229,18 +233,12 @@
     <button class="hx" onclick="setHL(null)">✕ 清除</button>
 </div>
 
-<!-- ========== SCRIPTS ========== -->
 <script type="module">
-
-// ==========================================
-// FIREBASE SETUP — 請替換為你自己的 config
-// ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-    // ⚠️ 請從你現有的 index.html 複製你的 Firebase config 到這裡
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_PROJECT.firebaseapp.com",
     projectId: "YOUR_PROJECT_ID",
@@ -259,9 +257,185 @@ const db = getFirestore(app);
 const LESSONS = [
 {
     id: 'intro', title: '導論', subtitle: '但以理書簡介',
-    ref: '課程介紹',
-    description: '但以理書的歷史背景、文學結構與神學主題',
-    comingSoon: true, verses: [], questions: null, quiz: []
+    ref: '課程介紹', description: '但以理書的歷史背景、文學結構與神學主題',
+    comingSoon: false,
+    isIntro: true,
+    chapterTitle: 'OT366 但以理書：文學與歷史背景研讀',
+    sections: [
+        {
+            title: '一、課程概述與目標',
+            icon: '🎯',
+            defaultOpen: true,
+            html: `<p>本課程旨在介紹但以理書的內容、結構，以及其文學和歷史背景。我們將探討原初聽眾如何在當時的歷史事件中理解這卷書，並以公平、簡明的方式處理書中複雜的釋經議題。</p>
+<p><strong>核心目標：</strong>不僅是研究末世時間表，更是要將書中的神學信息（上帝在永恆國度中的主權）應用於今日信徒的生活中，在破碎的世界中提供盼望。</p>
+<p><strong>學習成果：</strong>學員將能夠概述全書結構、討論作者與年代的爭議、識別不同的文學體裁（敘事與啟示文學），並解釋書卷的神學主題。</p>
+<p style="color:#888;font-size:13px;">講師：Dr. Wendy Widder (PhD, Near Eastern Studies)</p>`
+        },
+        {
+            title: '二、但以理書的神學核心：上帝的主權',
+            icon: '👑',
+            defaultOpen: true,
+            html: `<p>但以理書最重要的神學主題是：<strong>上帝的主權 (The Sovereignty of God) 以及祂對子民持續的眷顧</strong>。</p>
+<h4 style="color:#00897b;margin:16px 0 8px;">1. 被擄的神學衝擊 (Theological Shock)</h4>
+<p>對於身處巴比倫的以色列人來說，被擄造成了巨大的信仰危機。學者 Daniel Block 指出，以色列人對耶和華信心的「四大支柱」在被擄時看似崩塌了：</p>
+<ol>
+<li><strong>西奈之約的不可撤銷性</strong>：神曾揀選他們。</li>
+<li><strong>應許之地</strong>：神賜給他們的土地。</li>
+<li><strong>大衛之約</strong>：大衛的子孫將永遠在位。</li>
+<li><strong>聖殿</strong>：耶和華在耶路撒冷的居所。</li>
+</ol>
+<p>當土地失去、君王被廢、聖殿被毀，百姓不禁懷疑：神是否還在掌權？神是否還在乎我們？</p>
+<h4 style="color:#00897b;margin:16px 0 8px;">2. 書卷的回應</h4>
+<p>但以理書回應了這些質疑。雖然表面上外邦君王掌權，但實際上是<strong>以色列的神將耶路撒冷交在尼布甲尼撒手中</strong>（但 1:2）。神設立君王，也廢去君王。祂是全地的主，即便在異教的土地上，祂仍掌管一切。</p>`
+        },
+        {
+            title: '三、釋經議題：體裁、正典與作者',
+            icon: '📚',
+            defaultOpen: true,
+            html: `<h4 style="color:#00897b;margin:0 0 8px;">1. 正典位置的差異 (Canon)</h4>
+<p>但以理書在希伯來聖經與基督教舊約中的位置不同，反映了對其體裁的不同側重：</p>
+<ul>
+<li><strong>希伯來聖經 (Hebrew Bible)</strong>：位於<strong>「聖卷」(Writings / Ketuvim)</strong>，而非「先知書」。原因可能包括：成書較晚、但以理非傳統先知（政府官員）、具有智慧文學色彩、或因第 1-6 章的敘事性質。</li>
+<li><strong>基督教聖經 (Christian Canon)</strong>：位於<strong>「大先知書」</strong>。依據七十士譯本 (LXX) 的順序。耶穌、約瑟夫和早期教父都稱但以理為先知。此分類側重於第 7-12 章的預言性質。</li>
+</ul>
+<h4 style="color:#00897b;margin:16px 0 8px;">2. 作者與年代的爭論 (Author and Date)</h4>
+<div class="highlight-box">
+<p><strong>傳統觀點 (Traditional View)：</strong>作者為主前 6 世紀的但以理（被擄時期）。依據：書中後半部使用第一人稱「我」。</p>
+<p><strong>批判學者觀點 (Critical View)：</strong>作者為主前 2 世紀的匿名猶太人（馬加比時期）。依據：預言細節過於精確（像是事後寫的歷史 <em>ex eventu prophecy</em>）、啟示文學體裁在主前 2 世紀才流行、前半部使用第三人稱。</p>
+<p><strong>課程立場：</strong>無論採取哪種觀點，都能找到尊重聖經權威的學者。本課程將持開放態度，重點在於經文對原初聽眾的意義。</p>
+</div>`
+        },
+        {
+            title: '四、書卷的結構分析',
+            icon: '🏗️',
+            defaultOpen: true,
+            html: `<h4 style="color:#00897b;margin:0 0 8px;">1. 按體裁劃分 (By Genre)</h4>
+<ul>
+<li><strong>第 1-6 章：宮廷敘事 (Court Stories)</strong> — 講述但以理及其朋友在外邦宮廷中的經歷。</li>
+<li><strong>第 7-12 章：異象 (Visions)</strong> — 屬於預言/啟示文學，使用第一人稱敘述。</li>
+</ul>
+<h4 style="color:#00897b;margin:16px 0 8px;">2. 按語言劃分 (By Language)</h4>
+<p>但以理書使用了希伯來文與亞蘭文兩種語言，這是其最獨特的特徵之一：</p>
+<ul>
+<li><strong>希伯來文</strong>：第 1 章（導言），第 8-12 章（涉及以色列未來的異象）。</li>
+<li><strong>亞蘭文</strong>：第 2-7 章（涉及外邦列國的命運）。</li>
+</ul>
+<h4 style="color:#00897b;margin:16px 0 8px;">3. 亞蘭文部分的交叉結構 (The Aramaic Chiasm)</h4>
+<p>第 2-7 章呈現出一個精美的交叉結構 (ABCC'B'A')：</p>
+<div class="chiasm-box">
+<div class="level"><strong>A（第 2 章）</strong>：尼布甲尼撒的巨像夢 — 四個國度被神的國度取代。</div>
+<div class="level" style="padding-left:24px;"><strong>B（第 3 章）</strong>：忠心的猶太人（三友）在火窯中面對死亡威脅並獲救。</div>
+<div class="level" style="padding-left:48px;"><strong>C（第 4 章）</strong>：驕傲的外邦君王（尼布甲尼撒）受審判與羞辱。</div>
+<div class="level" style="padding-left:48px;"><strong>C'（第 5 章）</strong>：驕傲的外邦君王（伯沙撒）受審判與被殺。</div>
+<div class="level" style="padding-left:24px;"><strong>B'（第 6 章）</strong>：忠心的猶太人（但以理）在獅坑中面對死亡威脅並獲救。</div>
+<div class="level"><strong>A'（第 7 章）</strong>：但以理的四獸異象 — 四個國度被神的國度取代。</div>
+</div>
+<p><strong>結構的神學意義：</strong></p>
+<ul>
+<li><strong>中心 (C/C')</strong>：神掌管人類君王的命運，祂賜予權力也收回權力。</li>
+<li><strong>外圍 (A/A')</strong>：人類的帝國都是暫時的，唯有神的國度存到永遠。</li>
+<li><strong>中間 (B/B')</strong>：神的子民在異教統治下，應當至死忠心，神有能力拯救。</li>
+</ul>`
+        },
+        {
+            title: '結語',
+            icon: '✝️',
+            defaultOpen: true,
+            html: `<p>但以理書不僅是一本預言未來的書，更是一本關於<strong>「如何在不信的世界中活出信仰」</strong>的書。無論是第 1-6 章的敘事，還是第 7-12 章的異象，都指向同一個真理：雖然外邦君王看似掌權，但以色列的神才是歷史的終極主宰。</p>`
+        },
+        {
+            title: '附錄一：但以理書作者與寫作年代之學術探討',
+            icon: '📖',
+            isAppendix: true,
+            defaultOpen: false,
+            html: `<p>關於《但以理書》的作者身分與寫作日期，至今仍是聖經學術界爭論最激烈的議題之一。</p>
+<h4 style="color:#880e4f;margin:12px 0 8px;">一、傳統觀點：主前六世紀</h4>
+<p>此觀點認為但以理本人即為本書作者，寫作時間約在主前六世紀。支持論據包括：</p>
+<ol>
+<li><strong>耶穌基督的證言</strong>：太 24:15 明確引用「先知但以理所說的」，暗示預言指向未來終末事件。</li>
+<li><strong>死海古卷的證據</strong>：昆蘭最古老殘片約主前 125 年。若本書寫於主前 165-164 年，從寫作到被列入正典、傳播至昆蘭僅約 40 年，時間過於倉促。</li>
+<li><strong>書卷內部的宣稱</strong>：異象部分（第 7-12 章）使用第一人稱（「我，但以理」）不下十七次。</li>
+<li><strong>以西結的引用</strong>：結 14:14, 20; 28:3 三次提到但以理，將他與挪亞、約伯並列為義人。</li>
+<li><strong>考古學支持</strong>：伯沙撒的存在及攝政地位獲考古證實。</li>
+</ol>
+<h4 style="color:#880e4f;margin:12px 0 8px;">二、批判觀點：主前二世紀</h4>
+<p>大多數批判學者認為本書由匿名猶太作者在馬加比起義時期寫成。支持論據包括：</p>
+<ol>
+<li><strong>事後預言 (Vaticinium ex eventu)</strong>：第 11 章對安提阿哥四世時期事件描述極為精確。</li>
+<li><strong>歷史知識的不平衡</strong>：作者對六世紀細節掌握有誤，卻對二世紀瞭若指掌。</li>
+<li><strong>瑪代人大利烏</strong>：外部文獻無此人作王的記載。</li>
+<li><strong>語言學特徵</strong>：出現波斯語和希臘語外來詞，暗示較晚的寫作背景。</li>
+<li><strong>複合著作論</strong>：第 1-6 章宮廷故事可能較早，後在主前二世紀結合第 7-12 章異象。</li>
+</ol>
+<h4 style="color:#880e4f;margin:12px 0 8px;">三、當代學術現況</h4>
+<p>福音派評論家對此仍持不同意見。部分學者堅守傳統的六世紀觀點，認為這是維護聖經預言真實性的必要立場；另一部分學者則認為批判觀點在處理文本細節上更具說服力，並試圖在接受晚期寫作的同時肯定其神學價值。</p>`
+        },
+        {
+            title: '附錄二：支持主前六世紀寫作的十大論據',
+            icon: '🔟',
+            isAppendix: true,
+            defaultOpen: false,
+            html: `<ol>
+<li><strong>耶穌基督的直接歸屬</strong>：基督明確引用「先知但以理所說的」（太 24:15），確認但以理是真實的歷史人物。</li>
+<li><strong>未來的應驗而非事後歷史</strong>：耶穌將但以理的預言視為描述「尚未發生」的事件，直接反駁「事後預言」說。</li>
+<li><strong>昆蘭古卷的時間線難題</strong>：最古老殘片約主前 125 年，若寫於主前 165 年，正典化和傳播只有約 40 年，過於倉促。</li>
+<li><strong>亞蘭文的語言學證據</strong>：書中亞蘭文與主前五世紀象島蒲草紙（帝國亞蘭文）高度相似，與昆蘭後期亞蘭文不符。</li>
+<li><strong>波斯外來語指向早期年代</strong>：書中波斯語詞屬古波斯語，約主前 300 年後已停止使用。</li>
+<li><strong>考古學的證實</strong>：伯沙撒的存在及攝政地位獲考古證實，作者對六世紀背景有準確認識。</li>
+<li><strong>以西結的引用</strong>：結 14:14, 20; 28:3 提到但以理，確立其歷史性。批判學者認為是指烏加里特文獻中的 Dan'el，但該人物是拜偶像者，不合文脈。</li>
+<li><strong>七十士譯本的翻譯時機</strong>：若 LXX 在主前三世紀中葉翻譯，則主前二世紀寫作說要求 30 年內完成寫作、列入正典、傳播 300 英里至亞歷山大城並翻譯。</li>
+<li><strong>書卷內部的作者宣稱</strong>：本書明確宣稱由但以理所寫，呈現為真實記述。</li>
+<li><strong>結構的統一性</strong>：後半部第一人稱（「我，但以理」）+ 精密交叉結構，暗示單一作者構思完成。</li>
+</ol>
+<hr style="margin:16px 0">
+<p><strong>參考書目：</strong></p>
+<ul class="bib-list">
+<li>Buster & Walton, <em>The Book of Daniel, Chapters 1–6</em> (NICOT, 2025)</li>
+<li>Chase, "Daniel" in <em>ESV Expository Commentary</em> Vol.7 (2018)</li>
+<li>Tanner, <em>Daniel</em> (EEC, 2020)</li>
+<li>Walvoord, <em>Daniel</em> (Moody, 2012)</li>
+<li>Widder, <em>Daniel: God's Kingdom Will Endure</em> (ZECOT, 2023)</li>
+<li>Miller, <em>Daniel</em> (NAC, 1994)</li>
+<li>Holman, <em>Holman Illustrated Bible Handbook</em> (2012)</li>
+</ul>`
+        }
+    ],
+    questions: {
+        observation: [
+            { id:'i_obs1', text:'但以理書最重要的神學主題是什麼？請用課程內容的原文說明。', hint:'提示：留意「核心目標」和「神學核心」部分。',
+              reference:'但以理書最重要的神學主題是：<b>上帝的主權 (The Sovereignty of God) 以及祂對子民持續的眷顧</b>。書中的核心目標不僅是研究末世時間表，更是要將這個神學信息應用於今日信徒的生活中，在破碎的世界中提供盼望。' },
+            { id:'i_obs2', text:'被擄對以色列人造成了什麼「神學衝擊」？學者 Daniel Block 提出的信心「四大支柱」是什麼？', hint:'提示：回想當土地失去、君王被廢、聖殿被毀時的處境。',
+              reference:'<b>四大支柱：</b><br>1. 西奈之約的不可撤銷性（神的揀選）<br>2. 應許之地（神賜的土地）<br>3. 大衛之約（永遠的王位）<br>4. 聖殿（耶和華的居所）<br><br>被擄時這四大支柱看似全面崩塌，造成巨大的信仰危機：神是否還在掌權？' },
+            { id:'i_obs3', text:'但以理書在希伯來聖經和基督教聖經中的正典位置有何不同？各有什麼原因？', hint:'提示：注意「聖卷」vs.「大先知書」的分類。',
+              reference:'<b>希伯來聖經：</b>位於「聖卷」(Ketuvim)，原因可能包括成書較晚、但以理非傳統先知（是政府官員）、具智慧文學色彩、第 1-6 章的敘事性質。<br><b>基督教聖經：</b>位於「大先知書」，依據七十士譯本順序，側重第 7-12 章的預言性質。耶穌和早期教父都稱但以理為先知。' },
+            { id:'i_obs4', text:'請描述但以理書2-7章的交叉結構（Chiasm），並說明各層次的配對關係。', hint:'提示：ABCC\'B\'A\' 的結構。',
+              reference:'<b>交叉結構 (ABCC\'B\'A\')：</b><br>A（第2章）↔ A\'（第7章）：四個國度被神的國度取代<br>B（第3章）↔ B\'（第6章）：忠心的猶太人面對死亡威脅並獲救<br>C（第4章）↔ C\'（第5章）：驕傲的外邦君王受審判' }
+        ],
+        interpretation: [
+            { id:'i_int1', text:'交叉結構的中心、外圍和中間各自強調什麼神學信息？這個結構對你理解但以理書有什麼幫助？', hint:'思考 A/A\'、B/B\'、C/C\' 分別傳達什麼信息。',
+              reference:'<b>中心 (C/C\')：</b>神掌管人類君王的命運，祂賜予權力也收回權力。<br><b>外圍 (A/A\')：</b>人類的帝國都是暫時的，唯有神的國度存到永遠。<br><b>中間 (B/B\')：</b>神的子民在異教統治下應當至死忠心，神有能力拯救。<br><br>這個結構幫助我們看見全書不是零散的故事集，而是精心設計的文學作品，每一層都指向神的主權。' },
+            { id:'i_int2', text:'為什麼但以理書同時使用希伯來文和亞蘭文？這兩種語言的分佈有什麼神學意義？', hint:'比較兩種語言所涵蓋的內容主題。',
+              reference:'<b>希伯來文</b>（第1章 + 第8-12章）涵蓋導言和涉及<b>以色列未來</b>的異象 — 用以色列人自己的語言講述關乎他們的信息。<br><b>亞蘭文</b>（第2-7章）涵蓋涉及<b>外邦列國命運</b>的內容 — 用當時國際通用語言講述關乎萬國的信息。<br>語言的轉換本身就是一個神學聲明：神不僅是以色列的神，也是萬國的主。' },
+            { id:'i_int3', text:'關於作者與年代的爭論，課程建議我們採取什麼態度？你同意嗎？', hint:'留意「課程立場」的聲明。',
+              reference:'課程建議持<b>開放態度</b>，因為「無論採取哪種觀點，都能找到尊重聖經權威的學者」。重點在於經文對原初聽眾（無論是被擄群體或受逼迫的猶太人）的意義。這提醒我們不要讓學術爭論掩蓋了經文本身的神學信息。' }
+        ],
+        application: [
+            { id:'i_app1', text:'你是否經歷過「信仰支柱崩塌」的時刻（如失去健康、工作、關係）？但以理書的信息如何幫助你重新看待困境？', hint:'思考「四大支柱」在你生命中的對應是什麼。',
+              reference:'<b>引導方向：</b>鼓勵學員反思自己的「信仰支柱」是什麼 — 可能是穩定的工作、健康的身體、美好的關係、教會的社群。當這些被「擄去」時，但以理書提醒我們：神仍然在掌權，祂允許這些事發生並非因為祂失控，而是有祂的目的。' },
+            { id:'i_app2', text:'「如何在不信的世界中活出信仰」— 這個主題對你今天的處境有什麼具體意義？', hint:'想想你在職場、校園或社會中面對的壓力。',
+              reference:'<b>引導方向：</b>但以理書不只是古代歷史或末世預言，更是一本「生活手冊」。在世俗化的社會中，我們像但以理一樣每天面對身分認同、價值觀和忠誠的挑戰。鼓勵學員分享具體的例子，以及如何從但以理書中找到勇氣和智慧。' },
+            { id:'i_app3', text:'學習但以理書的歷史與文學背景，如何幫助你更深入地理解聖經？你對接下來12課的學習有什麼期待？', hint:'反思「知其然也知其所以然」的學習態度。',
+              reference:'<b>引導方向：</b>鼓勵學員認識到，理解歷史背景（被擄、帝國更替）和文學結構（交叉結構、體裁）不是「學術遊戲」，而是幫助我們聽到經文原初聽眾所聽到的信息。這使聖經從「遙遠的古書」變成「活的話語」。' }
+        ]
+    },
+    quiz: [
+        { q:'但以理書最重要的神學主題是什麼？', opts:['末世預言的時間表','上帝的主權與祂對子民的眷顧','天使與魔鬼的爭戰','猶太人的政治復興'], ans:1 },
+        { q:'但以理書在希伯來聖經（Hebrew Bible）中位於哪個部分？', opts:['律法書 (Torah)','前先知書 (Former Prophets)','後先知書 (Latter Prophets)','聖卷 (Writings / Ketuvim)'], ans:3 },
+        { q:'但以理書第2-7章使用什麼語言寫成？', opts:['希伯來文','希臘文','亞蘭文','拉丁文'], ans:2 },
+        { q:'在但以理書2-7章的交叉結構中，最中心的 C/C\'（第4-5章）強調什麼主題？', opts:['忠心的猶太人面對死亡威脅並獲救','四個國度被神的國度取代','驕傲的外邦君王受審判','但以理解夢的智慧超越眾人'], ans:2 },
+        { q:'以下哪一項不是學者 Daniel Block 提出的以色列人信心「四大支柱」？', opts:['西奈之約的不可撤銷性','應許之地','先知的傳承','大衛之約'], ans:2 }
+    ],
+    verses: []
 },
 {
     id: 'lesson1', title: '第一課', subtitle: '但以理的立志',
@@ -325,73 +499,29 @@ const LESSONS = [
         { q:'根據但以理書1:17，神賜給四個少年什麼？', opts:['財富和權力','知識和聰明','健康和長壽','勇氣和力量'], ans:1 }
     ]
 },
-{
-    id:'lesson2', title:'第二課', subtitle:'尼布甲尼撒的夢',
-    ref:'但以理書 第2章', description:'巨像之夢的解釋與預言的意義',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson3', title:'第三課', subtitle:'火窯的考驗',
-    ref:'但以理書 第3章', description:'沙得拉、米煞、亞伯尼歌的信心',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson4', title:'第四課', subtitle:'尼布甲尼撒的教訓',
-    ref:'但以理書 第4章', description:'驕傲的代價與悔改的恩典',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson5', title:'第五課', subtitle:'伯沙撒的筵席',
-    ref:'但以理書 第5章', description:'牆上的文字與巴比倫的終結',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson6', title:'第六課', subtitle:'獅子坑',
-    ref:'但以理書 第6章', description:'但以理的忠誠與神的保護',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson7', title:'第七課', subtitle:'四獸的異象',
-    ref:'但以理書 第7章', description:'歷史的走向與神國的降臨',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson8', title:'第八課', subtitle:'公綿羊與公山羊',
-    ref:'但以理書 第8章', description:'波斯與希臘帝國的預言',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson9', title:'第九課', subtitle:'但以理的禱告',
-    ref:'但以理書 第9章', description:'七十個七的預言與認罪禱告',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson10', title:'第十課', subtitle:'大爭戰的異象（上）',
-    ref:'但以理書 第10章', description:'靈界的爭戰與神的啟示',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson11', title:'第十一課', subtitle:'大爭戰的異象（下）',
-    ref:'但以理書 第11章', description:'南北王的爭戰與歷史的詳細預言',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-},
-{
-    id:'lesson12', title:'第十二課', subtitle:'末後的盼望',
-    ref:'但以理書 第12章', description:'復活的應許與忠信的獎賞',
-    comingSoon:true, verses:[], questions:null, quiz:[]
-}
+{ id:'lesson2', title:'第二課', subtitle:'尼布甲尼撒的夢', ref:'但以理書 第2章', description:'巨像之夢的解釋與預言的意義', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson3', title:'第三課', subtitle:'火窯的考驗', ref:'但以理書 第3章', description:'沙得拉、米煞、亞伯尼歌的信心', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson4', title:'第四課', subtitle:'尼布甲尼撒的教訓', ref:'但以理書 第4章', description:'驕傲的代價與悔改的恩典', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson5', title:'第五課', subtitle:'伯沙撒的筵席', ref:'但以理書 第5章', description:'牆上的文字與巴比倫的終結', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson6', title:'第六課', subtitle:'獅子坑', ref:'但以理書 第6章', description:'但以理的忠誠與神的保護', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson7', title:'第七課', subtitle:'四獸的異象', ref:'但以理書 第7章', description:'歷史的走向與神國的降臨', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson8', title:'第八課', subtitle:'公綿羊與公山羊', ref:'但以理書 第8章', description:'波斯與希臘帝國的預言', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson9', title:'第九課', subtitle:'但以理的禱告', ref:'但以理書 第9章', description:'七十個七的預言與認罪禱告', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson10', title:'第十課', subtitle:'大爭戰的異象（上）', ref:'但以理書 第10章', description:'靈界的爭戰與神的啟示', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson11', title:'第十一課', subtitle:'大爭戰的異象（下）', ref:'但以理書 第11章', description:'南北王的爭戰與歷史的詳細預言', comingSoon:true, verses:[], questions:null, quiz:[] },
+{ id:'lesson12', title:'第十二課', subtitle:'末後的盼望', ref:'但以理書 第12章', description:'復活的應許與忠信的獎賞', comingSoon:true, verses:[], questions:null, quiz:[] }
 ];
 
 // ==========================================
 // STATE
 // ==========================================
 let currentUser = null;
-let userData = {};      // { progress:{}, highlights:{}, notes:{} }
+let userData = {};
 let currentLessonId = null;
-let hlVerse = null;     // currently selected verse for highlighting
+let hlVerse = null;
 
 // ==========================================
-// AUTH FUNCTIONS
+// AUTH
 // ==========================================
 function showMsg(id, text, type) {
     const el = document.getElementById(id);
@@ -412,11 +542,8 @@ window.doLogin = async function() {
     const email = document.getElementById('login-email').value.trim();
     const pw = document.getElementById('login-password').value;
     if(!email||!pw) return showMsg('login-msg','請填寫電郵和密碼','error');
-    try {
-        await signInWithEmailAndPassword(auth, email, pw);
-    } catch(e) {
-        showMsg('login-msg','登入失敗：'+e.message,'error');
-    }
+    try { await signInWithEmailAndPassword(auth, email, pw); }
+    catch(e) { showMsg('login-msg','登入失敗：'+e.message,'error'); }
 };
 
 window.doRegister = async function() {
@@ -428,13 +555,8 @@ window.doRegister = async function() {
     try {
         const cred = await createUserWithEmailAndPassword(auth, email, pw);
         await updateProfile(cred.user, { displayName: name });
-        await setDoc(doc(db,'users',cred.user.uid), {
-            displayName: name, email: email,
-            progress: {}, highlights: {}, notes: {}
-        });
-    } catch(e) {
-        showMsg('register-msg','註冊失敗：'+e.message,'error');
-    }
+        await setDoc(doc(db,'users',cred.user.uid), { displayName:name, email:email, progress:{}, highlights:{}, notes:{} });
+    } catch(e) { showMsg('register-msg','註冊失敗：'+e.message,'error'); }
 };
 
 window.doForgotPassword = async function() {
@@ -443,18 +565,11 @@ window.doForgotPassword = async function() {
     try {
         await sendPasswordResetEmail(auth, email);
         showMsg('login-msg','重置密碼的電郵已發送到 '+email+'，請檢查收件箱（及垃圾郵件）。','success');
-    } catch(e) {
-        showMsg('login-msg','發送失敗：'+e.message,'error');
-    }
+    } catch(e) { showMsg('login-msg','發送失敗：'+e.message,'error'); }
 };
 
-window.doLogout = async function() {
-    await signOut(auth);
-};
+window.doLogout = async function() { await signOut(auth); };
 
-// ==========================================
-// AUTH STATE OBSERVER
-// ==========================================
 onAuthStateChanged(auth, async (user) => {
     if(user) {
         currentUser = user;
@@ -471,28 +586,22 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 // ==========================================
-// FIRESTORE — LOAD / SAVE
+// FIRESTORE
 // ==========================================
 async function loadUserData() {
     try {
         const snap = await getDoc(doc(db,'users',currentUser.uid));
-        if(snap.exists()) {
-            userData = snap.data();
-        } else {
-            userData = { displayName: currentUser.displayName, email: currentUser.email, progress:{}, highlights:{}, notes:{} };
-            await setDoc(doc(db,'users',currentUser.uid), userData);
-        }
+        if(snap.exists()) { userData = snap.data(); }
+        else { userData = { displayName:currentUser.displayName, email:currentUser.email, progress:{}, highlights:{}, notes:{} }; await setDoc(doc(db,'users',currentUser.uid), userData); }
         if(!userData.progress) userData.progress = {};
         if(!userData.highlights) userData.highlights = {};
         if(!userData.notes) userData.notes = {};
     } catch(e) { console.error('Load error:', e); }
 }
-
 async function saveUserData() {
     if(!currentUser) return;
-    try {
-        await setDoc(doc(db,'users',currentUser.uid), userData, {merge:true});
-    } catch(e) { console.error('Save error:', e); }
+    try { await setDoc(doc(db,'users',currentUser.uid), userData, {merge:true}); }
+    catch(e) { console.error('Save error:', e); }
 }
 
 // ==========================================
@@ -500,36 +609,29 @@ async function saveUserData() {
 // ==========================================
 function renderDashboard() {
     const total = LESSONS.filter(l => !l.comingSoon).length;
-    let done = 0;
-    let totalScore = 0, scored = 0;
+    let done = 0, totalScore = 0, scored = 0;
     LESSONS.forEach(l => {
         const p = userData.progress[l.id];
-        if(p && p.completed) { done++; }
+        if(p && p.completed) done++;
         if(p && p.quizScore != null) { totalScore += p.quizScore; scored++; }
     });
     const pct = total > 0 ? Math.round(done/total*100) : 0;
     document.getElementById('prog-bar').style.width = pct+'%';
     document.getElementById('prog-bar').textContent = pct+'%';
     let statsHtml = `已完成：${done} / ${total} 課`;
-    if(scored > 0) statsHtml += `&nbsp;&nbsp;&nbsp;&nbsp;平均測驗分數：${Math.round(totalScore/scored)}%`;
+    if(scored > 0) statsHtml += `&nbsp;&nbsp;|&nbsp;&nbsp;平均測驗分數：${Math.round(totalScore/scored)}%`;
     document.getElementById('prog-stats').innerHTML = statsHtml;
 
     const grid = document.getElementById('lesson-grid');
     grid.innerHTML = '';
     LESSONS.forEach(l => {
         const p = userData.progress[l.id] || {};
-        const isComplete = p.completed;
         const card = document.createElement('div');
-        card.className = 'lesson-card' + (isComplete ? ' completed' : '') + (l.comingSoon ? ' coming-soon' : '');
+        card.className = 'lesson-card' + (p.completed ? ' completed' : '') + (l.comingSoon ? ' coming-soon' : '');
         let statusHtml = '';
-        if(l.comingSoon) {
-            statusHtml = '<span class="badge badge-locked">🔒 即將推出</span>';
-        } else if(isComplete) {
-            statusHtml = '<span class="badge badge-done">✅ 已完成</span>';
-            if(p.quizScore != null) statusHtml += `<span class="badge badge-score">測驗：${p.quizScore}%</span>`;
-        } else {
-            statusHtml = '<span class="badge badge-wip">📖 進行中</span>';
-        }
+        if(l.comingSoon) statusHtml = '<span class="badge badge-locked">🔒 即將推出</span>';
+        else if(p.completed) { statusHtml = '<span class="badge badge-done">✅ 已完成</span>'; if(p.quizScore!=null) statusHtml += `<span class="badge badge-score">測驗：${p.quizScore}%</span>`; }
+        else statusHtml = '<span class="badge badge-wip">📖 進行中</span>';
         card.innerHTML = `<h3>${l.title}：${l.subtitle}</h3><div class="ref">${l.ref}</div><div class="desc">${l.description}</div><div>${statusHtml}</div>`;
         if(!l.comingSoon) card.onclick = () => openLesson(l.id);
         grid.appendChild(card);
@@ -546,10 +648,14 @@ function openLesson(id) {
 
     document.getElementById('dashboard-view').style.display = 'none';
     document.getElementById('lesson-view').style.display = 'block';
-
     document.getElementById('lv-header').innerHTML = `<h1>${lesson.title}：${lesson.subtitle}</h1><p>${lesson.ref} — ${lesson.description}</p>`;
 
-    renderScripture(lesson);
+    // Update first tab label based on lesson type
+    const tabLabel = document.getElementById('tab-label-scripture');
+    tabLabel.textContent = lesson.isIntro ? '📖 課程內容' : '📖 經文';
+
+    if(lesson.isIntro) renderIntroContent(lesson);
+    else renderScripture(lesson);
     renderQuestions(lesson);
     renderQuiz(lesson);
     showLessonTab('scripture');
@@ -562,7 +668,6 @@ window.goBack = function() {
     renderDashboard();
 };
 
-// Tab switching
 document.getElementById('lv-tabs').addEventListener('click', (e) => {
     const tab = e.target.dataset?.tab;
     if(tab) showLessonTab(tab);
@@ -570,15 +675,49 @@ document.getElementById('lv-tabs').addEventListener('click', (e) => {
 
 function showLessonTab(tab) {
     document.querySelectorAll('#lv-tabs .lesson-tab').forEach(t => t.classList.toggle('active', t.dataset.tab===tab));
-    ['scripture','questions','quiz'].forEach(t => {
-        document.getElementById('tab-'+t).classList.toggle('active', t===tab);
-    });
-    // Close highlight popup when switching tabs
+    ['scripture','questions','quiz'].forEach(t => document.getElementById('tab-'+t).classList.toggle('active', t===tab));
     document.getElementById('hl-popup').style.display = 'none';
 }
 
 // ==========================================
-// SCRIPTURE TAB
+// INTRO CONTENT TAB
+// ==========================================
+function renderIntroContent(lesson) {
+    const container = document.getElementById('tab-scripture');
+    const isRead = userData.progress[lesson.id]?.scriptureRead;
+
+    let html = `<div class="intro-content">`;
+    html += `<h2 style="color:#1a237e;margin-bottom:4px;">📖 ${lesson.chapterTitle}</h2>`;
+    html += `<p style="color:#888;font-size:13px;margin-bottom:20px;">Dr. Wendy Widder (PhD, Near Eastern Studies) — 點擊各標題可展開/收合內容</p>`;
+
+    lesson.sections.forEach((sec, i) => {
+        const isOpen = sec.defaultOpen;
+        const appendixClass = sec.isAppendix ? ' appendix' : '';
+        html += `<div class="intro-section${appendixClass}">
+            <div class="intro-section-header" onclick="toggleIntroSection(${i})">
+                <h3>${sec.icon} ${sec.title}</h3>
+                <span class="arrow${isOpen?' open':''}" id="arrow-${i}">▼</span>
+            </div>
+            <div class="intro-section-body${isOpen?' open':''}" id="isec-${i}">${sec.html}</div>
+        </div>`;
+    });
+
+    html += `<button class="btn-mark-read${isRead?' done':''}" onclick="markRead()" id="btn-read">${isRead?'✅ 已完成閱讀':'📖 標記已完成閱讀'}</button>`;
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+window.toggleIntroSection = function(i) {
+    const body = document.getElementById('isec-'+i);
+    const arrow = document.getElementById('arrow-'+i);
+    if(body && arrow) {
+        body.classList.toggle('open');
+        arrow.classList.toggle('open');
+    }
+};
+
+// ==========================================
+// SCRIPTURE TAB (for Bible chapters)
 // ==========================================
 function renderScripture(lesson) {
     const container = document.getElementById('tab-scripture');
@@ -610,7 +749,6 @@ function renderScripture(lesson) {
     html += `</div>`;
     container.innerHTML = html;
 
-    // Attach verse click handlers
     container.querySelectorAll('.verse').forEach(el => {
         el.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -625,7 +763,6 @@ function renderScripture(lesson) {
     });
 }
 
-// Close popup on outside click
 document.addEventListener('click', (e) => {
     if(!e.target.closest('.verse') && !e.target.closest('.hl-popup')) {
         document.getElementById('hl-popup').style.display = 'none';
@@ -635,17 +772,10 @@ document.addEventListener('click', (e) => {
 window.setHL = async function(color) {
     if(!currentLessonId || hlVerse == null) return;
     if(!userData.highlights[currentLessonId]) userData.highlights[currentLessonId] = {};
-    if(color) {
-        userData.highlights[currentLessonId][hlVerse] = color;
-    } else {
-        delete userData.highlights[currentLessonId][hlVerse];
-    }
-    // Update UI
+    if(color) userData.highlights[currentLessonId][hlVerse] = color;
+    else delete userData.highlights[currentLessonId][hlVerse];
     const el = document.querySelector(`.verse[data-v="${hlVerse}"]`);
-    if(el) {
-        el.classList.remove('hl-yellow','hl-blue','hl-green');
-        if(color) el.classList.add('hl-'+color);
-    }
+    if(el) { el.classList.remove('hl-yellow','hl-blue','hl-green'); if(color) el.classList.add('hl-'+color); }
     document.getElementById('hl-popup').style.display = 'none';
     await saveUserData();
 };
@@ -655,8 +785,7 @@ window.markRead = async function() {
     if(!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
     userData.progress[currentLessonId].scriptureRead = true;
     const btn = document.getElementById('btn-read');
-    btn.textContent = '✅ 已完成閱讀';
-    btn.classList.add('done');
+    btn.textContent = '✅ 已完成閱讀'; btn.classList.add('done');
     await saveUserData();
 };
 
@@ -666,16 +795,15 @@ window.markRead = async function() {
 function renderQuestions(lesson) {
     const container = document.getElementById('tab-questions');
     if(!lesson.questions) {
-        container.innerHTML = '<div class="coming-soon"><div class="icon">✏️</div><h3>查經問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
+        container.innerHTML = '<div class="coming-soon"><div class="icon">✏️</div><h3>討論問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
         return;
     }
     const notes = (userData.notes && userData.notes[lesson.id]) || {};
     const sections = [
-        { key:'observation', title:'一、觀察與經文梳理', cls:'', icon:'🔍' },
+        { key:'observation', title:'一、觀察與整理', cls:'', icon:'🔍' },
         { key:'interpretation', title:'二、解釋與深入討論', cls:'reflection', icon:'💡' },
         { key:'application', title:'三、生活應用與反思', cls:'sharing', icon:'❤️' }
     ];
-
     let html = '<div class="questions-box">';
     sections.forEach(sec => {
         const qs = lesson.questions[sec.key];
@@ -696,7 +824,6 @@ function renderQuestions(lesson) {
     html += '</div>';
     container.innerHTML = html;
 
-    // Auto-save notes on typing (debounced)
     let saveTimers = {};
     container.querySelectorAll('textarea').forEach(ta => {
         ta.addEventListener('input', () => {
@@ -725,20 +852,16 @@ let quizAnswers = {};
 let quizSubmitted = false;
 
 function renderQuiz(lesson) {
-    quizAnswers = {};
-    quizSubmitted = false;
+    quizAnswers = {}; quizSubmitted = false;
     const container = document.getElementById('tab-quiz');
     if(!lesson.quiz || lesson.quiz.length === 0) {
         container.innerHTML = '<div class="coming-soon"><div class="icon">📝</div><h3>測驗準備中</h3><p>請稍候，測驗即將更新。</p></div>';
         return;
     }
     const prevScore = userData.progress[lesson.id]?.quizScore;
-
-    let html = '<div class="quiz-box">';
-    html += '<h2>📝 課後測驗</h2>';
+    let html = '<div class="quiz-box"><h2>📝 課後測驗</h2>';
     if(prevScore != null) html += `<p style="color:#43a047;margin:8px 0">上次成績：${prevScore}%</p>`;
     html += '<p style="color:#888;font-size:13px;margin-bottom:16px">請選擇最佳答案：</p>';
-
     lesson.quiz.forEach((q, qi) => {
         html += `<div class="quiz-q" id="qq-${qi}"><h4>${qi+1}. ${q.q}</h4>`;
         q.opts.forEach((opt, oi) => {
@@ -747,8 +870,7 @@ function renderQuiz(lesson) {
         html += '</div>';
     });
     html += `<button class="btn-quiz" id="btn-submit-quiz" onclick="submitQuiz()">提交答案</button>`;
-    html += `<div class="quiz-result" id="quiz-result"></div>`;
-    html += '</div>';
+    html += `<div class="quiz-result" id="quiz-result"></div></div>`;
     container.innerHTML = html;
 }
 
@@ -765,9 +887,15 @@ window.submitQuiz = async function() {
     const lesson = LESSONS.find(l => l.id === currentLessonId);
     if(!lesson) return;
     const total = lesson.quiz.length;
-    const answered = Object.keys(quizAnswers).length;
-    if(answered < total) { alert('請回答所有問題！'); return; }
-
+    if(Object.keys(quizAnswers).length < total) {
+        // Custom inline warning instead of alert
+        const result = document.getElementById('quiz-result');
+        result.style.display = 'block';
+        result.className = 'quiz-result fail';
+        result.textContent = '⚠️ 請回答所有問題！';
+        setTimeout(() => { result.style.display = 'none'; }, 2000);
+        return;
+    }
     quizSubmitted = true;
     let correct = 0;
     lesson.quiz.forEach((q, qi) => {
@@ -780,16 +908,13 @@ window.submitQuiz = async function() {
             else if(oi === picked && !isCorrect) el.classList.add('wrong');
         });
     });
-
     const score = Math.round(correct/total*100);
     const result = document.getElementById('quiz-result');
     result.style.display = 'block';
     result.className = 'quiz-result ' + (score >= 60 ? 'pass' : 'fail');
     result.textContent = `你的分數：${score}%（${correct}/${total}）` + (score >= 60 ? ' 🎉' : ' — 請再加油！');
-
     document.getElementById('btn-submit-quiz').disabled = true;
 
-    // Save
     if(!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
     userData.progress[currentLessonId].quizScore = score;
     userData.progress[currentLessonId].completed = true;
