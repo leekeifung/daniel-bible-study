@@ -281,8 +281,6 @@
 <script>window.LESSONS_DATA = [];</script>
 <script src="data/intro.js"></script>
 <script src="data/lesson01.js"></script>
-<script src="data/lesson02.js"></script>
-<script src="data/lesson03.js"></script>
 <!-- 日後加新課只需新增 data/lessonXX.js 並取消下方註解 -->
 <!-- <script src="data/lesson02.js"></script> -->
 <!-- <script src="data/lesson03.js"></script> -->
@@ -575,10 +573,19 @@ window.toggleIntroSection = function(i) {
 // ==========================================
 function renderScripture(lesson) {
     const container = document.getElementById('tab-scripture');
-    if(!lesson.verses || lesson.verses.length === 0) {
-        container.innerHTML = '<div class="coming-soon"><div class="icon">📖</div><h3>經文內容準備中</h3><p>請稍候，內容即將更新。</p></div>';
+
+    // ── 判斷有冇經文 ──
+    const hasVerses   = lesson.verses && lesson.verses.length > 0;
+    const hasChapters = lesson.chapters && lesson.chapters.length > 0;
+
+    if (!hasVerses && !hasChapters) {
+        container.innerHTML = '<div class="coming-soon">'
+            + '<div class="icon">📖</div>'
+            + '<h3>經文內容準備中</h3>'
+            + '<p>請稍候，內容即將更新。</p></div>';
         return;
     }
+
     const highlights = (userData.highlights && userData.highlights[lesson.id]) || {};
     const isRead = userData.progress[lesson.id]?.scriptureRead;
 
@@ -592,21 +599,60 @@ function renderScripture(lesson) {
         + '<span><span class="hl-dot" style="background:#c8e6c9;border:1px solid #66bb6a"></span> 感動/有用</span>'
         + '<span style="color:#999;font-size:12px">（點擊經文即可標記）</span>'
         + '</div>';
-    html += '<div class="verses-area">';
-    lesson.verses.forEach((v, i) => {
-        const vnum = i + 1;
-        const hlClass = highlights[vnum] ? ' hl-' + highlights[vnum] : '';
-        html += '<span class="verse' + hlClass + '" data-v="' + vnum + '"><sup>' + vnum + '</sup>' + v + '</span>';
-    });
-    html += '</div>';
-    html += '<button class="btn-mark-read' + (isRead ? ' done' : '') + '" onclick="markRead()" id="btn-read">' + (isRead ? '✅ 已完成閱讀' : '📖 標記已完成閱讀') + '</button>';
-    html += '</div>';
+
+    // ══════════════════════════════════════════
+    //  A) 多章模式 — lesson.chapters
+    // ══════════════════════════════════════════
+    if (hasChapters) {
+        lesson.chapters.forEach(ch => {
+            html += '<div class="chapter-block" style="margin-top:28px">';
+            // 章標題
+            if (ch.chapterTitle) {
+                html += '<h3 style="color:#1a237e;margin-bottom:4px">'
+                    + ch.chapterTitle + '</h3>';
+            }
+            if (ch.ref) {
+                html += '<div class="sub" style="margin-bottom:10px;font-size:13px;color:#666">'
+                    + ch.ref + '</div>';
+            }
+            html += '<div class="verses-area">';
+            ch.verses.forEach((v, i) => {
+                const vnum = i + 1;
+                // 用 "章:節" 作 key，避免唔同章節號碼撞
+                const key = ch.chapterNumber + ':' + vnum;
+                const hlClass = highlights[key] ? ' hl-' + highlights[key] : '';
+                html += '<span class="verse' + hlClass + '" data-v="' + key + '">'
+                    + '<sup>' + vnum + '</sup>' + v + '</span>';
+            });
+            html += '</div>';  // .verses-area
+            html += '</div>';  // .chapter-block
+        });
+
+    // ══════════════════════════════════════════
+    //  B) 單章模式 — lesson.verses（原有邏輯）
+    // ══════════════════════════════════════════
+    } else {
+        html += '<div class="verses-area">';
+        lesson.verses.forEach((v, i) => {
+            const vnum = i + 1;
+            const hlClass = highlights[vnum] ? ' hl-' + highlights[vnum] : '';
+            html += '<span class="verse' + hlClass + '" data-v="' + vnum + '">'
+                + '<sup>' + vnum + '</sup>' + v + '</span>';
+        });
+        html += '</div>';
+    }
+
+    html += '<button class="btn-mark-read' + (isRead ? ' done' : '') + '" '
+        + 'onclick="markRead()" id="btn-read">'
+        + (isRead ? '✅ 已完成閱讀' : '📖 標記已完成閱讀') + '</button>';
+    html += '</div>';  // .scripture-box
     container.innerHTML = html;
 
+    // ── 螢光筆點擊 ──
     container.querySelectorAll('.verse').forEach(el => {
         el.addEventListener('click', (e) => {
             e.stopPropagation();
-            hlVerse = parseInt(el.dataset.v);
+            hlVerse = el.dataset.v;          // 可能係 "4:12" 或 "7"
             const popup = document.getElementById('hl-popup');
             const rect = el.getBoundingClientRect();
             popup.style.display = 'block';
@@ -617,34 +663,44 @@ function renderScripture(lesson) {
     });
 }
 
+// ── 保持原有嘅全域 click listener ──
 document.addEventListener('click', (e) => {
-    if(!e.target.closest('.verse') && !e.target.closest('.hl-popup')) {
+    if (!e.target.closest('.verse') && !e.target.closest('.hl-popup')) {
         document.getElementById('hl-popup').style.display = 'none';
     }
 });
 
+// ── 更新 setHL：支援 "章:節" key ──
 window.setHL = async function(color) {
-    if(!currentLessonId || hlVerse == null) return;
-    if(!userData.highlights[currentLessonId]) userData.highlights[currentLessonId] = {};
-    if(color) userData.highlights[currentLessonId][hlVerse] = color;
-    else delete userData.highlights[currentLessonId][hlVerse];
+    if (!currentLessonId || hlVerse == null) return;
+    if (!userData.highlights[currentLessonId]) userData.highlights[currentLessonId] = {};
+
+    if (color) {
+        userData.highlights[currentLessonId][hlVerse] = color;
+    } else {
+        delete userData.highlights[currentLessonId][hlVerse];
+    }
+
     const el = document.querySelector('.verse[data-v="' + hlVerse + '"]');
-    if(el) { el.classList.remove('hl-yellow','hl-blue','hl-green'); if(color) el.classList.add('hl-'+color); }
+    if (el) {
+        el.classList.remove('hl-yellow', 'hl-blue', 'hl-green');
+        if (color) el.classList.add('hl-' + color);
+    }
     document.getElementById('hl-popup').style.display = 'none';
     await saveUserData();
 };
 
-// UPDATED: markRead now checks full completion
+// ── markRead 保持不變 ──
 window.markRead = async function() {
-    if(!currentLessonId) return;
-    if(!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
+    if (!currentLessonId) return;
+    if (!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
     userData.progress[currentLessonId].scriptureRead = true;
     const btn = document.getElementById('btn-read');
-    btn.textContent = '✅ 已完成閱讀'; btn.classList.add('done');
-    // Check if lesson is now fully completed
+    btn.textContent = '✅ 已完成閱讀';
+    btn.classList.add('done');
     const lesson = LESSONS.find(l => l.id === currentLessonId);
     const hasQuiz = lesson && lesson.quiz && lesson.quiz.length > 0;
-    if(!hasQuiz || userData.progress[currentLessonId].quizScore != null) {
+    if (!hasQuiz || userData.progress[currentLessonId].quizScore != null) {
         userData.progress[currentLessonId].completed = true;
         userData.progress[currentLessonId].completedAt = new Date().toISOString();
     }
