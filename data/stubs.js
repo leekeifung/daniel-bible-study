@@ -23,20 +23,41 @@
     });
 })();
 
-// --- 自修閱讀：但以理書 3-6 ---
+// --- 自修閱讀 1：但以理書 3-4 ---
 (function() {
-    if(window.LESSONS_DATA.some(l => l.id === 'selfstudy')) return;
+    if(window.LESSONS_DATA.some(l => l.id === 'selfstudy1')) return;
     window.LESSONS_DATA.push({
-        id: 'selfstudy',
-        title: '📚 自修閱讀',
-        subtitle: '忠信者的見證',
-        ref: '但以理書 3-6章',
-        date: '4月26日 – 5月24日（自修期間）',
-        description: '自修閱讀第3-6章。請特別注意「重複的句型 (Repetition)」以及「君王的驕傲與降卑」主題（對應 OT366 Unit 4-7）。',
-        chapterTitle: '但以理書第三至六章',
+        id: 'selfstudy1',
+        title: '📚 自修閱讀 1',
+        subtitle: '火窰與驕傲的樹',
+        ref: '但以理書 第3-4章',
+        date: '4月27日 – 5月10日',
+        description: '自修閱讀第3-4章。注意「重複句型」及「君王的驕傲與降卑」主題（OT366 Unit 4-5）。',
+        chapterTitle: '但以理書第三至四章',
         isSelfStudy: true,
         comingSoon: true,
         verses: [],
+        chapters: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 自修閱讀 2：但以理書 5-6 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'selfstudy2')) return;
+    window.LESSONS_DATA.push({
+        id: 'selfstudy2',
+        title: '📚 自修閱讀 2',
+        subtitle: '伯沙撒之夜與獅子坑',
+        ref: '但以理書 第5-6章',
+        date: '5月11日 – 5月24日',
+        description: '自修閱讀第5-6章。注意驕傲君王的結局（第5章）及忠信者面臨死亡的第二個故事（第6章），對應 OT366 Unit 6-7。',
+        chapterTitle: '但以理書第五至六章',
+        isSelfStudy: true,
+        comingSoon: true,
+        verses: [],
+        chapters: [],
         questions: null,
         quiz: []
     });
