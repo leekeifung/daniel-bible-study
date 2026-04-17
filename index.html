@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>但以理書研經課程 | 富山平安福音堂</title>
     <style>
+    /* ── Collapsible Article ── */
+.article-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 0;
+}
+.article-header-bar .arrow {
+    font-size: 18px;
+    transition: transform 0.3s;
+    color: #999;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+.article-header-bar .arrow.open {
+    transform: rotate(180deg);
+}
+.article-body-wrap {
+    display: none;
+    padding-top: 16px;
+}
+.article-body-wrap.open {
+    display: block;
+}
+.article-status-hint {
+    font-size: 12px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+    
 .progress-bar-fill.reading-bar { background: linear-gradient(90deg, #ff8f00, #ffb74d); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1250,15 +1282,31 @@ function renderReading(lesson) {
     h += '<h1>📚 ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
 
-   /* ── Articles ── */
+   /* ── Articles (collapsible) ── */
 lesson.articles.forEach(function(art, ai) {
+    var artRead = userData.progress[lesson.id]
+              && userData.progress[lesson.id].articlesRead
+              && userData.progress[lesson.id].articlesRead[art.id];
+
     h += '<div class="reading-article" id="art-' + art.id + '">';
-    h += '<div class="article-cat">' + art.categoryLabel + '</div>';
-    h += '<div class="article-lesson">📖 ' + art.lessonRef + '</div>';
-    h += '<h3>' + art.icon + ' ' + art.title + '</h3>';
+
+    /* ── Clickable header ── */
+    h += '<div class="article-header-bar" onclick="toggleArticle(\'' + art.id + '\')">';
+    h += '<div>'
+       + '<div class="article-cat">' + art.categoryLabel + '</div>'
+       + '<div class="article-lesson">📖 ' + art.lessonRef + '</div>'
+       + '<h3 style="margin:0">' + art.icon + ' ' + art.title
+       + (artRead ? '<span class="article-status-hint" style="color:#43a047">✅ 已讀</span>' : '<span class="article-status-hint" style="color:#999">📖 未讀</span>')
+       + '</h3>'
+       + '</div>';
+    h += '<span class="arrow" id="art-arrow-' + art.id + '">▼</span>';
+    h += '</div>';
+
+    /* ── Collapsible body ── */
+    h += '<div class="article-body-wrap" id="art-body-' + art.id + '">';
     h += '<div class="article-body">' + art.html + '</div>';
 
-    /* inline footnote popups (hidden by default) */
+    /* inline footnote popups */
     if (art.footnotes && art.footnotes.length) {
         art.footnotes.forEach(function(fn) {
             var book = bib[fn.bookKey];
@@ -1266,7 +1314,6 @@ lesson.articles.forEach(function(art, ai) {
                + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
                + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
 
-            /* Book card inside popup */
             if (book) {
                 h += '<div class="book-card">';
                 if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
@@ -1276,19 +1323,15 @@ lesson.articles.forEach(function(art, ai) {
                    + '<div class="book-pub">' + book.publisher + ', ' + book.year
                    + (book.series ? ' — ' + book.series : '') + '</div>';
                 if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
-                h += '</div></div>';  // .book-card-info, .book-card
+                h += '</div></div>';
             }
 
             h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
-               + '</div>';  // .fn-popup
+               + '</div>';
         });
     }
 
-    /* ✅ NEW: 每篇文章底部「標記已完成閱讀」按鈕 */
-    var artRead = userData.progress[lesson.id]
-              && userData.progress[lesson.id].articlesRead
-              && userData.progress[lesson.id].articlesRead[art.id];
-
+    /* Mark-read button */
     h += '<div style="text-align:center;margin:24px 0 16px">';
     h += '<button class="btn-mark-read' + (artRead ? ' done' : '') + '" '
        + 'onclick="markArticleRead(\'' + lesson.id + '\',\'' + art.id + '\')" '
@@ -1296,6 +1339,7 @@ lesson.articles.forEach(function(art, ai) {
     h += (artRead ? '✅ 已完成閱讀此篇' : '📚 標記已完成閱讀此篇');
     h += '</button></div>';
 
+    h += '</div>';  // .article-body-wrap
     h += '</div>';  // .reading-article
 });
 
@@ -1401,6 +1445,15 @@ function showReadingComplete() {
     var container = document.getElementById('lesson-detail');
     if (container) container.appendChild(msg);
 }
+
+window.toggleArticle = function(artId) {
+    var body = document.getElementById('art-body-' + artId);
+    var arrow = document.getElementById('art-arrow-' + artId);
+    if (body && arrow) {
+        body.classList.toggle('open');
+        arrow.classList.toggle('open');
+    }
+};
 
 </script>
 </body>
