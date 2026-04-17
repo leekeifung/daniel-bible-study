@@ -574,32 +574,47 @@ function renderDashboard() {
         document.getElementById('prog-stats-quiz').textContent = '暫無測驗';
     }
 
-    // ✅ NEW: 課餘閱讀獨立進度
+    // ✅ NEW: 課餘閱讀獨立進度（按文章篇數計算）
     const readingLessons = LESSONS.filter(l => !l.comingSoon && l.isReading);
     const readingRow = document.getElementById('reading-progress-row');
+
     if(readingLessons.length > 0) {
-        const totalRL = readingLessons.length;
+        let totalRL = 0;
         let doneRL = 0;
+
         readingLessons.forEach(l => {
+            const artCount = (l.articles && l.articles.length) ? l.articles.length : 0;
+            totalRL += artCount;
+
             const p = userData.progress[l.id];
-            if(p && p.scriptureRead) doneRL++;
+            if (p && p.articlesRead && l.articles) {
+                l.articles.forEach(art => {
+                    if (p.articlesRead[art.id]) doneRL++;
+                });
+            }
         });
-        const pctRL = Math.round(doneRL / totalRL * 100);
 
-        readingRow.style.display = 'flex';
-        document.getElementById('prog-bar-reading').style.width = pctRL + '%';
-        document.getElementById('prog-bar-reading').textContent = pctRL + '%';
-        document.getElementById('prog-stats-reading').textContent = '已閱讀 ' + doneRL + ' / ' + totalRL + ' 篇';
+        if(totalRL > 0) {
+            const pctRL = Math.round(doneRL / totalRL * 100);
 
-        const badge = document.getElementById('reading-badge');
-        if(doneRL === 0) {
-            badge.textContent = '📖 開始你的課餘閱讀之旅吧！';
-        } else if(doneRL < totalRL) {
-            badge.textContent = '⭐ 好學不倦！繼續加油！';
-            badge.style.color = '#ff8f00';
+            readingRow.style.display = 'flex';
+            document.getElementById('prog-bar-reading').style.width = pctRL + '%';
+            document.getElementById('prog-bar-reading').textContent = pctRL + '%';
+            document.getElementById('prog-stats-reading').textContent = '已閱讀 ' + doneRL + ' / ' + totalRL + ' 篇';
+
+            const badge = document.getElementById('reading-badge');
+            if(doneRL === 0) {
+                badge.textContent = '📖 開始你的課餘閱讀之旅吧！';
+                badge.style.color = '#888';
+            } else if(doneRL < totalRL) {
+                badge.textContent = '⭐ 好學不倦！繼續加油！';
+                badge.style.color = '#ff8f00';
+            } else {
+                badge.textContent = '🏆 全部完成！你是閱讀達人！';
+                badge.style.color = '#e65100';
+            }
         } else {
-            badge.textContent = '🏆 全部完成！你是閱讀達人！';
-            badge.style.color = '#e65100';
+            readingRow.style.display = 'none';
         }
     } else {
         readingRow.style.display = 'none';
@@ -1235,41 +1250,54 @@ function renderReading(lesson) {
     h += '<h1>📚 ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
 
-    /* ── Articles ── */
-    lesson.articles.forEach(function(art, ai) {
-        h += '<div class="reading-article" id="art-' + art.id + '">';
-        h += '<div class="article-cat">' + art.categoryLabel + '</div>';
-        h += '<div class="article-lesson">📖 ' + art.lessonRef + '</div>';
-        h += '<h3>' + art.icon + ' ' + art.title + '</h3>';
-        h += '<div class="article-body">' + art.html + '</div>';
+   /* ── Articles ── */
+lesson.articles.forEach(function(art, ai) {
+    h += '<div class="reading-article" id="art-' + art.id + '">';
+    h += '<div class="article-cat">' + art.categoryLabel + '</div>';
+    h += '<div class="article-lesson">📖 ' + art.lessonRef + '</div>';
+    h += '<h3>' + art.icon + ' ' + art.title + '</h3>';
+    h += '<div class="article-body">' + art.html + '</div>';
 
-        /* inline footnote popups (hidden by default) */
-        if (art.footnotes && art.footnotes.length) {
-            art.footnotes.forEach(function(fn) {
-                var book = bib[fn.bookKey];
-                h += '<div class="fn-popup" id="fnp-' + art.id + '-' + fn.num + '">'
-                   + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
-                   + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
+    /* inline footnote popups (hidden by default) */
+    if (art.footnotes && art.footnotes.length) {
+        art.footnotes.forEach(function(fn) {
+            var book = bib[fn.bookKey];
+            h += '<div class="fn-popup" id="fnp-' + art.id + '-' + fn.num + '">'
+               + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
+               + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
 
-                /* Book card inside popup */
-                if (book) {
-                    h += '<div class="book-card">';
-                    if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
-                    h += '<div class="book-card-info">'
-                       + '<div class="book-title">' + book.title + '</div>'
-                       + '<div class="book-author">' + book.author + '</div>'
-                       + '<div class="book-pub">' + book.publisher + ', ' + book.year
-                       + (book.series ? ' — ' + book.series : '') + '</div>';
-                    if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
-                    h += '</div></div>';  // .book-card-info, .book-card
-                }
+            /* Book card inside popup */
+            if (book) {
+                h += '<div class="book-card">';
+                if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
+                h += '<div class="book-card-info">'
+                   + '<div class="book-title">' + book.title + '</div>'
+                   + '<div class="book-author">' + book.author + '</div>'
+                   + '<div class="book-pub">' + book.publisher + ', ' + book.year
+                   + (book.series ? ' — ' + book.series : '') + '</div>';
+                if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
+                h += '</div></div>';  // .book-card-info, .book-card
+            }
 
-                h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
-                   + '</div>';  // .fn-popup
-            });
-        }
-        h += '</div>';  // .reading-article
-    });
+            h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
+               + '</div>';  // .fn-popup
+        });
+    }
+
+    /* ✅ NEW: 每篇文章底部「標記已完成閱讀」按鈕 */
+    var artRead = userData.progress[lesson.id]
+              && userData.progress[lesson.id].articlesRead
+              && userData.progress[lesson.id].articlesRead[art.id];
+
+    h += '<div style="text-align:center;margin:24px 0 16px">';
+    h += '<button class="btn-mark-read' + (artRead ? ' done' : '') + '" '
+       + 'onclick="markArticleRead(\'' + lesson.id + '\',\'' + art.id + '\')" '
+       + 'id="btn-read-' + art.id + '">';
+    h += (artRead ? '✅ 已完成閱讀此篇' : '📚 標記已完成閱讀此篇');
+    h += '</button></div>';
+
+    h += '</div>';  // .reading-article
+});
 
     /* ── Bibliography Section ── */
     h += '<div class="bib-section"><h3>📕 參考書目</h3>';
@@ -1289,12 +1317,7 @@ function renderReading(lesson) {
     }
     h += '</div>';  // .bib-section
 
-    // ✅ NEW: 標記已完成閱讀按鈕
-    var isRead = userData.progress[lesson.id] && userData.progress[lesson.id].scriptureRead;
-    h += '<div style="text-align:center;margin:32px 0 16px">';
-    h += '<button class="btn-mark-read' + (isRead ? ' done' : '') + '" onclick="markRead()" id="btn-read">';
-    h += (isRead ? '✅ 已完成閱讀' : '📚 標記已完成閱讀');
-    h += '</button></div>';
+
 
     h += '</div>';  // .reading-page
     c.innerHTML = h;
@@ -1325,6 +1348,59 @@ window.closeFn = function(artId, fnNum) {
     var mark = document.querySelector('#art-' + artId + ' .fn-mark[data-fn="' + fnNum + '"]');
     if (mark) mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
+
+
+window.markArticleRead = function(lessonId, articleId) {
+    // 初始化
+    if (!userData.progress[lessonId]) {
+        userData.progress[lessonId] = {};
+    }
+    if (!userData.progress[lessonId].articlesRead) {
+        userData.progress[lessonId].articlesRead = {};
+    }
+
+    // 標記該篇已讀
+    userData.progress[lessonId].articlesRead[articleId] = true;
+
+    // 檢查是否全部文章都已讀 → 整課完成
+    var lesson = LESSONS.find(function(l) { return l.id === lessonId; });
+    if (lesson && lesson.articles) {
+        var allDone = lesson.articles.every(function(art) {
+            return userData.progress[lessonId].articlesRead
+                && userData.progress[lessonId].articlesRead[art.id];
+        });
+        userData.progress[lessonId].scriptureRead = allDone;
+    }
+
+    saveUserData();
+
+    // 更新按鈕外觀
+    var btn = document.getElementById('btn-read-' + articleId);
+    if (btn) {
+        btn.classList.add('done');
+        btn.textContent = '✅ 已完成閱讀此篇';
+    }
+
+    // 如果全部完成，顯示提示
+    if (userData.progress[lessonId].scriptureRead) {
+        showReadingComplete();
+    }
+}
+
+function showReadingComplete() {
+    var existing = document.getElementById('reading-complete-msg');
+    if (existing) return;
+
+    var msg = document.createElement('div');
+    msg.id = 'reading-complete-msg';
+    msg.style.cssText = 'text-align:center;padding:16px;margin:16px auto;max-width:400px;'
+        + 'background:#e8f5e9;border-radius:12px;color:#2e7d32;font-weight:bold;font-size:16px;';
+    msg.textContent = '🏆 太棒了！你已完成所有課餘閱讀！';
+
+    // ✅ 改成 lesson-detail（閱讀頁的實際容器）
+    var container = document.getElementById('lesson-detail');
+    if (container) container.appendChild(msg);
+}
 
 </script>
 </body>
