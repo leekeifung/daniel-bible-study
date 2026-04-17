@@ -66,7 +66,7 @@ window.LESSONS_DATA.push({
                     text: 'Eric J. Tully, <em>Reading the Prophets as Christian Scripture: A Literary, Canonical, and Theological Introduction</em>, Reading Christian Scripture (Grand Rapids, MI: Baker Academic, 2022), 231.'
                 }
             ]
-        };
+        },
         {
             id: 'art2',
             lessonRef: '但以理書第七章',
