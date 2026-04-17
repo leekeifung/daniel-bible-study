@@ -194,6 +194,109 @@
             .match-left { min-width: auto; }
             .match-arrow { display: none; }
         }
+        
+
+/* ═══════════════════════════════════════
+   HISTORY TIMELINE
+   ═══════════════════════════════════════ */
+.history-page { padding: 0 0 40px; }
+.history-page h1 { color:#3e2723; font-size:24px; margin-bottom:4px; }
+.history-page .subtitle { color:#888; font-size:14px; margin-bottom:24px; }
+
+/* ── Prophet Activity Chart ── */
+.prophet-chart { background:#fff; border-radius:12px; padding:20px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+.prophet-chart h3 { margin:0 0 16px; font-size:16px; color:#333; }
+.prophet-year-axis { display:flex; justify-content:space-between; font-size:11px; color:#999; padding:0 60px 4px 90px; }
+.prophet-bar-row { display:flex; align-items:center; margin-bottom:6px; }
+.prophet-bar-name { width:85px; text-align:right; padding-right:10px; font-size:13px; font-weight:600; color:#555; flex-shrink:0; }
+.prophet-bar-track { flex:1; height:26px; background:#f5f5f5; border-radius:13px; position:relative; overflow:hidden; }
+.prophet-bar { position:absolute; top:2px; height:22px; border-radius:11px; background:#80cbc4; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:600; white-space:nowrap; min-width:20px; transition:opacity .3s; }
+.prophet-bar.hl { background:linear-gradient(135deg,#ff8a65,#e64a19); box-shadow:0 2px 6px rgba(230,74,25,.35); }
+
+/* ── Legend ── */
+.timeline-legend { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:20px; }
+.legend-item { display:flex; align-items:center; gap:5px; font-size:13px; color:#555; }
+.legend-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+
+/* ── Vertical Timeline ── */
+.timeline-container { position:relative; padding:10px 0 10px 44px; }
+.timeline-container::before { content:''; position:absolute; left:22px; top:0; bottom:0; width:3px; background:linear-gradient(to bottom,#e0e0e0,#bdbdbd,#e0e0e0); border-radius:2px; }
+.timeline-event { position:relative; margin-bottom:20px; }
+.timeline-dot { position:absolute; left:-30px; top:18px; width:16px; height:16px; border-radius:50%; border:3px solid #fff; box-shadow:0 0 0 2px #ccc; z-index:1; transition:transform .2s; }
+.timeline-event.active .timeline-dot { transform:scale(1.3); }
+.timeline-date { font-size:13px; font-weight:700; color:#888; margin-bottom:4px; }
+.timeline-card { background:#fff; border-radius:12px; padding:16px 18px; box-shadow:0 2px 8px rgba(0,0,0,.07); cursor:pointer; border-left:4px solid #e0e0e0; transition:border-color .3s, box-shadow .3s; }
+.timeline-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.12); }
+.timeline-event.active .timeline-card { border-left-width:4px; box-shadow:0 4px 16px rgba(0,0,0,.13); }
+.timeline-card-header { display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+.timeline-card-header h4 { margin:0; font-size:16px; color:#222; }
+.timeline-title-en { font-size:12px; color:#aaa; display:block; margin-top:2px; }
+.category-badge { font-size:11px; padding:2px 10px; border-radius:12px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+.timeline-desc { font-size:14px; color:#444; margin:10px 0 0; line-height:1.65; }
+.timeline-detail { max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s; opacity:0; }
+.timeline-event.active .timeline-detail { max-height:800px; opacity:1; }
+.timeline-figures { margin:12px 0 8px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:13px; }
+.figure-tag { background:#f0f0f0; padding:3px 10px; border-radius:12px; font-size:12px; }
+.timeline-refs { font-size:13px; color:#666; margin:6px 0; }
+.timeline-detail-text { font-size:14px; color:#555; line-height:1.7; margin-top:10px; padding-top:10px; border-top:1px dashed #e0e0e0; }
+.timeline-image { margin-top:12px; text-align:center; }
+.timeline-image img { max-width:100%; border-radius:8px; }
+.timeline-image .img-caption { display:block; font-size:12px; color:#999; margin-top:4px; }
+.expand-hint { font-size:11px; color:#bbb; margin-top:8px; display:block; transition:opacity .3s; }
+.timeline-event.active .expand-hint { opacity:0; }
+
+/* ═══════════════════════════════════════
+   READING PAGE
+   ═══════════════════════════════════════ */
+.reading-page { padding:0 0 40px; }
+.reading-page h1 { color:#1b5e20; font-size:24px; margin-bottom:4px; }
+.reading-page .subtitle { color:#888; font-size:14px; margin-bottom:28px; }
+
+/* ── Article Card ── */
+.reading-article { background:#fff; border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,.07); }
+.reading-article .article-cat { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#00897b; margin-bottom:4px; }
+.reading-article .article-lesson { font-size:12px; color:#999; margin-bottom:8px; }
+.reading-article h3 { margin:0 0 16px; font-size:18px; color:#222; }
+.reading-article blockquote { margin:12px 0; padding:12px 20px; background:#f5f5f5; border-left:4px solid #00897b; border-radius:0 8px 8px 0; font-style:italic; color:#444; }
+.reading-article p { font-size:14px; line-height:1.75; color:#333; }
+
+/* ── Footnote marks ── */
+.fn-mark { color:#d32f2f; cursor:pointer; font-weight:700; padding:0 1px; transition:color .2s; }
+.fn-mark:hover { color:#b71c1c; text-decoration:underline; }
+
+/* ── Footnote Popup ── */
+.fn-popup { display:none; background:#fff8e1; border:1px solid #ffe082; border-radius:8px; padding:14px 16px; margin:12px 0; font-size:13px; line-height:1.6; color:#555; position:relative; }
+.fn-popup.show { display:block; animation:fadeSlide .3s ease; }
+.fn-popup .fn-close { position:absolute; top:6px; right:10px; cursor:pointer; font-size:16px; color:#999; }
+.fn-popup .fn-num { font-weight:700; color:#d32f2f; margin-right:4px; }
+
+/* ── Book Card ── */
+.book-card { display:flex; gap:20px; background:#fafafa; border:1px solid #e8e8e8; border-radius:12px; padding:20px; margin-top:16px; }
+.book-card img { width:110px; height:auto; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,.12); object-fit:contain; flex-shrink:0; }
+.book-card-info { flex:1; }
+.book-card-info .book-title { font-size:15px; font-weight:700; color:#222; margin-bottom:4px; }
+.book-card-info .book-author { font-size:13px; color:#666; margin-bottom:2px; }
+.book-card-info .book-pub { font-size:12px; color:#999; margin-bottom:10px; }
+.book-card-info .book-buy { display:inline-block; background:#00897b; color:#fff; padding:8px 18px; border-radius:20px; text-decoration:none; font-size:13px; font-weight:600; transition:background .2s; }
+.book-card-info .book-buy:hover { background:#00695c; }
+.fn-back { display:inline-block; margin-top:10px; font-size:12px; color:#00897b; cursor:pointer; }
+.fn-back:hover { text-decoration:underline; }
+@keyframes fadeSlide { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── Bibliography Section ── */
+.bib-section { margin-top:36px; padding-top:24px; border-top:2px solid #e0e0e0; }
+.bib-section h3 { color:#333; margin-bottom:16px; font-size:17px; }
+
+/* ── Responsive ── */
+@media(max-width:600px){
+    .book-card { flex-direction:column; align-items:center; text-align:center; }
+    .book-card img { width:140px; }
+    .prophet-bar-name { width:60px; font-size:11px; }
+    .timeline-container { padding-left:32px; }
+    .timeline-dot { left:-24px; width:12px; height:12px; }
+}
+
+
     </style>
 </head>
 <body>
@@ -271,6 +374,14 @@
     </div>
 </div>
 
+<!-- === 3d NEW: 歷史/閱讀專用容器 === -->
+    <div id="lesson-detail-wrapper" class="lesson-view" style="display:none">
+        <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
+        <div id="lesson-detail"></div>
+    </div>
+    <!-- === END 3d === -->
+
+
 <div id="hl-popup" class="hl-popup">
     <button class="hy" onclick="setHL('yellow')">🟡 重要</button>
     <button class="hb" onclick="setHL('blue')">🔵 不明白</button>
@@ -284,6 +395,9 @@
 <script src="data/lesson02.js"></script>
 <script src="data/lesson03.js"></script>
 <script src="data/lesson04.js"></script>
+<script src="data/history.js"></script>
+<script src="data/reading.js"></script>
+
     
 <!-- 日後加新課只需新增 data/lessonXX.js 並取消下方註解 -->
 <!-- <script src="data/lesson02.js"></script> -->
@@ -503,6 +617,17 @@ function openLesson(id) {
     const lesson = LESSONS.find(l => l.id === id);
     if(!lesson || lesson.comingSoon) return;
 
+    // === 3d: 歷史 / 閱讀特殊頁面 ===
+    if (lesson.isHistory || lesson.isReading) {
+        document.getElementById('dashboard-view').style.display = 'none';
+        document.getElementById('lesson-view').style.display = 'none';
+        document.getElementById('lesson-detail-wrapper').style.display = 'block';
+        if (lesson.isHistory) renderHistory(lesson);
+        else renderReading(lesson);
+        return;
+    }
+    // === END 3d ===
+
     document.getElementById('dashboard-view').style.display = 'none';
     document.getElementById('lesson-view').style.display = 'block';
     document.getElementById('lv-header').innerHTML = '<h1>' + lesson.title + '：' + lesson.subtitle + '</h1><p>' + lesson.ref + ' — ' + lesson.description + '</p>';
@@ -519,6 +644,7 @@ function openLesson(id) {
 
 window.goBack = function() {
     document.getElementById('lesson-view').style.display = 'none';
+    document.getElementById('lesson-detail-wrapper').style.display = 'none';  // ← 新增
     document.getElementById('dashboard-view').style.display = 'block';
     currentLessonId = null;
     renderDashboard();
@@ -971,6 +1097,181 @@ window.submitQuiz = async function() {
         userData.progress[currentLessonId].completedAt = new Date().toISOString();
     }
     await saveUserData();
+};
+
+/* ═══════════════════════════════
+   HISTORY — 時間線渲染
+   ═══════════════════════════════ */
+function renderHistory(lesson) {
+    const c = document.getElementById('lesson-detail');
+    let h = '<div class="history-page">';
+    h += '<h1>🗺️ ' + lesson.title + '</h1>';
+    h += '<p class="subtitle">' + lesson.description + '</p>';
+
+    /* ── Prophet Activity Chart ── */
+    var minY = 700, maxY = 530, range = minY - maxY;
+    h += '<div class="prophet-chart"><h3>📊 同時期先知的事奉年期</h3>';
+    h += '<div class="prophet-year-axis"><span>主前 700</span><span>650</span><span>600</span><span>550</span></div>';
+    lesson.prophets.forEach(function(p){
+        var left = ((minY - p.start) / range * 100);
+        var width = ((p.start - p.end) / range * 100);
+        h += '<div class="prophet-bar-row">'
+           + '<span class="prophet-bar-name">' + p.name + '</span>'
+           + '<div class="prophet-bar-track">'
+           + '<div class="prophet-bar' + (p.highlight ? ' hl' : '') + '" style="left:' + left + '%;width:' + Math.max(width, 2) + '%;">'
+           + p.start + '–' + p.end
+           + '</div></div></div>';
+    });
+    h += '</div>';
+
+    /* ── Legend ── */
+    h += '<div class="timeline-legend">';
+    var cats = lesson.categories;
+    for (var k in cats) {
+        h += '<span class="legend-item"><span class="legend-dot" style="background:' + cats[k].color + '"></span>' + cats[k].icon + ' ' + cats[k].label + '</span>';
+    }
+    h += '</div>';
+
+    /* ── Timeline ── */
+    h += '<div class="timeline-container">';
+    lesson.events.forEach(function(ev, i){
+        var cat = cats[ev.category];
+        var dateStr = '主前 ' + ev.year + ' 年' + (ev.endYear ? ' – ' + ev.endYear + ' 年' : '');
+        h += '<div class="timeline-event" id="tev-' + i + '" onclick="toggleTLEvent(' + i + ')">'
+           + '<div class="timeline-dot" style="background:' + cat.color + '"></div>'
+           + '<div class="timeline-date">' + dateStr + '</div>'
+           + '<div class="timeline-card" style="border-left-color:' + cat.color + '">'
+           + '<div class="timeline-card-header">'
+           + '<span class="category-badge" style="background:' + cat.bg + ';color:' + cat.color + '">' + cat.icon + ' ' + cat.label + '</span>'
+           + '<div><h4>' + ev.title + '</h4>'
+           + (ev.titleEn ? '<span class="timeline-title-en">' + ev.titleEn + '</span>' : '')
+           + '</div></div>'
+           + '<p class="timeline-desc">' + ev.description + '</p>'
+           + '<div class="timeline-detail">';
+
+        if (ev.keyFigures && ev.keyFigures.length) {
+            h += '<div class="timeline-figures"><strong>👤 重要人物：</strong>';
+            ev.keyFigures.forEach(function(f){ h += '<span class="figure-tag">' + f + '</span>'; });
+            h += '</div>';
+        }
+        if (ev.references && ev.references.length) {
+            h += '<div class="timeline-refs"><strong>📖 經文參考：</strong>' + ev.references.join('、') + '</div>';
+        }
+        if (ev.detail) {
+            h += '<div class="timeline-detail-text">' + ev.detail + '</div>';
+        }
+        if (ev.image) {
+            h += '<div class="timeline-image"><img src="' + ev.image.src + '" alt="' + (ev.image.caption||'') + '">'
+               + (ev.image.caption ? '<span class="img-caption">' + ev.image.caption + '</span>' : '')
+               + '</div>';
+        }
+
+        h += '</div>'  // .timeline-detail
+           + '<span class="expand-hint">▾ 點擊展開詳情</span>'
+           + '</div></div>';  // .timeline-card, .timeline-event
+    });
+    h += '</div>';  // .timeline-container
+    h += '</div>';  // .history-page
+    c.innerHTML = h;
+}
+
+window.toggleTLEvent = function(i) {
+    var el = document.getElementById('tev-' + i);
+    if (el) el.classList.toggle('active');
+};
+
+
+/* ═══════════════════════════════
+   READING — 課餘閱讀渲染
+   ═══════════════════════════════ */
+function renderReading(lesson) {
+    var c = document.getElementById('lesson-detail');
+    var bib = lesson.bibliography;
+    var h = '<div class="reading-page">';
+    h += '<h1>📚 ' + lesson.title + '</h1>';
+    h += '<p class="subtitle">' + lesson.description + '</p>';
+
+    /* ── Articles ── */
+    lesson.articles.forEach(function(art, ai) {
+        h += '<div class="reading-article" id="art-' + art.id + '">';
+        h += '<div class="article-cat">' + art.categoryLabel + '</div>';
+        h += '<div class="article-lesson">📖 ' + art.lessonRef + '</div>';
+        h += '<h3>' + art.icon + ' ' + art.title + '</h3>';
+        h += '<div class="article-body">' + art.html + '</div>';
+
+        /* inline footnote popups (hidden by default) */
+        if (art.footnotes && art.footnotes.length) {
+            art.footnotes.forEach(function(fn) {
+                var book = bib[fn.bookKey];
+                h += '<div class="fn-popup" id="fnp-' + art.id + '-' + fn.num + '">'
+                   + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
+                   + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
+
+                /* Book card inside popup */
+                if (book) {
+                    h += '<div class="book-card">';
+                    if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
+                    h += '<div class="book-card-info">'
+                       + '<div class="book-title">' + book.title + '</div>'
+                       + '<div class="book-author">' + book.author + '</div>'
+                       + '<div class="book-pub">' + book.publisher + ', ' + book.year
+                       + (book.series ? ' — ' + book.series : '') + '</div>';
+                    if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
+                    h += '</div></div>';  // .book-card-info, .book-card
+                }
+
+                h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
+                   + '</div>';  // .fn-popup
+            });
+        }
+        h += '</div>';  // .reading-article
+    });
+
+    /* ── Bibliography Section ── */
+    h += '<div class="bib-section"><h3>📕 參考書目</h3>';
+    for (var key in bib) {
+        var b = bib[key];
+        h += '<div class="book-card" id="bib-' + key + '">';
+        if (b.image) h += '<img src="' + b.image + '" alt="' + b.title + '">';
+        h += '<div class="book-card-info">'
+           + '<div class="book-title">' + b.title + '</div>'
+           + '<div class="book-author">' + b.author + '</div>'
+           + '<div class="book-pub">' + b.publisher + ', ' + b.address + ', ' + b.year
+           + (b.series ? '<br>Series: ' + b.series : '')
+           + (b.isbn ? '<br>ISBN: ' + b.isbn : '')
+           + '</div>';
+        if (b.link) h += '<a class="book-buy" href="' + b.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
+        h += '</div></div>';
+    }
+    h += '</div>';  // .bib-section
+    h += '</div>';  // .reading-page
+    c.innerHTML = h;
+
+    /* ── Bind footnote clicks ── */
+    c.querySelectorAll('.fn-mark').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var fnNum = el.getAttribute('data-fn');
+            // find parent article id
+            var artEl = el.closest('.reading-article');
+            var artId = artEl ? artEl.id.replace('art-', '') : '';
+            var popup = document.getElementById('fnp-' + artId + '-' + fnNum);
+            if (popup) {
+                // close all others first
+                c.querySelectorAll('.fn-popup.show').forEach(function(p){ p.classList.remove('show'); });
+                popup.classList.add('show');
+                popup.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    });
+}
+
+window.closeFn = function(artId, fnNum) {
+    var popup = document.getElementById('fnp-' + artId + '-' + fnNum);
+    if (popup) popup.classList.remove('show');
+    // scroll back to the footnote mark
+    var mark = document.querySelector('#art-' + artId + ' .fn-mark[data-fn="' + fnNum + '"]');
+    if (mark) mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
 
 </script>
