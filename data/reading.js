@@ -67,6 +67,30 @@ window.LESSONS_DATA.push({
                 }
             ]
         }
+        //
+        //
+        {
+            id: 'art2',
+            lessonRef: '但以理書第七章',
+            title: '正典關聯：人子耶穌',
+            icon: '✝️',
+            category: 'canonical',
+            categoryLabel: '正典關聯 Canonical Connection',
+            html:
+                '<p>耶穌在福音書中經常自稱「<strong>人子</strong>」。在某些語境中，這個稱呼強調祂的為人（如先知以西結的用法），但在幾處關鍵經文裡，祂用這個稱呼<strong>直接指向但以理書中的那位神聖統治者</strong>——駕著天雲而來、領受權柄並建立神永恆國度的「人子」。</p>' +
+                '<p>在馬太福音 24:30，耶穌宣告：</p>' +
+                '<blockquote>「那時，人子的兆頭要顯在天上，地上的萬族都要哀哭，他們要看見人子，有能力，有大榮耀，駕著天上的雲降臨。」（馬太福音 24:30，和合本修訂版）</blockquote>' +
+                '<p>耶穌藉此表明，祂就是但以理書第七章所預言、從神領受國度與榮耀的那位「人子」。拒絕或敵對祂，就等於拒絕神所設立的統治；而接受並跟隨祂，便是進入那永不敗壞的國度。<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p>可再參：<strong>馬太福音 26:64；馬可福音 13:24–27；14:61–62；啟示錄 1:7</strong>，這些經文同樣將「人子」與駕雲降臨、施行審判與得著榮耀連結起來。</p>',
+            footnotes: [
+                {
+                    num: 1,
+                    bookKey: 'tully2022',
+                    page: '236',
+                    text: 'Eric J. Tully, <em>Reading the Prophets as Christian Scripture: A Literary, Canonical, and Theological Introduction</em>, Reading Christian Scripture (Grand Rapids, MI: Baker Academic, 2022), 236.'
+                }
+            ]
+        }   
         // ↑ 日後可在此處添加更多文章
         // { id: 'art2', lessonRef: '但以理書第七章', title: '...', ... }
     ]
