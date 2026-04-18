@@ -54,6 +54,19 @@ window.LESSONS_DATA.push({
             image: 'https://files.logoscdn.com/v1/assets/16688771/optimized?w=500&m=limit&h=508',
             link: 'https://www.logos.com/product/156782/daniel',
             bibtex: '@book{Widder_2016,\n  address={Grand Rapids, MI},\n  series={The Story of God Bible Commentary},\n  title={Daniel},\n  publisher={Zondervan},\n  author={Widder, Wendy L.},\n  editor={Longman, Tremper, III},\n  year={2016},\n  collection={The Story of God Bible Commentary}\n}'
+        },
+        busterWalton2025: {
+            id: 'busterWalton2025',
+            author: 'Aubrey E. Buster and John H. Walton',
+            title: 'The Book of Daniel, Chapters 1–6',
+            series: 'New International Commentary on the Old and New Testament',
+            publisher: 'William B. Eerdmans Publishing Company',
+            address: 'Grand Rapids, MI',
+            year: 2025,
+            isbn: '9780802875990',
+            image: 'https://files.amberfile.com/v1/assets/16822628/optimized?w=500&m=limit&h=508',
+            link: 'https://www.logos.com/product/389476/the-book-of-daniel-chapters-1-6',
+            bibtex: '@book{Buster_Walton_2025,\n  address={Grand Rapids, MI},\n  series={New International Commentary on the Old and New Testament},\n  title={The Book of Daniel, Chapters 1–6},\n  publisher={William B. Eerdmans Publishing Company},\n  author={Buster, Aubrey E. and Walton, John H.},\n  editor={Young, E. J. and Harrison, R. K. and Hubbard, Robert L., Jr. and Arnold, Bill T.},\n  year={2025},\n  collection={New International Commentary on the Old and New Testament}\n}'
         }
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
     },
@@ -172,6 +185,33 @@ window.LESSONS_DATA.push({
                     bookKey: 'widder2016',
                     page: '32–33',
                     text: 'Wendy L. Widder, <em>Daniel</em>, The Story of God Bible Commentary, ed. Tremper Longman III (Grand Rapids, MI: Zondervan, 2016), 32–33.'
+                }
+            ]
+        },
+        {
+            id: 'art5',
+            lessonRef: '但以理書第一章',
+            title: '拒絕御膳與身分抹除：流亡中的抗衡',
+            icon: '🛡️',
+            category: 'theology',
+            categoryLabel: '神學主題 Theological Theme',
+            html:
+                '<p>NICOT 認為，但以理拒絕王膳的核心並非飲食律法、偶像祭肉或「健康素食」，而是兩個獨特的社會政治面向：其一，<strong>拒絕帝國庇蔭</strong>——享用御膳是帝國綁定忠誠的手段；其二，<strong>「圍城口糧」的象徵性團餐</strong>——以「種子／雜糧」（<em>zērōʿîm</em>）自我節制，刻意與流亡同胞的苦難站在一起，拒吃巴比倫菁英的餐桌，成為政治性的抵抗行動。<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p><blockquote>「但以理卻立志，不以王的膳和王所飲的酒玷污自己，於是懇求太監長容他不使自己玷污。 」（但以理書 1:8，和合本修訂版）</blockquote></p>' +
+                '<p>作者進一步以社會學概念「<strong>族譜隔離</strong>」解讀太監體制：巴比倫透過閹官系統切斷青年與家族、後代的聯繫，使忠誠只向王室傾斜；改名與省略家譜皆凸顯這種強制的文化抹除。敘事描寫的，是一位被去勢於身分、卻仍在體制內以智慧抗衡帝國全然占有的故事。<sup class="fn-mark" data-fn="2">2</sup></p>' +
+                '<p>第一章因此呈現雙重抗衡：在餐桌上拒絕成為帝國附庸，在身分上拒絕被切斷族裔記憶。即便權力結構企圖重塑其生存與忠誠，但以理選擇以節制與信仰來重新界定自己的歸屬與盼望。</p>',
+            footnotes: [
+                {
+                    num: 1,
+                    bookKey: 'busterWalton2025',
+                    page: '205–212',
+                    text: 'Aubrey E. Buster and John H. Walton, <em>The Book of Daniel, Chapters 1–6</em>, ed. E. J. Young et al., New International Commentary on the Old and New Testament (Grand Rapids, MI: William B. Eerdmans Publishing Company, 2025), 205–212.'
+                },
+                {
+                    num: 2,
+                    bookKey: 'busterWalton2025',
+                    page: '176–178',
+                    text: 'Aubrey E. Buster and John H. Walton, <em>The Book of Daniel, Chapters 1–6</em>, ed. E. J. Young et al., New International Commentary on the Old and New Testament (Grand Rapids, MI: William B. Eerdmans Publishing Company, 2025), 176–178.'
                 }
             ]
         }
