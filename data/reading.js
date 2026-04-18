@@ -28,6 +28,19 @@ window.LESSONS_DATA.push({
             image: 'https://files.logoscdn.com/v1/assets/13723266/optimized?w=500&m=limit&h=508',
             link: 'https://www.logos.com/product/210608/reading-the-prophets-as-christian-scripture-a-literary-canonical-and-theological-introduction',
             bibtex: '@book{Tully_2022,\n  address={Grand Rapids, MI},\n  series={Reading Christian Scripture},\n  title={Reading the Prophets as Christian Scripture: A Literary, Canonical, and Theological Introduction},\n  publisher={Baker Academic: A Division of Baker Publishing Group},\n  author={Tully, Eric J.},\n  year={2022},\n  collection={Reading Christian Scripture}\n}'
+        },
+        tanner2020: {
+            id: 'tanner2020',
+            author: 'J. Paul Tanner',
+            title: 'Daniel',
+            series: 'Evangelical Exegetical Commentary',
+            publisher: 'Lexham Press',
+            address: 'Bellingham, WA',
+            year: 2020,
+            isbn: '9781683593096',
+            image: 'https://files.logoscdn.com/v1/assets/10505745/optimized?w=500&m=limit&h=508',
+            link: 'https://www.logos.com/product/183942/daniel-evangelical-exegetical-commentary',
+            bibtex: '@book{Tanner_2020,\n  address={Bellingham, WA},\n  series={Evangelical Exegetical Commentary},\n  title={Daniel},\n  publisher={Lexham Press},\n  author={Tanner, J. Paul},\n  year={2020},\n  collection={Evangelical Exegetical Commentary}\n}'
         }
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
     },
@@ -88,7 +101,38 @@ window.LESSONS_DATA.push({
                     text: 'Eric J. Tully, <em>Reading the Prophets as Christian Scripture: A Literary, Canonical, and Theological Introduction</em>, Reading Christian Scripture (Grand Rapids, MI: Baker Academic, 2022), 236.'
                 }
             ]
-        }   
+        },
+        {
+            id: 'art3',
+            lessonRef: '但以理書全書',
+            title: '結構與目的：外邦權勢、以色列受管教與彌賽亞國度',
+            icon: '🎯',
+            category: 'theology',
+            categoryLabel: '神學主題 Theological Theme',
+            html:
+                '<p>要理解這一觀點對《但以理書》信息與目的的意涵，需先把握全書的兩大段落及其重疊之處。第 2–7 章以亞蘭文寫成，聚焦<strong>以色列在外邦權勢之下所受的管教</strong>；這些外邦國（巴比倫起首，至第四國度）在神主權之下暫時掌握世界政權，直到基督再臨、敵基督被敗、彌賽亞國度正式建立為止（參 2:44；4:3, 34–35；5:21；6:26；7:14, 27）。這段表明，外邦諸國的統治權是受託的、暫時的，無人能成功抵擋神的計畫。<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p>第 7–12 章轉回希伯來文，特別指向<strong>以色列的未來與逼迫</strong>。但以理四個異象皆凸顯末後那位敵擋以色列、逼迫聖民的「敵基督」（在第 8 章以安提阿古四世為預表）。以色列起初將錯信他（9:26–27），卻終將深受其害，苦難成為這段經文的底色。</p>' +
+                '<p>第七章成為全書的「樞紐」：它一方面重述第 2–6 章的主題（外邦國度在神主權下的興衰），另一方面預示後文的「小角／敵基督」將如何登場。章中異象也最美地展現了神對全地的終極美意：</p>' +
+                '<blockquote>「我在夜間的異象中觀看，見有一位像人子的，駕著天上的雲而來，被領到亙古常在者面前。得了權柄、榮耀、國度，使各族、各國、各語言的人都事奉他。他的權柄是永遠的權柄，不能廢去；他的國必不敗壞。」（但以理書 7:13–14，和合本修訂版）</blockquote>' +
+                '<p>縱然全書帶著被擄與管教的陰霾，但盼望在於末後賜給基督的國度；人若要得著這安慰，必須歸信那位君王，成為其國度的子民。正如尼布甲尼撒所承認的：</p>' +
+                '<blockquote>「他的神蹟何其大，他的奇事何其盛！他的國度是永遠的國度；他的權柄存到萬代。」（但以理書 4:3，和合本修訂版）</blockquote>' +
+                '<p><strong>因此，《但以理書》的目的可表述為：</strong>「要顯明神主權地掌管那些管教以色列的列國，直到祂帶來彌賽亞的國度；以色列在經歷敵基督所加的患難與苦楚之後，終必在這國度中被恢復並蒙福。」<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p>本註釋書採取的立場是：先知但以理在主前 536/535 年後不久，<strong>親自寫成全書</strong>。<sup class="fn-mark" data-fn="2">2</sup></p>',
+            footnotes: [
+                {
+                    num: 1,
+                    bookKey: 'tanner2020',
+                    page: '34–35',
+                    text: 'J. Paul Tanner, <em>Daniel</em>, Evangelical Exegetical Commentary (Bellingham, WA: Lexham Press, 2020), 34–35.'
+                },
+                {
+                    num: 2,
+                    bookKey: 'tanner2020',
+                    page: '39',
+                    text: 'J. Paul Tanner, <em>Daniel</em>, Evangelical Exegetical Commentary (Bellingham, WA: Lexham Press, 2020), 39.'
+                }
+            ]
+        }
         // ↑ 日後可在此處添加更多文章
         // { id: 'art2', lessonRef: '但以理書第七章', title: '...', ... }
     ]
