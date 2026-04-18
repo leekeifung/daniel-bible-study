@@ -41,6 +41,19 @@ window.LESSONS_DATA.push({
             image: 'https://files.logoscdn.com/v1/assets/10505745/optimized?w=500&m=limit&h=508',
             link: 'https://www.logos.com/product/183942/daniel-evangelical-exegetical-commentary',
             bibtex: '@book{Tanner_2020,\n  address={Bellingham, WA},\n  series={Evangelical Exegetical Commentary},\n  title={Daniel},\n  publisher={Lexham Press},\n  author={Tanner, J. Paul},\n  year={2020},\n  collection={Evangelical Exegetical Commentary}\n}'
+        },
+        widder2016: {
+            id: 'widder2016',
+            author: 'Wendy L. Widder',
+            title: 'Daniel',
+            series: 'The Story of God Bible Commentary',
+            publisher: 'Zondervan',
+            address: 'Grand Rapids, MI',
+            year: 2016,
+            isbn: '9780310491323',
+            image: 'https://files.logoscdn.com/v1/assets/16688771/optimized?w=500&m=limit&h=508',
+            link: 'https://www.logos.com/product/156782/daniel',
+            bibtex: '@book{Widder_2016,\n  address={Grand Rapids, MI},\n  series={The Story of God Bible Commentary},\n  title={Daniel},\n  publisher={Zondervan},\n  author={Widder, Wendy L.},\n  editor={Longman, Tremper, III},\n  year={2016},\n  collection={The Story of God Bible Commentary}\n}'
         }
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
     },
@@ -130,6 +143,35 @@ window.LESSONS_DATA.push({
                     bookKey: 'tanner2020',
                     page: '39',
                     text: 'J. Paul Tanner, <em>Daniel</em>, Evangelical Exegetical Commentary (Bellingham, WA: Lexham Press, 2020), 39.'
+                }
+            ]
+        },
+        {
+            id: 'art4',
+            lessonRef: '但以理書第一章與第七章',
+            title: '主權與永恆：亙古常在者與流亡中的盼望',
+            icon: '👑',
+            category: 'theology',
+            categoryLabel: '神學主題 Theological Theme',
+            html:
+                '<p>第七章異象的核心，是那位白髮皓然、衣袍光輝的「亙古常在者」（Ancient of Days）。這稱謂在聖經中僅此出現，但舊約多處稱神為「榮耀的王」（詩篇 24:7–9）、「永在的父」（以賽亞書 9:6）、「永在的神」（以賽亞書 40:28）。祂永恆的本性與國度，正與諸獸及其短暫的政權形成鮮明對比。<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p>第一章則以歷史敘事顯出神「隱而不顯」的主權：從約雅敬被敗、聖殿器皿被擄、到但以理與同伴在巴比倫受訓蒙恩，「神把......交在他手中」的反覆語句，解構了軍事、政治與人類智慧的權勢神話。即使器皿被收進示拿（巴比倫）神廟庫，神仍在掌舵，預備在後續章節向狂妄的人顯明誰是真神。<sup class="fn-mark" data-fn="2">2</sup></p>' +
+                '<p>本卷自開篇便傳遞一條穩固的信息：<strong>以色列的神掌管歷史，且最終發聲</strong>。祂的介入多半細微而含蓄，卻足以穩定信徒的心，使人在顛簸中仍能忠心而活。詩篇 46 的呼聲正與此同調：</p>' +
+                '<blockquote>「 上帝是我們的避難所，是我們的力量， 是我們在患難中隨時的幫助。 <br/>所以，地雖改變， 山雖搖動到海心，<br/>其中的水雖澎湃翻騰，山雖因海漲而戰抖， <br/>我們也不害怕。（細拉）」（詩篇 46:1–3，和合本修訂版）</blockquote>' +
+                '<blockquote>「你們要休息，要知道我是上帝！ <br/>我必在列國中受尊崇，在全地也受尊崇。<br/>萬軍之耶和華與我們同在，<br/>雅各的上帝是我們的避難所！」（詩篇 46:10–11，和合本修訂版）</blockquote>' +
+                '<p>當世界崩塌、原因暫且不明之際，最重要的不是立刻給出「一切都會好」的陳詞，而是安靜提醒：<strong>神仍在場，仍掌權</strong>。祂的國度終將超越並取代所有人間國度，祂的子民得以在風暴中站立得穩。</p>',
+            footnotes: [
+                {
+                    num: 1,
+                    bookKey: 'widder2016',
+                    page: '155',
+                    text: 'Wendy L. Widder, <em>Daniel</em>, The Story of God Bible Commentary, ed. Tremper Longman III (Grand Rapids, MI: Zondervan, 2016), 155.'
+                },
+                {
+                    num: 2,
+                    bookKey: 'widder2016',
+                    page: '32–33',
+                    text: 'Wendy L. Widder, <em>Daniel</em>, The Story of God Bible Commentary, ed. Tremper Longman III (Grand Rapids, MI: Zondervan, 2016), 32–33.'
                 }
             ]
         }
