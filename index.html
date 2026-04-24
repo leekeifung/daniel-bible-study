@@ -5,40 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>但以理書研經課程 | 富山平安福音堂</title>
     <style>
-    /* ── Collapsible Article ── */
-.article-header-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    padding: 4px 0;
-}
-.article-header-bar .arrow {
-    font-size: 18px;
-    transition: transform 0.3s;
-    color: #999;
-    flex-shrink: 0;
-    margin-left: 12px;
-}
-.article-header-bar .arrow.open {
-    transform: rotate(180deg);
-}
-.article-body-wrap {
-    display: none;
-    padding-top: 16px;
-}
-.article-body-wrap.open {
-    display: block;
-}
-.article-status-hint {
-    font-size: 12px;
-    margin-left: 8px;
-    vertical-align: middle;
-}
-    
-.progress-bar-fill.reading-bar { background: linear-gradient(90deg, #ff8f00, #ffb74d); }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif; background: #f0f2f5; color: #333; }
 
@@ -142,7 +108,7 @@
 
         .questions-box { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .q-section { margin-bottom: 28px; }
-        .q-section h3 { color: #1a237e; font-size: 18px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; margin-bottom: 16px; }
+        .q-section h3 { color: #1a237e; font-size: 17px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; margin-bottom: 16px; }
         .q-section.reflection h3 { color: #00897b; }
         .q-section.sharing h3 { color: #e65100; }
         .q-item { margin-bottom: 20px; padding: 16px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #1a237e; }
@@ -184,9 +150,9 @@
         /* NEW: Matching quiz */
         .match-grid { margin-top: 12px; }
         .match-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; padding: 10px 14px; background: #f5f5f5; border-radius: 8px; }
-        .match-left { font-weight: 600; min-width: 100px; font-size: 18px; }
-        .match-arrow { color: #999; font-size: 20px; }
-        .match-select { flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 18px; font-family: inherit; background: white; }
+        .match-left { font-weight: 600; min-width: 100px; font-size: 14px; }
+        .match-arrow { color: #999; font-size: 16px; }
+        .match-select { flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; background: white; }
         .match-select:focus { outline: none; border-color: #1a237e; }
         .match-select.correct { border-color: #43a047 !important; background: #e8f5e9 !important; }
         .match-select.wrong { border-color: #d32f2f !important; background: #ffebee !important; }
@@ -201,9 +167,9 @@
         .intro-section-header h3 { color: #1a237e; font-size: 16px; margin: 0; }
         .intro-section-header .arrow { font-size: 18px; transition: transform 0.3s; color: #666; }
         .intro-section-header .arrow.open { transform: rotate(180deg); }
-        .intro-section-body { padding: 16px 18px; line-height: 1.9; font-size: 18px; display: none; }
+        .intro-section-body { padding: 16px 18px; line-height: 1.9; font-size: 15px; display: none; }
         .intro-section-body.open { display: block; }
-        .intro-section-body p { margin-bottom: 14px; }
+        .intro-section-body p { margin-bottom: 12px; }
         .intro-section-body ul, .intro-section-body ol { margin: 8px 0 12px 20px; }
         .intro-section-body li { margin-bottom: 6px; line-height: 1.7; }
         .intro-section-body strong { color: #1a237e; }
@@ -258,14 +224,14 @@
 .timeline-event { position:relative; margin-bottom:20px; }
 .timeline-dot { position:absolute; left:-30px; top:18px; width:16px; height:16px; border-radius:50%; border:3px solid #fff; box-shadow:0 0 0 2px #ccc; z-index:1; transition:transform .2s; }
 .timeline-event.active .timeline-dot { transform:scale(1.3); }
-.timeline-date { font-size:15px; font-weight:700; color:#888; margin-bottom:4px; }
+.timeline-date { font-size:13px; font-weight:700; color:#888; margin-bottom:4px; }
 .timeline-card { background:#fff; border-radius:12px; padding:16px 18px; box-shadow:0 2px 8px rgba(0,0,0,.07); cursor:pointer; border-left:4px solid #e0e0e0; transition:border-color .3s, box-shadow .3s; }
 .timeline-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.12); }
 .timeline-event.active .timeline-card { border-left-width:4px; box-shadow:0 4px 16px rgba(0,0,0,.13); }
 .timeline-card-header { display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; }
 .timeline-card-header h4 { margin:0; font-size:16px; color:#222; }
 .timeline-title-en { font-size:12px; color:#aaa; display:block; margin-top:2px; }
-.category-badge { font-size:13px; padding:2px 10px; border-radius:12px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+.category-badge { font-size:11px; padding:2px 10px; border-radius:12px; font-weight:600; white-space:nowrap; flex-shrink:0; }
 .timeline-desc { font-size:14px; color:#444; margin:10px 0 0; line-height:1.65; }
 .timeline-detail { max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s; opacity:0; }
 .timeline-event.active .timeline-detail { max-height:800px; opacity:1; }
@@ -276,7 +242,7 @@
 .timeline-image { margin-top:12px; text-align:center; }
 .timeline-image img { max-width:100%; border-radius:8px; }
 .timeline-image .img-caption { display:block; font-size:12px; color:#999; margin-top:4px; }
-.expand-hint { font-size:13px; color:#bbb; margin-top:8px; display:block; transition:opacity .3s; }
+.expand-hint { font-size:11px; color:#bbb; margin-top:8px; display:block; transition:opacity .3s; }
 .timeline-event.active .expand-hint { opacity:0; }
 
 /* ═══════════════════════════════════════
@@ -292,7 +258,7 @@
 .reading-article .article-lesson { font-size:12px; color:#999; margin-bottom:8px; }
 .reading-article h3 { margin:0 0 16px; font-size:18px; color:#222; }
 .reading-article blockquote { margin:12px 0; padding:12px 20px; background:#f5f5f5; border-left:4px solid #00897b; border-radius:0 8px 8px 0; font-style:italic; color:#444; }
-.reading-article p { font-size:18px; line-height:1.75; color:#333; }
+.reading-article p { font-size:14px; line-height:1.75; color:#333; }
 
 /* ── Footnote marks ── */
 .fn-mark { color:#d32f2f; cursor:pointer; font-weight:700; padding:0 1px; transition:color .2s; }
@@ -308,7 +274,7 @@
 .book-card { display:flex; gap:20px; background:#fafafa; border:1px solid #e8e8e8; border-radius:12px; padding:20px; margin-top:16px; }
 .book-card img { width:110px; height:auto; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,.12); object-fit:contain; flex-shrink:0; }
 .book-card-info { flex:1; }
-.book-card-info .book-title { font-size:14px; font-weight:700; color:#222; margin-bottom:4px; }
+.book-card-info .book-title { font-size:15px; font-weight:700; color:#222; margin-bottom:4px; }
 .book-card-info .book-author { font-size:13px; color:#666; margin-bottom:2px; }
 .book-card-info .book-pub { font-size:12px; color:#999; margin-bottom:10px; }
 .book-card-info .book-buy { display:inline-block; background:#00897b; color:#fff; padding:8px 18px; border-radius:20px; text-decoration:none; font-size:13px; font-weight:600; transition:background .2s; }
@@ -319,7 +285,7 @@
 
 /* ── Bibliography Section ── */
 .bib-section { margin-top:36px; padding-top:24px; border-top:2px solid #e0e0e0; }
-.bib-section h3 { color:#333; margin-bottom:16px; font-size:15px; }
+.bib-section h3 { color:#333; margin-bottom:16px; font-size:17px; }
 
 /* ── Responsive ── */
 @media(max-width:600px){
@@ -372,62 +338,35 @@
     </nav>
     <div id="dashboard-view" class="dashboard">
         <!-- UPDATED: Dual progress bars -->
-<div class="progress-card">
-    <h2>📊 學習進度</h2>
-    <div class="progress-dual">
-        <div class="progress-col">
-            <div class="progress-label">📖 讀經進度</div>
-            <div class="progress-bar-bg">
-                <div id="prog-bar-read" class="progress-bar-fill" style="width:0%">0%</div>
+        <div class="progress-card">
+            <h2>📊 學習進度</h2>
+            <div class="progress-dual">
+                <div class="progress-col">
+                    <div class="progress-label">📖 讀經進度</div>
+                    <div class="progress-bar-bg">
+                        <div id="prog-bar-read" class="progress-bar-fill" style="width:0%">0%</div>
+                    </div>
+                    <div id="prog-stats-read" class="progress-stats"></div>
+                </div>
+                <div class="progress-col">
+                    <div class="progress-label">📝 測驗成績</div>
+                    <div class="progress-bar-bg">
+                        <div id="prog-bar-quiz" class="progress-bar-fill quiz-bar" style="width:0%">0%</div>
+                    </div>
+                    <div id="prog-stats-quiz" class="progress-stats"></div>
+                </div>
             </div>
-            <div id="prog-stats-read" class="progress-stats"></div>
         </div>
-        <div class="progress-col">
-            <div class="progress-label">📝 測驗成績</div>
-            <div class="progress-bar-bg">
-                <div id="prog-bar-quiz" class="progress-bar-fill quiz-bar" style="width:0%">0%</div>
-            </div>
-            <div id="prog-stats-quiz" class="progress-stats"></div>
-        </div>
-    </div>
-    <!-- ✅ NEW: 課餘閱讀進度 -->
-    <div id="reading-progress-row" class="progress-dual" style="margin-top:12px;display:none">
-        <div class="progress-col">
-            <div class="progress-label">📚 課餘閱讀</div>
-            <div class="progress-bar-bg">
-                <div id="prog-bar-reading" class="progress-bar-fill reading-bar" style="width:0%">0%</div>
-            </div>
-            <div id="prog-stats-reading" class="progress-stats"></div>
-        </div>
-        <div class="progress-col" style="display:flex;align-items:center">
-            <div id="reading-badge" style="font-size:14px;color:#888"></div>
-        </div>
-    </div>
-</div>
         <h2 class="section-title">📚 課程列表</h2>
         <div id="lesson-grid" class="lesson-grid"></div>
     </div>
     <div id="lesson-view" class="lesson-view" style="display:none">
         <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
         <div id="lv-header" class="lesson-header"></div>
-        <div class="lesson-tabs" id="lv-tabs">
-            <div class="lesson-tab active" data-tab="scripture" id="tab-label-scripture">📖 經文</div>
-            <div class="lesson-tab" data-tab="questions">✏️ 討論問題</div>
-            <div class="lesson-tab" data-tab="quiz">📝 測驗</div>
-        </div>
-        <div id="tab-scripture" class="tab-content active"></div>
-        <div id="tab-questions" class="tab-content"></div>
-        <div id="tab-quiz" class="tab-content"></div>
+        <div class="lesson-tabs" id="lv-tabs"></div>
+	<div id="lv-tab-panels"></div>
     </div>
 </div>
-
-<!-- === 3d NEW: 歷史/閱讀專用容器 === -->
-    <div id="lesson-detail-wrapper" class="lesson-view" style="display:none">
-        <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
-        <div id="lesson-detail"></div>
-    </div>
-    <!-- === END 3d === -->
-
 
 <div id="hl-popup" class="hl-popup">
     <button class="hy" onclick="setHL('yellow')">🟡 重要</button>
@@ -440,9 +379,10 @@
 <script src="data/intro.js"></script>
 <script src="data/lesson01.js"></script>
 <script src="data/lesson02.js"></script>
+<script src="data/lesson03.js"></script>
+<script src="data/lesson04.js"></script>
 <script src="data/history.js"></script>
 <script src="data/reading.js"></script>
-<script src="data/lesson03.js"></script>
 
     
 <!-- 日後加新課只需新增 data/lessonXX.js 並取消下方註解 -->
@@ -477,6 +417,7 @@ let currentUser = null;
 let userData = {};
 let currentLessonId = null;
 let hlVerse = null;
+let activeLessonTabIds = [];
 
 // ==========================================
 // AUTH
@@ -566,10 +507,9 @@ async function saveUserData() {
 // DASHBOARD (UPDATED: dual progress)
 // ==========================================
 function renderDashboard() {
-    // ✅ 排除 isHistory 和 isReading 的課程
-    const activeLessons = LESSONS.filter(l => !l.comingSoon && !l.isHistory && !l.isReading);
-    const quizzableLessons = activeLessons.filter(l => l.quiz && l.quiz.length > 0);
+    const activeLessons = LESSONS.filter(l => !l.comingSoon);
     const totalRead = activeLessons.length;
+    const quizzableLessons = activeLessons.filter(l => l.quiz && l.quiz.length > 0);
     const totalQuiz = quizzableLessons.length;
 
     let doneRead = 0, doneQuiz = 0, totalScore = 0;
@@ -605,53 +545,7 @@ function renderDashboard() {
         document.getElementById('prog-stats-quiz').textContent = '暫無測驗';
     }
 
-    // ✅ NEW: 課餘閱讀獨立進度（按文章篇數計算）
-    const readingLessons = LESSONS.filter(l => !l.comingSoon && l.isReading);
-    const readingRow = document.getElementById('reading-progress-row');
-
-    if(readingLessons.length > 0) {
-        let totalRL = 0;
-        let doneRL = 0;
-
-        readingLessons.forEach(l => {
-            const artCount = (l.articles && l.articles.length) ? l.articles.length : 0;
-            totalRL += artCount;
-
-            const p = userData.progress[l.id];
-            if (p && p.articlesRead && l.articles) {
-                l.articles.forEach(art => {
-                    if (p.articlesRead[art.id]) doneRL++;
-                });
-            }
-        });
-
-        if(totalRL > 0) {
-            const pctRL = Math.round(doneRL / totalRL * 100);
-
-            readingRow.style.display = 'flex';
-            document.getElementById('prog-bar-reading').style.width = pctRL + '%';
-            document.getElementById('prog-bar-reading').textContent = pctRL + '%';
-            document.getElementById('prog-stats-reading').textContent = '已閱讀 ' + doneRL + ' / ' + totalRL + ' 篇';
-
-            const badge = document.getElementById('reading-badge');
-            if(doneRL === 0) {
-                badge.textContent = '📖 開始你的課餘閱讀之旅吧！';
-                badge.style.color = '#888';
-            } else if(doneRL < totalRL) {
-                badge.textContent = '⭐ 好學不倦！繼續加油！';
-                badge.style.color = '#ff8f00';
-            } else {
-                badge.textContent = '🏆 全部完成！你是閱讀達人！';
-                badge.style.color = '#e65100';
-            }
-        } else {
-            readingRow.style.display = 'none';
-        }
-    } else {
-        readingRow.style.display = 'none';
-    }
-
-    // Render lesson cards (此處保持不變)
+    // Render lesson cards
     const grid = document.getElementById('lesson-grid');
     grid.innerHTML = '';
     LESSONS.forEach(l => {
@@ -672,11 +566,13 @@ function renderDashboard() {
         if(l.comingSoon) {
             statusHtml += '<span class="badge badge-locked">🔒 即將推出</span>';
         } else {
+            // Reading status
             if(isRead) {
                 statusHtml += '<span class="badge badge-read">✅ 已讀</span>';
             } else {
                 statusHtml += '<span class="badge badge-unread">📖 未讀</span>';
             }
+            // Quiz status
             if(hasQuiz) {
                 if(quizDone) {
                     statusHtml += '<span class="badge badge-score">📝 測驗 ' + p.quizScore + '%</span>';
@@ -700,6 +596,56 @@ function renderDashboard() {
     });
 }
 // ==========================================
+// BUILD DYNAMIC TABS (★ NEW)
+// ==========================================
+function buildLessonTabs(lesson) {
+    const tabsBar = document.getElementById('lv-tabs');
+    const panelsContainer = document.getElementById('lv-tab-panels');
+
+    // 清除上一課殘留的 panel
+    panelsContainer.innerHTML = '';
+    activeLessonTabIds = [];
+
+    let tabs = [];
+    const hasChapters = lesson.chapters && lesson.chapters.length > 0;
+
+    // ── 經文 tab(s) ──
+    if (lesson.isIntro) {
+        tabs.push({ id: 'scripture', label: '📖 課程內容' });
+    } else if (hasChapters) {
+        // 每章一個獨立 tab
+        lesson.chapters.forEach(ch => {
+            tabs.push({
+                id: 'scripture-ch' + ch.chapter,
+                label: ch.tabLabel || ('📖 經文　第' + ch.chapter + '章')
+            });
+        });
+    } else {
+        tabs.push({ id: 'scripture', label: '📖 經文' });
+    }
+
+    // ── 討論問題 tab ──
+    tabs.push({ id: 'questions', label: '✏️ 討論問題' });
+
+    // ── 測驗 tab ──
+    tabs.push({ id: 'quiz', label: '📝 測驗' });
+
+    // 產生 tab 列
+    tabsBar.innerHTML = tabs.map((t, i) =>
+        '<div class="lesson-tab' + (i === 0 ? ' active' : '') + '" data-tab="' + t.id + '">' + t.label + '</div>'
+    ).join('');
+
+    // 產生對應的內容容器
+    tabs.forEach((t, i) => {
+        const div = document.createElement('div');
+        div.id = 'tab-' + t.id;
+        div.className = 'tab-content' + (i === 0 ? ' active' : '');
+        panelsContainer.appendChild(div);
+    });
+
+    activeLessonTabIds = tabs.map(t => t.id);
+}
+// ==========================================
 // LESSON VIEW
 // ==========================================
 function openLesson(id) {
@@ -707,7 +653,7 @@ function openLesson(id) {
     const lesson = LESSONS.find(l => l.id === id);
     if(!lesson || lesson.comingSoon) return;
 
-    // === 3d: 歷史 / 閱讀特殊頁面 ===
+    // === 歷史 / 閱讀特殊頁面 ===
     if (lesson.isHistory || lesson.isReading) {
         document.getElementById('dashboard-view').style.display = 'none';
         document.getElementById('lesson-view').style.display = 'none';
@@ -716,25 +662,42 @@ function openLesson(id) {
         else renderReading(lesson);
         return;
     }
-    // === END 3d ===
 
     document.getElementById('dashboard-view').style.display = 'none';
     document.getElementById('lesson-view').style.display = 'block';
-    document.getElementById('lv-header').innerHTML = '<h1>' + lesson.title + '：' + lesson.subtitle + '</h1><p>' + lesson.ref + ' — ' + lesson.description + '</p>';
+    document.getElementById('lv-header').innerHTML =
+        '<h1>' + lesson.title + '：' + lesson.subtitle + '</h1>'
+        + '<p>' + lesson.ref + ' — ' + lesson.description + '</p>';
 
-    const tabLabel = document.getElementById('tab-label-scripture');
-    tabLabel.textContent = lesson.isIntro ? '📖 課程內容' : '📖 經文';
+    // ★ 動態建立 tabs
+    buildLessonTabs(lesson);
 
-    if(lesson.isIntro) renderIntroContent(lesson);
-    else renderScripture(lesson);
+    // ★ 依課程類型渲染經文
+    const hasChapters = lesson.chapters && lesson.chapters.length > 0;
+
+    if (lesson.isIntro) {
+        renderIntroContent(lesson);
+    } else if (hasChapters) {
+        // 多章：每章渲染到獨立 tab
+        lesson.chapters.forEach((ch, idx) => {
+            renderScriptureChapter(lesson, ch, idx);
+        });
+    } else {
+        renderScripture(lesson);
+    }
+
     renderQuestions(lesson);
     renderQuiz(lesson);
-    showLessonTab('scripture');
+
+    // 預設顯示第一個 tab
+    if (activeLessonTabIds.length > 0) {
+        showLessonTab(activeLessonTabIds[0]);
+    }
 }
+
 
 window.goBack = function() {
     document.getElementById('lesson-view').style.display = 'none';
-    document.getElementById('lesson-detail-wrapper').style.display = 'none';  // ← 新增
     document.getElementById('dashboard-view').style.display = 'block';
     currentLessonId = null;
     renderDashboard();
@@ -745,9 +708,14 @@ document.getElementById('lv-tabs').addEventListener('click', (e) => {
     if(tab) showLessonTab(tab);
 });
 
-function showLessonTab(tab) {
-    document.querySelectorAll('#lv-tabs .lesson-tab').forEach(t => t.classList.toggle('active', t.dataset.tab===tab));
-    ['scripture','questions','quiz'].forEach(t => document.getElementById('tab-'+t).classList.toggle('active', t===tab));
+function showLessonTab(tabId) {
+    document.querySelectorAll('#lv-tabs .lesson-tab').forEach(t =>
+        t.classList.toggle('active', t.dataset.tab === tabId)
+    );
+    activeLessonTabIds.forEach(id => {
+        const el = document.getElementById('tab-' + id);
+        if (el) el.classList.toggle('active', id === tabId);
+    });
     document.getElementById('hl-popup').style.display = 'none';
 }
 
@@ -795,18 +763,94 @@ window.toggleStudySection = function(i) {
         arrow.classList.toggle('open');
     }
 };
+window.toggleStudyGuide = function(i) {
+    const body = document.getElementById('sg-body-' + i);
+    const arrow = document.getElementById('sg-arrow-' + i);
+    if (body && arrow) {
+        body.classList.toggle('open');
+        arrow.classList.toggle('open');
+    }
+};
 
 // ==========================================
 // SCRIPTURE TAB
 // ==========================================
+// ==========================================
+// SCRIPTURE — 多章模式：每章獨立 tab (★ NEW)
+// ==========================================
+function renderScriptureChapter(lesson, ch, chapterIndex) {
+    const container = document.getElementById('tab-scripture-ch' + ch.chapter);
+    if (!container) return;
+
+    const highlights = (userData.highlights && userData.highlights[lesson.id]) || {};
+    const isRead = userData.progress[lesson.id]?.scriptureRead;
+
+    let html = '<div class="scripture-box">';
+    html += '<h2>📖 ' + (ch.title || '') + '</h2>';
+    html += '<div class="sub">' + (ch.subtitle || ('和合本修訂版 (RCUV) — 但以理書 第' + ch.chapter + '章')) + '</div>';
+
+    // ── 閱讀指南（如有）──
+    if (lesson.studyGuide && lesson.studyGuide[chapterIndex]) {
+        const sg = lesson.studyGuide[chapterIndex];
+        html += '<div class="intro-section" style="margin-bottom:16px">'
+            + '<div class="intro-section-header" onclick="toggleStudyGuide(' + chapterIndex + ')">'
+            + '<h3>📝 ' + sg.heading + '</h3>'
+            + '<span class="arrow" id="sg-arrow-' + chapterIndex + '">▼</span>'
+            + '</div>'
+            + '<div class="intro-section-body" id="sg-body-' + chapterIndex + '">'
+            + '<ul>' + sg.points.map(p => '<li>' + p + '</li>').join('') + '</ul>'
+            + '</div></div>';
+    }
+
+    // ── 螢光筆圖例 ──
+    html += '<div class="hl-legend">'
+        + '<b>螢光筆：</b>'
+        + '<span><span class="hl-dot" style="background:#fff9c4;border:1px solid #f9a825"></span> 重要</span>'
+        + '<span><span class="hl-dot" style="background:#bbdefb;border:1px solid #42a5f5"></span> 不明白</span>'
+        + '<span><span class="hl-dot" style="background:#c8e6c9;border:1px solid #66bb6a"></span> 感動/有用</span>'
+        + '<span style="color:#999;font-size:12px">（點擊經文即可標記）</span>'
+        + '</div>';
+
+    // ── 經文 ──
+    ch.verses.forEach((v, i) => {
+        const vnum = i + 1;
+        // ★ 關鍵修復：key 用 "章:節"，例如 "3:1", "4:12"
+        const key = ch.chapter + ':' + vnum;
+        const hlClass = highlights[key] ? ' hl-' + highlights[key] : '';
+        html += '<span class="verse' + hlClass + '" data-v="' + key + '">'
+            + '<sup>' + vnum + '</sup>' + v + '</span>';
+    });
+
+    // ── 標記已讀按鈕 ──
+    html += '<button class="btn-mark-read btn-mark-read-multi' + (isRead ? ' done' : '') + '" '
+        + 'onclick="markRead()">'
+        + (isRead ? '✅ 已完成閱讀' : '📖 標記已完成閱讀') + '</button>';
+
+    html += '</div>';
+    container.innerHTML = html;
+
+    // ── 螢光筆點擊事件 ──
+    container.querySelectorAll('.verse').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hlVerse = el.dataset.v;
+            const popup = document.getElementById('hl-popup');
+            const rect = el.getBoundingClientRect();
+            popup.style.display = 'block';
+            popup.style.position = 'fixed';
+            popup.style.top = (rect.bottom + 4) + 'px';
+            popup.style.left = Math.min(rect.left, window.innerWidth - 280) + 'px';
+        });
+    });
+}
+// ==========================================
+// SCRIPTURE — 單章模式（lesson01, lesson02 等）
+// ==========================================
 function renderScripture(lesson) {
     const container = document.getElementById('tab-scripture');
+    if (!container) return;
 
-    // ── 判斷有冇經文 ──
-    const hasVerses   = lesson.verses && lesson.verses.length > 0;
-    const hasChapters = lesson.chapters && lesson.chapters.length > 0;
-
-    if (!hasVerses && !hasChapters) {
+    if (!lesson.verses || lesson.verses.length === 0) {
         container.innerHTML = '<div class="coming-soon">'
             + '<div class="icon">📖</div>'
             + '<h3>經文內容準備中</h3>'
@@ -828,59 +872,23 @@ function renderScripture(lesson) {
         + '<span style="color:#999;font-size:12px">（點擊經文即可標記）</span>'
         + '</div>';
 
-    // ══════════════════════════════════════════
-    //  A) 多章模式 — lesson.chapters
-    // ══════════════════════════════════════════
-    if (hasChapters) {
-        lesson.chapters.forEach(ch => {
-            html += '<div class="chapter-block" style="margin-top:28px">';
-            // 章標題
-            if (ch.chapterTitle) {
-                html += '<h3 style="color:#1a237e;margin-bottom:4px">'
-                    + ch.chapterTitle + '</h3>';
-            }
-            if (ch.ref) {
-                html += '<div class="sub" style="margin-bottom:10px;font-size:13px;color:#666">'
-                    + ch.ref + '</div>';
-            }
-            html += '<div class="verses-area">';
-            ch.verses.forEach((v, i) => {
-                const vnum = i + 1;
-                // 用 "章:節" 作 key，避免唔同章節號碼撞
-                const key = ch.chapterNumber + ':' + vnum;
-                const hlClass = highlights[key] ? ' hl-' + highlights[key] : '';
-                html += '<span class="verse' + hlClass + '" data-v="' + key + '">'
-                    + '<sup>' + vnum + '</sup>' + v + '</span>';
-            });
-            html += '</div>';  // .verses-area
-            html += '</div>';  // .chapter-block
-        });
-
-    // ══════════════════════════════════════════
-    //  B) 單章模式 — lesson.verses（原有邏輯）
-    // ══════════════════════════════════════════
-    } else {
-        html += '<div class="verses-area">';
-        lesson.verses.forEach((v, i) => {
-            const vnum = i + 1;
-            const hlClass = highlights[vnum] ? ' hl-' + highlights[vnum] : '';
-            html += '<span class="verse' + hlClass + '" data-v="' + vnum + '">'
-                + '<sup>' + vnum + '</sup>' + v + '</span>';
-        });
-        html += '</div>';
-    }
+    lesson.verses.forEach((v, i) => {
+        const vnum = i + 1;
+        const hlClass = highlights[vnum] ? ' hl-' + highlights[vnum] : '';
+        html += '<span class="verse' + hlClass + '" data-v="' + vnum + '">'
+            + '<sup>' + vnum + '</sup>' + v + '</span>';
+    });
 
     html += '<button class="btn-mark-read' + (isRead ? ' done' : '') + '" '
         + 'onclick="markRead()" id="btn-read">'
         + (isRead ? '✅ 已完成閱讀' : '📖 標記已完成閱讀') + '</button>';
-    html += '</div>';  // .scripture-box
+    html += '</div>';
     container.innerHTML = html;
 
-    // ── 螢光筆點擊 ──
     container.querySelectorAll('.verse').forEach(el => {
         el.addEventListener('click', (e) => {
             e.stopPropagation();
-            hlVerse = el.dataset.v;          // 可能係 "4:12" 或 "7"
+            hlVerse = el.dataset.v;
             const popup = document.getElementById('hl-popup');
             const rect = el.getBoundingClientRect();
             popup.style.display = 'block';
@@ -923,9 +931,20 @@ window.markRead = async function() {
     if (!currentLessonId) return;
     if (!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
     userData.progress[currentLessonId].scriptureRead = true;
+
+    // ★ 更新單章按鈕
     const btn = document.getElementById('btn-read');
-    btn.textContent = '✅ 已完成閱讀';
-    btn.classList.add('done');
+    if (btn) {
+        btn.textContent = '✅ 已完成閱讀';
+        btn.classList.add('done');
+    }
+
+    // ★ 更新多章按鈕（所有 tab 裡的按鈕同步）
+    document.querySelectorAll('.btn-mark-read-multi').forEach(b => {
+        b.textContent = '✅ 已完成閱讀';
+        b.classList.add('done');
+    });
+
     const lesson = LESSONS.find(l => l.id === currentLessonId);
     const hasQuiz = lesson && lesson.quiz && lesson.quiz.length > 0;
     if (!hasQuiz || userData.progress[currentLessonId].quizScore != null) {
@@ -1281,66 +1300,41 @@ function renderReading(lesson) {
     h += '<h1>📚 ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
 
-   /* ── Articles (collapsible) ── */
-lesson.articles.forEach(function(art, ai) {
-    var artRead = userData.progress[lesson.id]
-              && userData.progress[lesson.id].articlesRead
-              && userData.progress[lesson.id].articlesRead[art.id];
+    /* ── Articles ── */
+    lesson.articles.forEach(function(art, ai) {
+        h += '<div class="reading-article" id="art-' + art.id + '">';
+        h += '<div class="article-cat">' + art.categoryLabel + '</div>';
+        h += '<div class="article-lesson">📖 ' + art.lessonRef + '</div>';
+        h += '<h3>' + art.icon + ' ' + art.title + '</h3>';
+        h += '<div class="article-body">' + art.html + '</div>';
 
-    h += '<div class="reading-article" id="art-' + art.id + '">';
+        /* inline footnote popups (hidden by default) */
+        if (art.footnotes && art.footnotes.length) {
+            art.footnotes.forEach(function(fn) {
+                var book = bib[fn.bookKey];
+                h += '<div class="fn-popup" id="fnp-' + art.id + '-' + fn.num + '">'
+                   + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
+                   + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
 
-    /* ── Clickable header ── */
-    h += '<div class="article-header-bar" onclick="toggleArticle(\'' + art.id + '\')">';
-    h += '<div>'
-       + '<div class="article-cat">' + art.categoryLabel + '</div>'
-       + '<div class="article-lesson">📖 ' + art.lessonRef + '</div>'
-       + '<h3 style="margin:0">' + art.icon + ' ' + art.title
-       + (artRead ? '<span class="article-status-hint" style="color:#43a047">✅ 已讀</span>' : '<span class="article-status-hint" style="color:#999">📖 未讀</span>')
-       + '</h3>'
-       + '</div>';
-    h += '<span class="arrow" id="art-arrow-' + art.id + '">▼</span>';
-    h += '</div>';
+                /* Book card inside popup */
+                if (book) {
+                    h += '<div class="book-card">';
+                    if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
+                    h += '<div class="book-card-info">'
+                       + '<div class="book-title">' + book.title + '</div>'
+                       + '<div class="book-author">' + book.author + '</div>'
+                       + '<div class="book-pub">' + book.publisher + ', ' + book.year
+                       + (book.series ? ' — ' + book.series : '') + '</div>';
+                    if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
+                    h += '</div></div>';  // .book-card-info, .book-card
+                }
 
-    /* ── Collapsible body ── */
-    h += '<div class="article-body-wrap" id="art-body-' + art.id + '">';
-    h += '<div class="article-body">' + art.html + '</div>';
-
-    /* inline footnote popups */
-    if (art.footnotes && art.footnotes.length) {
-        art.footnotes.forEach(function(fn) {
-            var book = bib[fn.bookKey];
-            h += '<div class="fn-popup" id="fnp-' + art.id + '-' + fn.num + '">'
-               + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
-               + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
-
-            if (book) {
-                h += '<div class="book-card">';
-                if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
-                h += '<div class="book-card-info">'
-                   + '<div class="book-title">' + book.title + '</div>'
-                   + '<div class="book-author">' + book.author + '</div>'
-                   + '<div class="book-pub">' + book.publisher + ', ' + book.year
-                   + (book.series ? ' — ' + book.series : '') + '</div>';
-                if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
-                h += '</div></div>';
-            }
-
-            h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
-               + '</div>';
-        });
-    }
-
-    /* Mark-read button */
-    h += '<div style="text-align:center;margin:24px 0 16px">';
-    h += '<button class="btn-mark-read' + (artRead ? ' done' : '') + '" '
-       + 'onclick="markArticleRead(\'' + lesson.id + '\',\'' + art.id + '\')" '
-       + 'id="btn-read-' + art.id + '">';
-    h += (artRead ? '✅ 已完成閱讀此篇' : '📚 標記已完成閱讀此篇');
-    h += '</button></div>';
-
-    h += '</div>';  // .article-body-wrap
-    h += '</div>';  // .reading-article
-});
+                h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
+                   + '</div>';  // .fn-popup
+            });
+        }
+        h += '</div>';  // .reading-article
+    });
 
     /* ── Bibliography Section ── */
     h += '<div class="bib-section"><h3>📕 參考書目</h3>';
@@ -1359,9 +1353,6 @@ lesson.articles.forEach(function(art, ai) {
         h += '</div></div>';
     }
     h += '</div>';  // .bib-section
-
-
-
     h += '</div>';  // .reading-page
     c.innerHTML = h;
 
@@ -1390,68 +1381,6 @@ window.closeFn = function(artId, fnNum) {
     // scroll back to the footnote mark
     var mark = document.querySelector('#art-' + artId + ' .fn-mark[data-fn="' + fnNum + '"]');
     if (mark) mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
-};
-
-
-window.markArticleRead = function(lessonId, articleId) {
-    // 初始化
-    if (!userData.progress[lessonId]) {
-        userData.progress[lessonId] = {};
-    }
-    if (!userData.progress[lessonId].articlesRead) {
-        userData.progress[lessonId].articlesRead = {};
-    }
-
-    // 標記該篇已讀
-    userData.progress[lessonId].articlesRead[articleId] = true;
-
-    // 檢查是否全部文章都已讀 → 整課完成
-    var lesson = LESSONS.find(function(l) { return l.id === lessonId; });
-    if (lesson && lesson.articles) {
-        var allDone = lesson.articles.every(function(art) {
-            return userData.progress[lessonId].articlesRead
-                && userData.progress[lessonId].articlesRead[art.id];
-        });
-        userData.progress[lessonId].scriptureRead = allDone;
-    }
-
-    saveUserData();
-
-    // 更新按鈕外觀
-    var btn = document.getElementById('btn-read-' + articleId);
-    if (btn) {
-        btn.classList.add('done');
-        btn.textContent = '✅ 已完成閱讀此篇';
-    }
-
-    // 如果全部完成，顯示提示
-    if (userData.progress[lessonId].scriptureRead) {
-        showReadingComplete();
-    }
-}
-
-function showReadingComplete() {
-    var existing = document.getElementById('reading-complete-msg');
-    if (existing) return;
-
-    var msg = document.createElement('div');
-    msg.id = 'reading-complete-msg';
-    msg.style.cssText = 'text-align:center;padding:16px;margin:16px auto;max-width:400px;'
-        + 'background:#e8f5e9;border-radius:12px;color:#2e7d32;font-weight:bold;font-size:16px;';
-    msg.textContent = '🏆 太棒了！你已完成所有課餘閱讀！';
-
-    // ✅ 改成 lesson-detail（閱讀頁的實際容器）
-    var container = document.getElementById('lesson-detail');
-    if (container) container.appendChild(msg);
-}
-
-window.toggleArticle = function(artId) {
-    var body = document.getElementById('art-body-' + artId);
-    var arrow = document.getElementById('art-arrow-' + artId);
-    if (body && arrow) {
-        body.classList.toggle('open');
-        arrow.classList.toggle('open');
-    }
 };
 
 </script>
