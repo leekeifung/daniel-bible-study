@@ -13,6 +13,82 @@ window.LESSONS_DATA.push({
     comingSoon: false,
 
     /* ==============================
+       📖 課程內容 (collapsible)
+       ============================== */
+    studyContent: [
+        {
+            title: '文學結構與歷史背景',
+            icon: '📖',
+            defaultOpen: false,
+            html:
+                '<h4 style="color:#00897b;margin:0 0 8px;">1. 亞蘭文交叉結構 (The Aramaic Chiasm)</h4>' +
+                '<p>從第 2 章開始，但以理書的語言從希伯來文轉為亞蘭文（直到第 7 章結束）。這六章構成了一個精妙的<strong>交叉結構 (Chiasm)</strong>，傳遞核心信息：</p>' +
+                '<div style="background:#f5f5f5;border-left:4px solid #00897b;padding:12px 16px;margin:12px 0;font-size:14px;line-height:1.8;">' +
+                    '<strong>A（第 2 章）</strong>：巨像之夢（四個國度被第五個國度取代）<br>' +
+                    '<span style="padding-left:24px;"><strong>B（第 3 章）</strong>：忠信的猶太人面臨死亡（火窯）</span><br>' +
+                    '<span style="padding-left:48px;"><strong>C（第 4 章）</strong>：外邦君王受審判（尼布甲尼撒的驕傲）</span><br>' +
+                    '<span style="padding-left:48px;"><strong>C\'（第 5 章）</strong>：外邦君王受審判（伯沙撒的驕傲）</span><br>' +
+                    '<span style="padding-left:24px;"><strong>B\'（第 6 章）</strong>：忠信的猶太人面臨死亡（獅子坑）</span><br>' +
+                    '<strong>A\'（第 7 章）</strong>：四獸異象（四個國度被第五個國度取代）' +
+                '</div>' +
+                '<div class="highlight-box"><strong>神學意義：</strong>雖然外邦君王看似掌權，但神（以色列的神）掌控歷史，並審判驕傲的統治者。</div>' +
+
+                '<h4 style="color:#00897b;margin:16px 0 8px;">2. 宮廷競賽 (Court Contest) 與危機</h4>' +
+                '<p>本章屬於「<strong>宮廷競賽</strong>」類型故事：地位較低的英雄被召喚來解決難題。</p>' +
+                '<ul>' +
+                '<li><strong>前所未有的要求：</strong>尼布甲尼撒不僅要求解夢，還要求術士<strong>說出夢的內容</strong>。</li>' +
+                '<li><strong>巴比倫智慧的破產：</strong>術士承認「除了不與世人同居的神明，沒有人能把這事告訴王」(2:11)。這鋪陳了本章的核心——<strong>真正的智慧不屬於巴比倫，而屬於天上的神。</strong></li>' +
+                '</ul>'
+        },
+        {
+            title: '但以理書第二章釋義',
+            icon: '📝',
+            defaultOpen: false,
+            html:
+                '<h4 style="color:#00897b;margin:0 0 8px;">1. 但以理的頌讚 (2:20-23)</h4>' +
+                '<p>在神顯明奧祕後，但以理發出的頌讚詩是<strong>全書神學的縮影</strong>。</p>' +
+                '<div class="highlight-box">' +
+                    '<p><strong>🔍 頌讚詩的三個核心主題</strong></p>' +
+                    '<ol>' +
+                    '<li><strong>智慧與能力屬於神：</strong>神知道深奧隱祕的事。</li>' +
+                    '<li><strong>神掌管歷史與政治：</strong>祂改變時候、日期；祂廢王、立王。</li>' +
+                    '<li><strong>神賜予智慧：</strong>神將智慧賜給智慧人。</li>' +
+                    '</ol>' +
+                    '<p><strong>重點：</strong>但以理並沒有因為自己有智慧而驕傲，他清楚智慧是「神賜的」(God gave)。這回應了第一章的主題。</p>' +
+                '</div>' +
+
+                '<h4 style="color:#00897b;margin:16px 0 8px;">2. 巨像之夢與解釋 (2:31-45)</h4>' +
+                '<ul>' +
+                '<li><strong>巨像的組成：</strong>金頭、銀胸、銅腹、鐵腿、半鐵半泥的腳。價值遞減，但硬度（除了腳）遞增。</li>' +
+                '<li><strong>解釋的觀點：</strong>' +
+                    '<ul>' +
+                    '<li><strong>傳統／羅馬觀點：</strong>巴比倫 → 瑪代波斯 → 希臘 → 羅馬。</li>' +
+                    '<li><strong>希臘觀點：</strong>巴比倫 → 瑪代 → 波斯 → 希臘。</li>' +
+                    '</ul>' +
+                '</li>' +
+                '<li><strong>Wendy Widder 觀點：</strong>無論採取哪種歷史解釋，<strong>不要見樹不見林</strong>。重點不在於第四個國度是誰，而在於<strong>第五個國度</strong>。</li>' +
+                '</ul>' +
+
+                '<div class="highlight-box">' +
+                    '<p><strong>💡 非人手鑿出來的石頭 (The Stone)</strong></p>' +
+                    '<p>這石頭打碎了整座像，變成一座大山，充滿天下。</p>' +
+                    '<ul>' +
+                    '<li><strong>意義：</strong>這代表<strong>神的國度</strong>。</li>' +
+                    '<li><strong>特質：</strong>它是永恆的，必不敗壞，也不歸別國的人。</li>' +
+                    '<li><strong>對比：</strong>人類國度無論多麼輝煌（金頭）或強大（鐵腿），最終都是短暫且會被粉碎的。唯有神的國度存到永遠。</li>' +
+                    '</ul>' +
+                '</div>' +
+
+                '<h4 style="color:#00897b;margin:16px 0 8px;">3. 尼布甲尼撒的反應 (2:46-49)</h4>' +
+                '<p>國王俯伏敬拜但以理，並承認「你們的神誠然是萬神之神、萬王之主」。</p>' +
+                '<ul>' +
+                '<li>這<strong>不代表</strong>國王真正歸信（他是多神論者，只是把耶和華加入萬神殿）。</li>' +
+                '<li>但這證明了本章的目的：<strong>顯明唯有以色列的神擁有真正的智慧與權柄。</strong></li>' +
+                '</ul>'
+        }
+    ],
+
+    /* ==============================
        經文：但以理書第二章 (RCUV)
        ============================== */
     verses: [
