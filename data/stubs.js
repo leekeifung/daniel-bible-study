@@ -51,7 +51,7 @@
         title: '📚 自修閱讀 2',
         subtitle: '伯沙撒之夜與獅子坑',
         ref: '但以理書 第5-6章',
-        date: '5月11日 – 5月24日',
+        date: '5月11日 – 5月23日',
         description: '自修閱讀第5-6章。注意驕傲君王的結局（第5章）及忠信者面臨死亡的第二個故事（第6章），對應 OT366 Unit 6-7。',
         chapterTitle: '但以理書第五至六章',
         isSelfStudy: true,
