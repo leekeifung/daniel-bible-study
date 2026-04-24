@@ -195,7 +195,7 @@
             .match-left { min-width: auto; }
             .match-arrow { display: none; }
         }
-        
+
 
 /* ═══════════════════════════════════════
    HISTORY TIMELINE
@@ -253,6 +253,11 @@
 .reading-page h1 { color:#1b5e20; font-size:24px; margin-bottom:4px; }
 .reading-page .subtitle { color:#888; font-size:14px; margin-bottom:28px; }
 
+/* ── 展開/收合全部按鈕 ── */
+.reading-controls { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.btn-expand-all { background:#fff; border:1px solid #ccc; color:#555; padding:8px 18px; border-radius:20px; cursor:pointer; font-size:13px; font-weight:600; transition:all .2s; }
+.btn-expand-all:hover { background:#f5f5f5; border-color:#999; }
+
 /* ── Article Card ── */
 .reading-article { background:#fff; border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,.07); }
 .reading-article .article-cat { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#00897b; margin-bottom:4px; }
@@ -260,6 +265,15 @@
 .reading-article h3 { margin:0 0 16px; font-size:18px; color:#222; }
 .reading-article blockquote { margin:12px 0; padding:12px 20px; background:#f5f5f5; border-left:4px solid #00897b; border-radius:0 8px 8px 0; font-style:italic; color:#444; }
 .reading-article p { font-size:14px; line-height:1.75; color:#333; }
+
+/* ── Article Accordion (標題列 + 收合/展開) ── */
+.article-header-bar { cursor:pointer; display:flex; justify-content:space-between; align-items:flex-start; padding:0 0 8px; user-select:none; }
+.article-header-bar:hover { opacity:.85; }
+.article-header-bar .arrow { font-size:18px; transition:transform .3s; color:#666; flex-shrink:0; margin-top:4px; }
+.article-header-bar .arrow.open { transform:rotate(180deg); }
+.article-body-wrap { max-height:0; overflow:hidden; opacity:0; transition:max-height .4s ease, opacity .3s ease; }
+.article-body-wrap.open { max-height:5000px; opacity:1; }
+.article-status-hint { font-size:13px; margin-left:8px; font-weight:normal; }
 
 /* ── Footnote marks ── */
 .fn-mark { color:#d32f2f; cursor:pointer; font-weight:700; padding:0 1px; transition:color .2s; }
@@ -295,6 +309,7 @@
     .prophet-bar-name { width:60px; font-size:11px; }
     .timeline-container { padding-left:32px; }
     .timeline-dot { left:-24px; width:12px; height:12px; }
+    .reading-controls { justify-content:center; }
 }
 
 
@@ -1273,7 +1288,7 @@ window.toggleTLEvent = function(i) {
 };
 
 // ==========================================
-// READING — 課餘閱讀渲染
+// READING — 課餘閱讀渲染 (★ 已更新：預設收合 + 展開/收合全部按鈕)
 // ==========================================
 function renderReading(lesson) {
     var c = document.getElementById('lesson-detail');
@@ -1281,6 +1296,12 @@ function renderReading(lesson) {
     var h = '<div class="reading-page">';
     h += '<h1>📚 ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
+
+    /* ★ 新增：展開/收合全部按鈕 */
+    h += '<div class="reading-controls">';
+    h += '<button class="btn-expand-all" onclick="toggleAllArticles(true)">📖 展開全部</button>';
+    h += '<button class="btn-expand-all" onclick="toggleAllArticles(false)">📕 收合全部</button>';
+    h += '</div>';
 
     lesson.articles.forEach(function(art, ai) {
         var artRead = userData.progress[lesson.id]
@@ -1294,12 +1315,13 @@ function renderReading(lesson) {
             + '<div class="article-cat">' + art.categoryLabel + '</div>'
             + '<div class="article-lesson">📖 ' + art.lessonRef + '</div>'
             + '<h3 style="margin:0">' + art.icon + ' ' + art.title
-            + (artRead ? '<span class="article-status-hint" style="color:#43a047">✅ 已讀</span>' : '<span class="article-status-hint" style="color:#999">📖 未讀</span>')
+            + (artRead ? '<span class="article-status-hint" style="color:#43a047"> ✅ 已讀</span>' : '<span class="article-status-hint" style="color:#999"> 📖 未讀</span>')
             + '</h3>'
             + '</div>';
         h += '<span class="arrow" id="art-arrow-' + art.id + '">▼</span>';
         h += '</div>';
 
+        /* ★ 預設不加 open，文章收合 */
         h += '<div class="article-body-wrap" id="art-body-' + art.id + '">';
         h += '<div class="article-body">' + art.html + '</div>';
 
@@ -1334,8 +1356,8 @@ function renderReading(lesson) {
         h += (artRead ? '✅ 已完成閱讀此篇' : '📚 標記已完成閱讀此篇');
         h += '</button></div>';
 
-        h += '</div>';
-        h += '</div>';
+        h += '</div>'; /* end article-body-wrap */
+        h += '</div>'; /* end reading-article */
     });
 
     h += '<div class="bib-section"><h3>📕 參考書目</h3>';
@@ -1401,11 +1423,10 @@ window.markArticleRead = function(lessonId, articleId) {
     var btn = document.getElementById('btn-read-' + articleId);
     if (btn) { btn.classList.add('done'); btn.textContent = '✅ 已完成閱讀此篇'; }
 
-    // 更新標題旁邊的狀態提示
     var artEl = document.getElementById('art-' + articleId);
     if (artEl) {
         var hint = artEl.querySelector('.article-status-hint');
-        if (hint) { hint.textContent = '✅ 已讀'; hint.style.color = '#43a047'; }
+        if (hint) { hint.textContent = ' ✅ 已讀'; hint.style.color = '#43a047'; }
     }
 
     if (userData.progress[lessonId].scriptureRead) showReadingComplete();
@@ -1427,6 +1448,18 @@ window.toggleArticle = function(artId) {
     var body = document.getElementById('art-body-' + artId);
     var arrow = document.getElementById('art-arrow-' + artId);
     if (body && arrow) { body.classList.toggle('open'); arrow.classList.toggle('open'); }
+};
+
+/* ★ 新增：展開/收合全部文章 */
+window.toggleAllArticles = function(expand) {
+    document.querySelectorAll('.article-body-wrap').forEach(function(el) {
+        if (expand) el.classList.add('open');
+        else el.classList.remove('open');
+    });
+    document.querySelectorAll('.article-header-bar .arrow').forEach(function(el) {
+        if (expand) el.classList.add('open');
+        else el.classList.remove('open');
+    });
 };
 
 </script>
