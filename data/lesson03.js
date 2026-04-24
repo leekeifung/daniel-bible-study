@@ -9,7 +9,6 @@ window.LESSONS_DATA.push({
     ref: '但以理書 第3-4章',
     date: '4月27日 – 5月10日',
     description: '自修閱讀但以理書第三至四章。請特別注意「重複的句型 (Repetition)」以及「君王的驕傲與降卑」主題。第三章記載沙得拉、米煞、亞伯尼歌在火窰中的信仰告白；第四章記載尼布甲尼撒的大樹之夢與降卑。兩章分別位於亞蘭文交叉結構 (Chiasm) 的 B 段與 C 段，對應 OT366 Unit 4-5。',
-    chapterTitle: '但以理書第三至四章',
     isSelfStudy: true,
     comingSoon: false,
 
@@ -41,14 +40,14 @@ window.LESSONS_DATA.push({
 
     /* ==============================
        經文：但以理書第三至四章 (RCUV)
-       多章經文存於 chapters 陣列
+       每章獨立一個 tab，解決 highlight 衝突
        ============================== */
-    verses: [],
-
     chapters: [
         {
             chapter: 3,
+            tabLabel: '📖 經文　但以理書第三章',
             title: '第三章：火窰的試煉',
+            subtitle: '和合本修訂版 (RCUV) — 但以理書 第3章',
             verses: [
                 /* v1  */ '尼布甲尼撒王造了一個金像，高六十肘，寬六肘，立在巴比倫省的杜拉平原。',
                 /* v2  */ '尼布甲尼撒王差人將總督、欽差、省長、參謀、財務、法官、地方官和各省的官員都召了來，為尼布甲尼撒王所立的像行開光禮。',
@@ -84,7 +83,9 @@ window.LESSONS_DATA.push({
         },
         {
             chapter: 4,
+            tabLabel: '📖 經文　但以理書第四章',
             title: '第四章：大樹的夢',
+            subtitle: '和合本修訂版 (RCUV) — 但以理書 第4章',
             verses: [
                 /* v1  */ '尼布甲尼撒王對住在全地各方、各國、各族的人說：「願你們大享平安！',
                 /* v2  */ '我樂意宣揚至高上帝向我所行的神蹟奇事。',
