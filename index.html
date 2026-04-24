@@ -336,8 +336,8 @@
             <button class="btn-logout" onclick="doLogout()">登出</button>
         </div>
     </nav>
+
     <div id="dashboard-view" class="dashboard">
-        <!-- UPDATED: Dual progress bars -->
         <div class="progress-card">
             <h2>📊 學習進度</h2>
             <div class="progress-dual">
@@ -356,15 +356,36 @@
                     <div id="prog-stats-quiz" class="progress-stats"></div>
                 </div>
             </div>
+            <div id="reading-progress-row" class="progress-dual" style="margin-top:12px;display:none">
+                <div class="progress-col">
+                    <div class="progress-label">📚 課餘閱讀</div>
+                    <div class="progress-bar-bg">
+                        <div id="prog-bar-reading" class="progress-bar-fill reading-bar" style="width:0%">0%</div>
+                    </div>
+                    <div id="prog-stats-reading" class="progress-stats"></div>
+                </div>
+                <div class="progress-col" style="display:flex;align-items:center">
+                    <div id="reading-badge" style="font-size:14px;color:#888"></div>
+                </div>
+            </div>
         </div>
         <h2 class="section-title">📚 課程列表</h2>
         <div id="lesson-grid" class="lesson-grid"></div>
     </div>
+
+    <!-- ★ 普通課程（經文 + 問題 + 測驗）頁面 -->
     <div id="lesson-view" class="lesson-view" style="display:none">
         <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
         <div id="lv-header" class="lesson-header"></div>
+        <!-- ★ 動態 tabs：由 JS 的 buildLessonTabs() 填入 -->
         <div class="lesson-tabs" id="lv-tabs"></div>
-	<div id="lv-tab-panels"></div>
+        <div id="lv-tab-panels"></div>
+    </div>
+
+    <!-- ★ 歷史 / 閱讀專用容器（已移入 #app 內部） -->
+    <div id="lesson-detail-wrapper" class="lesson-view" style="display:none">
+        <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
+        <div id="lesson-detail"></div>
     </div>
 </div>
 
@@ -379,18 +400,9 @@
 <script src="data/intro.js"></script>
 <script src="data/lesson01.js"></script>
 <script src="data/lesson02.js"></script>
-<script src="data/lesson03.js"></script>
-<script src="data/lesson04.js"></script>
 <script src="data/history.js"></script>
 <script src="data/reading.js"></script>
-
-    
-<!-- 日後加新課只需新增 data/lessonXX.js 並取消下方註解 -->
-<!-- <script src="data/lesson02.js"></script> -->
-<!-- <script src="data/lesson03.js"></script> -->
-<!-- <script src="data/lesson04.js"></script> -->
-<!-- <script src="data/lesson05.js"></script> -->
-<!-- <script src="data/lesson06.js"></script> -->
+<script src="data/lesson03.js"></script>
 <script src="data/stubs.js"></script>
 
 <script type="module">
@@ -399,12 +411,12 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCq-53c29i4TDDJUjL35R6QBSXvwlHkHUI",
-  authDomain: "daniel-bible-study.firebaseapp.com",
-  projectId: "daniel-bible-study",
-  storageBucket: "daniel-bible-study.firebasestorage.app",
-  messagingSenderId: "455825520749",
-  appId: "1:455825520749:web:c1328bcc7ea4b39ff62764"
+    apiKey: "AIzaSyCq-53c29i4TDDJUjL35R6QBSXvwlHkHUI",
+    authDomain: "daniel-bible-study.firebaseapp.com",
+    projectId: "daniel-bible-study",
+    storageBucket: "daniel-bible-study.firebasestorage.app",
+    messagingSenderId: "455825520749",
+    appId: "1:455825520749:web:c1328bcc7ea4b39ff62764"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -430,47 +442,47 @@ function showMsg(id, text, type) {
 }
 
 window.switchAuthTab = function(tab) {
-    document.querySelectorAll('.auth-tab').forEach((t,i) => {
-        t.classList.toggle('active', (tab==='login' ? i===0 : i===1));
+    document.querySelectorAll('.auth-tab').forEach((t, i) => {
+        t.classList.toggle('active', (tab === 'login' ? i === 0 : i === 1));
     });
-    document.getElementById('login-form').style.display = tab==='login' ? 'block' : 'none';
-    document.getElementById('register-form').style.display = tab==='register' ? 'block' : 'none';
+    document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+    document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
 };
 
 window.doLogin = async function() {
     const email = document.getElementById('login-email').value.trim();
     const pw = document.getElementById('login-password').value;
-    if(!email||!pw) return showMsg('login-msg','請填寫電郵和密碼','error');
+    if (!email || !pw) return showMsg('login-msg', '請填寫電郵和密碼', 'error');
     try { await signInWithEmailAndPassword(auth, email, pw); }
-    catch(e) { showMsg('login-msg','登入失敗：'+e.message,'error'); }
+    catch (e) { showMsg('login-msg', '登入失敗：' + e.message, 'error'); }
 };
 
 window.doRegister = async function() {
     const name = document.getElementById('reg-name').value.trim();
     const email = document.getElementById('reg-email').value.trim();
     const pw = document.getElementById('reg-password').value;
-    if(!name||!email||!pw) return showMsg('register-msg','請填寫所有欄位','error');
-    if(pw.length<6) return showMsg('register-msg','密碼需至少6位','error');
+    if (!name || !email || !pw) return showMsg('register-msg', '請填寫所有欄位', 'error');
+    if (pw.length < 6) return showMsg('register-msg', '密碼需至少6位', 'error');
     try {
         const cred = await createUserWithEmailAndPassword(auth, email, pw);
         await updateProfile(cred.user, { displayName: name });
-        await setDoc(doc(db,'users',cred.user.uid), { displayName:name, email:email, progress:{}, highlights:{}, notes:{} });
-    } catch(e) { showMsg('register-msg','註冊失敗：'+e.message,'error'); }
+        await setDoc(doc(db, 'users', cred.user.uid), { displayName: name, email: email, progress: {}, highlights: {}, notes: {} });
+    } catch (e) { showMsg('register-msg', '註冊失敗：' + e.message, 'error'); }
 };
 
 window.doForgotPassword = async function() {
     const email = document.getElementById('login-email').value.trim();
-    if(!email) return showMsg('login-msg','請先填寫電郵地址，再點「忘記密碼」','error');
+    if (!email) return showMsg('login-msg', '請先填寫電郵地址，再點「忘記密碼」', 'error');
     try {
         await sendPasswordResetEmail(auth, email);
-        showMsg('login-msg','重置密碼的電郵已發送到 '+email+'，請檢查收件箱（及垃圾郵件）。','success');
-    } catch(e) { showMsg('login-msg','發送失敗：'+e.message,'error'); }
+        showMsg('login-msg', '重置密碼的電郵已發送到 ' + email + '，請檢查收件箱（及垃圾郵件）。', 'success');
+    } catch (e) { showMsg('login-msg', '發送失敗：' + e.message, 'error'); }
 };
 
 window.doLogout = async function() { await signOut(auth); };
 
 onAuthStateChanged(auth, async (user) => {
-    if(user) {
+    if (user) {
         currentUser = user;
         document.getElementById('auth-screen').style.display = 'none';
         document.getElementById('app').style.display = 'block';
@@ -489,42 +501,41 @@ onAuthStateChanged(auth, async (user) => {
 // ==========================================
 async function loadUserData() {
     try {
-        const snap = await getDoc(doc(db,'users',currentUser.uid));
-        if(snap.exists()) { userData = snap.data(); }
-        else { userData = { displayName:currentUser.displayName, email:currentUser.email, progress:{}, highlights:{}, notes:{} }; await setDoc(doc(db,'users',currentUser.uid), userData); }
-        if(!userData.progress) userData.progress = {};
-        if(!userData.highlights) userData.highlights = {};
-        if(!userData.notes) userData.notes = {};
-    } catch(e) { console.error('Load error:', e); }
+        const snap = await getDoc(doc(db, 'users', currentUser.uid));
+        if (snap.exists()) { userData = snap.data(); }
+        else {
+            userData = { displayName: currentUser.displayName, email: currentUser.email, progress: {}, highlights: {}, notes: {} };
+            await setDoc(doc(db, 'users', currentUser.uid), userData);
+        }
+        if (!userData.progress) userData.progress = {};
+        if (!userData.highlights) userData.highlights = {};
+        if (!userData.notes) userData.notes = {};
+    } catch (e) { console.error('Load error:', e); }
 }
+
 async function saveUserData() {
-    if(!currentUser) return;
-    try { await setDoc(doc(db,'users',currentUser.uid), userData, {merge:true}); }
-    catch(e) { console.error('Save error:', e); }
+    if (!currentUser) return;
+    try { await setDoc(doc(db, 'users', currentUser.uid), userData, { merge: true }); }
+    catch (e) { console.error('Save error:', e); }
 }
 
 // ==========================================
-// DASHBOARD (UPDATED: dual progress)
+// DASHBOARD
 // ==========================================
 function renderDashboard() {
-    const activeLessons = LESSONS.filter(l => !l.comingSoon);
-    const totalRead = activeLessons.length;
+    const activeLessons = LESSONS.filter(l => !l.comingSoon && !l.isHistory && !l.isReading);
     const quizzableLessons = activeLessons.filter(l => l.quiz && l.quiz.length > 0);
+    const totalRead = activeLessons.length;
     const totalQuiz = quizzableLessons.length;
 
     let doneRead = 0, doneQuiz = 0, totalScore = 0;
-
     activeLessons.forEach(l => {
         const p = userData.progress[l.id];
-        if(p && p.scriptureRead) doneRead++;
+        if (p && p.scriptureRead) doneRead++;
     });
-
     quizzableLessons.forEach(l => {
         const p = userData.progress[l.id];
-        if(p && p.quizScore != null) {
-            doneQuiz++;
-            totalScore += p.quizScore;
-        }
+        if (p && p.quizScore != null) { doneQuiz++; totalScore += p.quizScore; }
     });
 
     const pctRead = totalRead > 0 ? Math.round(doneRead / totalRead * 100) : 0;
@@ -537,15 +548,42 @@ function renderDashboard() {
 
     document.getElementById('prog-bar-quiz').style.width = pctQuiz + '%';
     document.getElementById('prog-bar-quiz').textContent = pctQuiz + '%';
-    if(totalQuiz > 0) {
+    if (totalQuiz > 0) {
         let quizStats = '已完成 ' + doneQuiz + ' / ' + totalQuiz + ' 課';
-        if(doneQuiz > 0) quizStats += '　|　平均分數 ' + avgScore + '%';
+        if (doneQuiz > 0) quizStats += '　|　平均分數 ' + avgScore + '%';
         document.getElementById('prog-stats-quiz').textContent = quizStats;
     } else {
         document.getElementById('prog-stats-quiz').textContent = '暫無測驗';
     }
 
-    // Render lesson cards
+    // ── 課餘閱讀進度 ──
+    const readingLessons = LESSONS.filter(l => !l.comingSoon && l.isReading);
+    const readingRow = document.getElementById('reading-progress-row');
+
+    if (readingLessons.length > 0) {
+        let totalRL = 0, doneRL = 0;
+        readingLessons.forEach(l => {
+            const artCount = (l.articles && l.articles.length) ? l.articles.length : 0;
+            totalRL += artCount;
+            const p = userData.progress[l.id];
+            if (p && p.articlesRead && l.articles) {
+                l.articles.forEach(art => { if (p.articlesRead[art.id]) doneRL++; });
+            }
+        });
+        if (totalRL > 0) {
+            const pctRL = Math.round(doneRL / totalRL * 100);
+            readingRow.style.display = 'flex';
+            document.getElementById('prog-bar-reading').style.width = pctRL + '%';
+            document.getElementById('prog-bar-reading').textContent = pctRL + '%';
+            document.getElementById('prog-stats-reading').textContent = '已閱讀 ' + doneRL + ' / ' + totalRL + ' 篇';
+            const badge = document.getElementById('reading-badge');
+            if (doneRL === 0) { badge.textContent = '📖 開始你的課餘閱讀之旅吧！'; badge.style.color = '#888'; }
+            else if (doneRL < totalRL) { badge.textContent = '⭐ 好學不倦！繼續加油！'; badge.style.color = '#ff8f00'; }
+            else { badge.textContent = '🏆 全部完成！你是閱讀達人！'; badge.style.color = '#e65100'; }
+        } else { readingRow.style.display = 'none'; }
+    } else { readingRow.style.display = 'none'; }
+
+    // ── Lesson cards ──
     const grid = document.getElementById('lesson-grid');
     grid.innerHTML = '';
     LESSONS.forEach(l => {
@@ -557,28 +595,22 @@ function renderDashboard() {
 
         const card = document.createElement('div');
         let cardClass = 'lesson-card';
-        if(isCompleted && !l.comingSoon) cardClass += ' completed';
-        if(l.comingSoon) cardClass += ' coming-soon';
-        if(l.isSelfStudy) cardClass += ' self-study';
+        if (isCompleted && !l.comingSoon) cardClass += ' completed';
+        if (l.comingSoon) cardClass += ' coming-soon';
+        if (l.isSelfStudy) cardClass += ' self-study';
         card.className = cardClass;
 
         let statusHtml = '<div class="lesson-status">';
-        if(l.comingSoon) {
+        if (l.comingSoon) {
             statusHtml += '<span class="badge badge-locked">🔒 即將推出</span>';
         } else {
-            // Reading status
-            if(isRead) {
-                statusHtml += '<span class="badge badge-read">✅ 已讀</span>';
-            } else {
-                statusHtml += '<span class="badge badge-unread">📖 未讀</span>';
-            }
-            // Quiz status
-            if(hasQuiz) {
-                if(quizDone) {
-                    statusHtml += '<span class="badge badge-score">📝 測驗 ' + p.quizScore + '%</span>';
-                } else {
-                    statusHtml += '<span class="badge badge-noquiz">📝 未測驗</span>';
-                }
+            statusHtml += isRead
+                ? '<span class="badge badge-read">✅ 已讀</span>'
+                : '<span class="badge badge-unread">📖 未讀</span>';
+            if (hasQuiz) {
+                statusHtml += quizDone
+                    ? '<span class="badge badge-score">📝 測驗 ' + p.quizScore + '%</span>'
+                    : '<span class="badge badge-noquiz">📝 未測驗</span>';
             }
         }
         statusHtml += '</div>';
@@ -591,51 +623,43 @@ function renderDashboard() {
             + '<div class="desc">' + l.description + '</div>'
             + statusHtml;
 
-        if(!l.comingSoon) card.onclick = () => openLesson(l.id);
+        if (!l.comingSoon) card.onclick = () => openLesson(l.id);
         grid.appendChild(card);
     });
 }
+
 // ==========================================
-// BUILD DYNAMIC TABS (★ NEW)
+// BUILD DYNAMIC TABS
 // ==========================================
 function buildLessonTabs(lesson) {
     const tabsBar = document.getElementById('lv-tabs');
     const panelsContainer = document.getElementById('lv-tab-panels');
-
-    // 清除上一課殘留的 panel
     panelsContainer.innerHTML = '';
     activeLessonTabIds = [];
 
     let tabs = [];
     const hasChapters = lesson.chapters && lesson.chapters.length > 0;
 
-    // ── 經文 tab(s) ──
     if (lesson.isIntro) {
         tabs.push({ id: 'scripture', label: '📖 課程內容' });
     } else if (hasChapters) {
-        // 每章一個獨立 tab
         lesson.chapters.forEach(ch => {
             tabs.push({
                 id: 'scripture-ch' + ch.chapter,
-                label: ch.tabLabel || ('📖 經文　第' + ch.chapter + '章')
+                label: ch.tabLabel || ('📖 第' + ch.chapter + '章')
             });
         });
     } else {
         tabs.push({ id: 'scripture', label: '📖 經文' });
     }
 
-    // ── 討論問題 tab ──
     tabs.push({ id: 'questions', label: '✏️ 討論問題' });
-
-    // ── 測驗 tab ──
     tabs.push({ id: 'quiz', label: '📝 測驗' });
 
-    // 產生 tab 列
     tabsBar.innerHTML = tabs.map((t, i) =>
         '<div class="lesson-tab' + (i === 0 ? ' active' : '') + '" data-tab="' + t.id + '">' + t.label + '</div>'
     ).join('');
 
-    // 產生對應的內容容器
     tabs.forEach((t, i) => {
         const div = document.createElement('div');
         div.id = 'tab-' + t.id;
@@ -645,15 +669,16 @@ function buildLessonTabs(lesson) {
 
     activeLessonTabIds = tabs.map(t => t.id);
 }
+
 // ==========================================
 // LESSON VIEW
 // ==========================================
 function openLesson(id) {
     currentLessonId = id;
     const lesson = LESSONS.find(l => l.id === id);
-    if(!lesson || lesson.comingSoon) return;
+    if (!lesson || lesson.comingSoon) return;
 
-    // === 歷史 / 閱讀特殊頁面 ===
+    // ── 歷史 / 閱讀 → 專屬容器 ──
     if (lesson.isHistory || lesson.isReading) {
         document.getElementById('dashboard-view').style.display = 'none';
         document.getElementById('lesson-view').style.display = 'none';
@@ -663,22 +688,20 @@ function openLesson(id) {
         return;
     }
 
+    // ── 一般課程 ──
     document.getElementById('dashboard-view').style.display = 'none';
+    document.getElementById('lesson-detail-wrapper').style.display = 'none';
     document.getElementById('lesson-view').style.display = 'block';
     document.getElementById('lv-header').innerHTML =
         '<h1>' + lesson.title + '：' + lesson.subtitle + '</h1>'
         + '<p>' + lesson.ref + ' — ' + lesson.description + '</p>';
 
-    // ★ 動態建立 tabs
     buildLessonTabs(lesson);
 
-    // ★ 依課程類型渲染經文
     const hasChapters = lesson.chapters && lesson.chapters.length > 0;
-
     if (lesson.isIntro) {
         renderIntroContent(lesson);
     } else if (hasChapters) {
-        // 多章：每章渲染到獨立 tab
         lesson.chapters.forEach((ch, idx) => {
             renderScriptureChapter(lesson, ch, idx);
         });
@@ -689,15 +712,14 @@ function openLesson(id) {
     renderQuestions(lesson);
     renderQuiz(lesson);
 
-    // 預設顯示第一個 tab
     if (activeLessonTabIds.length > 0) {
         showLessonTab(activeLessonTabIds[0]);
     }
 }
 
-
 window.goBack = function() {
     document.getElementById('lesson-view').style.display = 'none';
+    document.getElementById('lesson-detail-wrapper').style.display = 'none';
     document.getElementById('dashboard-view').style.display = 'block';
     currentLessonId = null;
     renderDashboard();
@@ -705,7 +727,7 @@ window.goBack = function() {
 
 document.getElementById('lv-tabs').addEventListener('click', (e) => {
     const tab = e.target.dataset?.tab;
-    if(tab) showLessonTab(tab);
+    if (tab) showLessonTab(tab);
 });
 
 function showLessonTab(tabId) {
@@ -724,6 +746,7 @@ function showLessonTab(tabId) {
 // ==========================================
 function renderIntroContent(lesson) {
     const container = document.getElementById('tab-scripture');
+    if (!container) return;
     const isRead = userData.progress[lesson.id]?.scriptureRead;
 
     let html = '<div class="intro-content">';
@@ -748,35 +771,25 @@ function renderIntroContent(lesson) {
 }
 
 window.toggleIntroSection = function(i) {
-    const body = document.getElementById('isec-'+i);
-    const arrow = document.getElementById('arrow-'+i);
-    if(body && arrow) {
-        body.classList.toggle('open');
-        arrow.classList.toggle('open');
-    }
+    const body = document.getElementById('isec-' + i);
+    const arrow = document.getElementById('arrow-' + i);
+    if (body && arrow) { body.classList.toggle('open'); arrow.classList.toggle('open'); }
 };
+
 window.toggleStudySection = function(i) {
-    const body = document.getElementById('ssec-'+i);
-    const arrow = document.getElementById('sarrow-'+i);
-    if(body && arrow) {
-        body.classList.toggle('open');
-        arrow.classList.toggle('open');
-    }
+    const body = document.getElementById('ssec-' + i);
+    const arrow = document.getElementById('sarrow-' + i);
+    if (body && arrow) { body.classList.toggle('open'); arrow.classList.toggle('open'); }
 };
+
 window.toggleStudyGuide = function(i) {
     const body = document.getElementById('sg-body-' + i);
     const arrow = document.getElementById('sg-arrow-' + i);
-    if (body && arrow) {
-        body.classList.toggle('open');
-        arrow.classList.toggle('open');
-    }
+    if (body && arrow) { body.classList.toggle('open'); arrow.classList.toggle('open'); }
 };
 
 // ==========================================
-// SCRIPTURE TAB
-// ==========================================
-// ==========================================
-// SCRIPTURE — 多章模式：每章獨立 tab (★ NEW)
+// SCRIPTURE — 多章模式：每章獨立 tab
 // ==========================================
 function renderScriptureChapter(lesson, ch, chapterIndex) {
     const container = document.getElementById('tab-scripture-ch' + ch.chapter);
@@ -786,10 +799,9 @@ function renderScriptureChapter(lesson, ch, chapterIndex) {
     const isRead = userData.progress[lesson.id]?.scriptureRead;
 
     let html = '<div class="scripture-box">';
-    html += '<h2>📖 ' + (ch.title || '') + '</h2>';
+    html += '<h2>📖 ' + (ch.title || ('但以理書 第' + ch.chapter + '章')) + '</h2>';
     html += '<div class="sub">' + (ch.subtitle || ('和合本修訂版 (RCUV) — 但以理書 第' + ch.chapter + '章')) + '</div>';
 
-    // ── 閱讀指南（如有）──
     if (lesson.studyGuide && lesson.studyGuide[chapterIndex]) {
         const sg = lesson.studyGuide[chapterIndex];
         html += '<div class="intro-section" style="margin-bottom:16px">'
@@ -798,11 +810,10 @@ function renderScriptureChapter(lesson, ch, chapterIndex) {
             + '<span class="arrow" id="sg-arrow-' + chapterIndex + '">▼</span>'
             + '</div>'
             + '<div class="intro-section-body" id="sg-body-' + chapterIndex + '">'
-            + '<ul>' + sg.points.map(p => '<li>' + p + '</li>').join('') + '</ul>'
+            + '<ul>' + sg.points.map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ul>'
             + '</div></div>';
     }
 
-    // ── 螢光筆圖例 ──
     html += '<div class="hl-legend">'
         + '<b>螢光筆：</b>'
         + '<span><span class="hl-dot" style="background:#fff9c4;border:1px solid #f9a825"></span> 重要</span>'
@@ -811,25 +822,20 @@ function renderScriptureChapter(lesson, ch, chapterIndex) {
         + '<span style="color:#999;font-size:12px">（點擊經文即可標記）</span>'
         + '</div>';
 
-    // ── 經文 ──
     ch.verses.forEach((v, i) => {
         const vnum = i + 1;
-        // ★ 關鍵修復：key 用 "章:節"，例如 "3:1", "4:12"
         const key = ch.chapter + ':' + vnum;
         const hlClass = highlights[key] ? ' hl-' + highlights[key] : '';
         html += '<span class="verse' + hlClass + '" data-v="' + key + '">'
             + '<sup>' + vnum + '</sup>' + v + '</span>';
     });
 
-    // ── 標記已讀按鈕 ──
     html += '<button class="btn-mark-read btn-mark-read-multi' + (isRead ? ' done' : '') + '" '
         + 'onclick="markRead()">'
         + (isRead ? '✅ 已完成閱讀' : '📖 標記已完成閱讀') + '</button>';
-
     html += '</div>';
     container.innerHTML = html;
 
-    // ── 螢光筆點擊事件 ──
     container.querySelectorAll('.verse').forEach(el => {
         el.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -843,18 +849,16 @@ function renderScriptureChapter(lesson, ch, chapterIndex) {
         });
     });
 }
+
 // ==========================================
-// SCRIPTURE — 單章模式（lesson01, lesson02 等）
+// SCRIPTURE — 單章模式
 // ==========================================
 function renderScripture(lesson) {
     const container = document.getElementById('tab-scripture');
     if (!container) return;
 
     if (!lesson.verses || lesson.verses.length === 0) {
-        container.innerHTML = '<div class="coming-soon">'
-            + '<div class="icon">📖</div>'
-            + '<h3>經文內容準備中</h3>'
-            + '<p>請稍候，內容即將更新。</p></div>';
+        container.innerHTML = '<div class="coming-soon"><div class="icon">📖</div><h3>經文內容準備中</h3><p>請稍候，內容即將更新。</p></div>';
         return;
     }
 
@@ -879,8 +883,7 @@ function renderScripture(lesson) {
             + '<sup>' + vnum + '</sup>' + v + '</span>';
     });
 
-    html += '<button class="btn-mark-read' + (isRead ? ' done' : '') + '" '
-        + 'onclick="markRead()" id="btn-read">'
+    html += '<button class="btn-mark-read' + (isRead ? ' done' : '') + '" onclick="markRead()" id="btn-read">'
         + (isRead ? '✅ 已完成閱讀' : '📖 標記已完成閱讀') + '</button>';
     html += '</div>';
     container.innerHTML = html;
@@ -899,24 +902,18 @@ function renderScripture(lesson) {
     });
 }
 
-// ── 保持原有嘅全域 click listener ──
+// ── Highlight ──
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.verse') && !e.target.closest('.hl-popup')) {
         document.getElementById('hl-popup').style.display = 'none';
     }
 });
 
-// ── 更新 setHL：支援 "章:節" key ──
 window.setHL = async function(color) {
     if (!currentLessonId || hlVerse == null) return;
     if (!userData.highlights[currentLessonId]) userData.highlights[currentLessonId] = {};
-
-    if (color) {
-        userData.highlights[currentLessonId][hlVerse] = color;
-    } else {
-        delete userData.highlights[currentLessonId][hlVerse];
-    }
-
+    if (color) { userData.highlights[currentLessonId][hlVerse] = color; }
+    else { delete userData.highlights[currentLessonId][hlVerse]; }
     const el = document.querySelector('.verse[data-v="' + hlVerse + '"]');
     if (el) {
         el.classList.remove('hl-yellow', 'hl-blue', 'hl-green');
@@ -926,23 +923,16 @@ window.setHL = async function(color) {
     await saveUserData();
 };
 
-// ── markRead 保持不變 ──
 window.markRead = async function() {
     if (!currentLessonId) return;
     if (!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
     userData.progress[currentLessonId].scriptureRead = true;
 
-    // ★ 更新單章按鈕
     const btn = document.getElementById('btn-read');
-    if (btn) {
-        btn.textContent = '✅ 已完成閱讀';
-        btn.classList.add('done');
-    }
+    if (btn) { btn.textContent = '✅ 已完成閱讀'; btn.classList.add('done'); }
 
-    // ★ 更新多章按鈕（所有 tab 裡的按鈕同步）
     document.querySelectorAll('.btn-mark-read-multi').forEach(b => {
-        b.textContent = '✅ 已完成閱讀';
-        b.classList.add('done');
+        b.textContent = '✅ 已完成閱讀'; b.classList.add('done');
     });
 
     const lesson = LESSONS.find(l => l.id === currentLessonId);
@@ -959,16 +949,16 @@ window.markRead = async function() {
 // ==========================================
 function renderQuestions(lesson) {
     const container = document.getElementById('tab-questions');
+    if (!container) return;
 
-    if(!lesson.questions && !lesson.studyContent) {
+    if (!lesson.questions && !lesson.studyContent) {
         container.innerHTML = '<div class="coming-soon"><div class="icon">✏️</div><h3>討論問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
         return;
     }
 
     let html = '';
 
-    // ── 課文釋義（可收合段落）──
-    if(lesson.studyContent && lesson.studyContent.length > 0) {
+    if (lesson.studyContent && lesson.studyContent.length > 0) {
         html += '<div class="intro-content" style="margin-bottom:20px;">';
         html += '<h2 style="color:#1a237e;margin-bottom:4px;">📖 課文釋義</h2>';
         html += '<p style="color:#888;font-size:13px;margin-bottom:20px;">點擊各標題可展開／收合內容</p>';
@@ -985,8 +975,7 @@ function renderQuestions(lesson) {
         html += '</div>';
     }
 
-    // ── 討論問題 ──
-    if(!lesson.questions) {
+    if (!lesson.questions) {
         html += '<div class="coming-soon"><div class="icon">✏️</div><h3>討論問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
         container.innerHTML = html;
         return;
@@ -994,20 +983,20 @@ function renderQuestions(lesson) {
 
     const notes = (userData.notes && userData.notes[lesson.id]) || {};
     const sections = [
-        { key:'observation', title:'一、觀察與整理', cls:'', icon:'🔍' },
-        { key:'interpretation', title:'二、解釋與深入討論', cls:'reflection', icon:'💡' },
-        { key:'application', title:'三、生活應用與反思', cls:'sharing', icon:'❤️' }
+        { key: 'observation', title: '一、觀察與整理', cls: '', icon: '🔍' },
+        { key: 'interpretation', title: '二、解釋與深入討論', cls: 'reflection', icon: '💡' },
+        { key: 'application', title: '三、生活應用與反思', cls: 'sharing', icon: '❤️' }
     ];
 
     html += '<div class="questions-box">';
     sections.forEach(sec => {
         const qs = lesson.questions[sec.key];
-        if(!qs || qs.length === 0) return;
+        if (!qs || qs.length === 0) return;
         html += '<div class="q-section ' + sec.cls + '"><h3>' + sec.icon + ' ' + sec.title + '</h3>';
         qs.forEach((q, i) => {
             const saved = notes[q.id] || '';
             html += '<div class="q-item ' + sec.cls + '">'
-                + '<div class="q-text">' + (i+1) + '. ' + q.text + '</div>'
+                + '<div class="q-text">' + (i + 1) + '. ' + q.text + '</div>'
                 + (q.hint ? '<div class="q-hint">' + q.hint + '</div>' : '')
                 + '<textarea data-qid="' + q.id + '" placeholder="在此寫下你的想法和筆記...">' + saved + '</textarea>'
                 + '<div class="save-ind" id="save-' + q.id + '">✓ 已儲存</div>'
@@ -1019,30 +1008,29 @@ function renderQuestions(lesson) {
     html += '</div>';
     container.innerHTML = html;
 
-    // Auto-save notes
     let saveTimers = {};
     container.querySelectorAll('textarea').forEach(ta => {
         ta.addEventListener('input', () => {
             const qid = ta.dataset.qid;
             clearTimeout(saveTimers[qid]);
             saveTimers[qid] = setTimeout(async () => {
-                if(!userData.notes[lesson.id]) userData.notes[lesson.id] = {};
+                if (!userData.notes[lesson.id]) userData.notes[lesson.id] = {};
                 userData.notes[lesson.id][qid] = ta.value;
                 await saveUserData();
-                const ind = document.getElementById('save-'+qid);
-                if(ind) { ind.classList.add('show'); setTimeout(()=>ind.classList.remove('show'), 2000); }
+                const ind = document.getElementById('save-' + qid);
+                if (ind) { ind.classList.add('show'); setTimeout(() => ind.classList.remove('show'), 2000); }
             }, 1200);
         });
     });
 }
 
 window.toggleRef = function(qid) {
-    const el = document.getElementById('ref-'+qid);
-    if(el) el.classList.toggle('show');
+    const el = document.getElementById('ref-' + qid);
+    if (el) el.classList.toggle('show');
 };
 
 // ==========================================
-// QUIZ TAB (UPDATED: mc / fill / match)
+// QUIZ TAB
 // ==========================================
 let quizAnswers = {};
 let quizSubmitted = false;
@@ -1053,28 +1041,30 @@ function renderQuiz(lesson) {
     quizSubmitted = false;
     matchShuffleCache = {};
     const container = document.getElementById('tab-quiz');
-    if(!lesson.quiz || lesson.quiz.length === 0) {
+    if (!container) return;
+
+    if (!lesson.quiz || lesson.quiz.length === 0) {
         container.innerHTML = '<div class="coming-soon"><div class="icon">📝</div><h3>測驗準備中</h3><p>請稍候，測驗即將更新。</p></div>';
         return;
     }
     const prevScore = userData.progress[lesson.id]?.quizScore;
     let html = '<div class="quiz-box"><h2>📝 課後測驗</h2>';
-    if(prevScore != null) html += '<p style="color:#43a047;margin:8px 0">上次成績：' + prevScore + '%</p>';
+    if (prevScore != null) html += '<p style="color:#43a047;margin:8px 0">上次成績：' + prevScore + '%</p>';
     html += '<p style="color:#888;font-size:13px;margin-bottom:16px">請回答以下問題（包含選擇、填充及配對題）：</p>';
 
     lesson.quiz.forEach((q, qi) => {
         const qType = q.type || 'mc';
-        html += '<div class="quiz-q" id="qq-' + qi + '"><h4>' + (qi+1) + '. ' + q.q + '</h4>';
+        html += '<div class="quiz-q" id="qq-' + qi + '"><h4>' + (qi + 1) + '. ' + q.q + '</h4>';
 
-        if(qType === 'mc') {
+        if (qType === 'mc') {
             q.opts.forEach((opt, oi) => {
-                html += '<label class="quiz-opt" data-qi="' + qi + '" data-oi="' + oi + '" onclick="pickQuiz(' + qi + ',' + oi + ')">' + String.fromCharCode(65+oi) + '. ' + opt + '</label>';
+                html += '<label class="quiz-opt" data-qi="' + qi + '" data-oi="' + oi + '" onclick="pickQuiz(' + qi + ',' + oi + ')">' + String.fromCharCode(65 + oi) + '. ' + opt + '</label>';
             });
-        } else if(qType === 'fill') {
+        } else if (qType === 'fill') {
             html += '<input type="text" class="fill-input" data-qi="' + qi + '" placeholder="請填寫答案…">';
-        } else if(qType === 'match') {
+        } else if (qType === 'match') {
             const shuffled = q.pairs.map((p, i) => ({ text: p.right, idx: i }));
-            for(let i = shuffled.length - 1; i > 0; i--) {
+            for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
@@ -1087,12 +1077,10 @@ function renderQuiz(lesson) {
                     + '<select class="match-select" data-qi="' + qi + '" data-mi="' + mi + '">'
                     + '<option value="">請選擇…</option>'
                     + shuffled.map(s => '<option value="' + s.idx + '">' + s.text + '</option>').join('')
-                    + '</select>'
-                    + '</div>';
+                    + '</select></div>';
             });
             html += '</div>';
         }
-
         html += '</div>';
     });
 
@@ -1102,7 +1090,7 @@ function renderQuiz(lesson) {
 }
 
 window.pickQuiz = function(qi, oi) {
-    if(quizSubmitted) return;
+    if (quizSubmitted) return;
     quizAnswers[qi] = oi;
     document.querySelectorAll('[data-qi="' + qi + '"].quiz-opt').forEach(el => {
         el.classList.toggle('selected', parseInt(el.dataset.oi) === oi);
@@ -1110,29 +1098,28 @@ window.pickQuiz = function(qi, oi) {
 };
 
 window.submitQuiz = async function() {
-    if(quizSubmitted) return;
+    if (quizSubmitted) return;
     const lesson = LESSONS.find(l => l.id === currentLessonId);
-    if(!lesson) return;
+    if (!lesson) return;
     const total = lesson.quiz.length;
 
-    // Check all answered
     let allAnswered = true;
     lesson.quiz.forEach((q, qi) => {
         const qType = q.type || 'mc';
-        if(qType === 'mc') {
-            if(quizAnswers[qi] === undefined) allAnswered = false;
-        } else if(qType === 'fill') {
+        if (qType === 'mc') {
+            if (quizAnswers[qi] === undefined) allAnswered = false;
+        } else if (qType === 'fill') {
             const input = document.querySelector('.fill-input[data-qi="' + qi + '"]');
-            if(!input || !input.value.trim()) allAnswered = false;
-        } else if(qType === 'match') {
+            if (!input || !input.value.trim()) allAnswered = false;
+        } else if (qType === 'match') {
             q.pairs.forEach((_, mi) => {
                 const sel = document.querySelector('select[data-qi="' + qi + '"][data-mi="' + mi + '"]');
-                if(!sel || !sel.value) allAnswered = false;
+                if (!sel || !sel.value) allAnswered = false;
             });
         }
     });
 
-    if(!allAnswered) {
+    if (!allAnswered) {
         const result = document.getElementById('quiz-result');
         result.style.display = 'block';
         result.className = 'quiz-result fail';
@@ -1146,41 +1133,40 @@ window.submitQuiz = async function() {
 
     lesson.quiz.forEach((q, qi) => {
         const qType = q.type || 'mc';
-
-        if(qType === 'mc') {
+        if (qType === 'mc') {
             const picked = quizAnswers[qi];
             const isCorrect = picked === q.ans;
-            if(isCorrect) correct++;
+            if (isCorrect) correct++;
             document.querySelectorAll('[data-qi="' + qi + '"].quiz-opt').forEach(el => {
                 const oi = parseInt(el.dataset.oi);
-                if(oi === q.ans) el.classList.add('correct');
-                else if(oi === picked && !isCorrect) el.classList.add('wrong');
+                if (oi === q.ans) el.classList.add('correct');
+                else if (oi === picked && !isCorrect) el.classList.add('wrong');
             });
-        } else if(qType === 'fill') {
+        } else if (qType === 'fill') {
             const input = document.querySelector('.fill-input[data-qi="' + qi + '"]');
             const userAns = input.value.trim();
             const accepts = q.accept || [q.ans];
             const isCorrect = accepts.some(a => a.trim().toLowerCase() === userAns.toLowerCase());
-            if(isCorrect) correct++;
+            if (isCorrect) correct++;
             input.classList.add(isCorrect ? 'correct' : 'wrong');
             input.readOnly = true;
-            if(!isCorrect) {
+            if (!isCorrect) {
                 const hint = document.createElement('div');
                 hint.className = 'fill-correct-ans';
                 hint.textContent = '✅ 正確答案：' + q.ans;
                 input.parentElement.appendChild(hint);
             }
-        } else if(qType === 'match') {
+        } else if (qType === 'match') {
             let allCorrect = true;
             q.pairs.forEach((pair, mi) => {
                 const sel = document.querySelector('select[data-qi="' + qi + '"][data-mi="' + mi + '"]');
                 const isCorrect = parseInt(sel.value) === mi;
-                if(!isCorrect) allCorrect = false;
+                if (!isCorrect) allCorrect = false;
                 sel.classList.add(isCorrect ? 'correct' : 'wrong');
                 sel.disabled = true;
             });
-            if(allCorrect) correct++;
-            if(!allCorrect) {
+            if (allCorrect) correct++;
+            if (!allCorrect) {
                 const grid = document.querySelector('#qq-' + qi + ' .match-grid');
                 const hint = document.createElement('div');
                 hint.className = 'fill-correct-ans';
@@ -1198,42 +1184,39 @@ window.submitQuiz = async function() {
     result.textContent = '你的分數：' + score + '%（' + correct + '/' + total + '）' + (score >= 60 ? ' 🎉' : ' — 請再加油！');
     document.getElementById('btn-submit-quiz').disabled = true;
 
-    if(!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
+    if (!userData.progress[currentLessonId]) userData.progress[currentLessonId] = {};
     userData.progress[currentLessonId].quizScore = score;
-    // Check if lesson is now fully completed (reading + quiz)
-    if(userData.progress[currentLessonId].scriptureRead) {
+    if (userData.progress[currentLessonId].scriptureRead) {
         userData.progress[currentLessonId].completed = true;
         userData.progress[currentLessonId].completedAt = new Date().toISOString();
     }
     await saveUserData();
 };
 
-/* ═══════════════════════════════
-   HISTORY — 時間線渲染
-   ═══════════════════════════════ */
+// ==========================================
+// HISTORY — 時間線渲染
+// ==========================================
 function renderHistory(lesson) {
-    const c = document.getElementById('lesson-detail');
-    let h = '<div class="history-page">';
+    var c = document.getElementById('lesson-detail');
+    var h = '<div class="history-page">';
     h += '<h1>🗺️ ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
 
-    /* ── Prophet Activity Chart ── */
     var minY = 700, maxY = 530, range = minY - maxY;
     h += '<div class="prophet-chart"><h3>📊 同時期先知的事奉年期</h3>';
     h += '<div class="prophet-year-axis"><span>主前 700</span><span>650</span><span>600</span><span>550</span></div>';
-    lesson.prophets.forEach(function(p){
+    lesson.prophets.forEach(function(p) {
         var left = ((minY - p.start) / range * 100);
         var width = ((p.start - p.end) / range * 100);
         h += '<div class="prophet-bar-row">'
-           + '<span class="prophet-bar-name">' + p.name + '</span>'
-           + '<div class="prophet-bar-track">'
-           + '<div class="prophet-bar' + (p.highlight ? ' hl' : '') + '" style="left:' + left + '%;width:' + Math.max(width, 2) + '%;">'
-           + p.start + '–' + p.end
-           + '</div></div></div>';
+            + '<span class="prophet-bar-name">' + p.name + '</span>'
+            + '<div class="prophet-bar-track">'
+            + '<div class="prophet-bar' + (p.highlight ? ' hl' : '') + '" style="left:' + left + '%;width:' + Math.max(width, 2) + '%;">'
+            + p.start + '–' + p.end
+            + '</div></div></div>';
     });
     h += '</div>';
 
-    /* ── Legend ── */
     h += '<div class="timeline-legend">';
     var cats = lesson.categories;
     for (var k in cats) {
@@ -1241,26 +1224,25 @@ function renderHistory(lesson) {
     }
     h += '</div>';
 
-    /* ── Timeline ── */
     h += '<div class="timeline-container">';
-    lesson.events.forEach(function(ev, i){
+    lesson.events.forEach(function(ev, i) {
         var cat = cats[ev.category];
         var dateStr = '主前 ' + ev.year + ' 年' + (ev.endYear ? ' – ' + ev.endYear + ' 年' : '');
         h += '<div class="timeline-event" id="tev-' + i + '" onclick="toggleTLEvent(' + i + ')">'
-           + '<div class="timeline-dot" style="background:' + cat.color + '"></div>'
-           + '<div class="timeline-date">' + dateStr + '</div>'
-           + '<div class="timeline-card" style="border-left-color:' + cat.color + '">'
-           + '<div class="timeline-card-header">'
-           + '<span class="category-badge" style="background:' + cat.bg + ';color:' + cat.color + '">' + cat.icon + ' ' + cat.label + '</span>'
-           + '<div><h4>' + ev.title + '</h4>'
-           + (ev.titleEn ? '<span class="timeline-title-en">' + ev.titleEn + '</span>' : '')
-           + '</div></div>'
-           + '<p class="timeline-desc">' + ev.description + '</p>'
-           + '<div class="timeline-detail">';
+            + '<div class="timeline-dot" style="background:' + cat.color + '"></div>'
+            + '<div class="timeline-date">' + dateStr + '</div>'
+            + '<div class="timeline-card" style="border-left-color:' + cat.color + '">'
+            + '<div class="timeline-card-header">'
+            + '<span class="category-badge" style="background:' + cat.bg + ';color:' + cat.color + '">' + cat.icon + ' ' + cat.label + '</span>'
+            + '<div><h4>' + ev.title + '</h4>'
+            + (ev.titleEn ? '<span class="timeline-title-en">' + ev.titleEn + '</span>' : '')
+            + '</div></div>'
+            + '<p class="timeline-desc">' + ev.description + '</p>'
+            + '<div class="timeline-detail">';
 
         if (ev.keyFigures && ev.keyFigures.length) {
             h += '<div class="timeline-figures"><strong>👤 重要人物：</strong>';
-            ev.keyFigures.forEach(function(f){ h += '<span class="figure-tag">' + f + '</span>'; });
+            ev.keyFigures.forEach(function(f) { h += '<span class="figure-tag">' + f + '</span>'; });
             h += '</div>';
         }
         if (ev.references && ev.references.length) {
@@ -1270,17 +1252,17 @@ function renderHistory(lesson) {
             h += '<div class="timeline-detail-text">' + ev.detail + '</div>';
         }
         if (ev.image) {
-            h += '<div class="timeline-image"><img src="' + ev.image.src + '" alt="' + (ev.image.caption||'') + '">'
-               + (ev.image.caption ? '<span class="img-caption">' + ev.image.caption + '</span>' : '')
-               + '</div>';
+            h += '<div class="timeline-image"><img src="' + ev.image.src + '" alt="' + (ev.image.caption || '') + '">'
+                + (ev.image.caption ? '<span class="img-caption">' + ev.image.caption + '</span>' : '')
+                + '</div>';
         }
 
-        h += '</div>'  // .timeline-detail
-           + '<span class="expand-hint">▾ 點擊展開詳情</span>'
-           + '</div></div>';  // .timeline-card, .timeline-event
+        h += '</div>'
+            + '<span class="expand-hint">▾ 點擊展開詳情</span>'
+            + '</div></div>';
     });
-    h += '</div>';  // .timeline-container
-    h += '</div>';  // .history-page
+    h += '</div>';
+    h += '</div>';
     c.innerHTML = h;
 }
 
@@ -1289,10 +1271,9 @@ window.toggleTLEvent = function(i) {
     if (el) el.classList.toggle('active');
 };
 
-
-/* ═══════════════════════════════
-   READING — 課餘閱讀渲染
-   ═══════════════════════════════ */
+// ==========================================
+// READING — 課餘閱讀渲染
+// ==========================================
 function renderReading(lesson) {
     var c = document.getElementById('lesson-detail');
     var bib = lesson.bibliography;
@@ -1300,74 +1281,91 @@ function renderReading(lesson) {
     h += '<h1>📚 ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
 
-    /* ── Articles ── */
     lesson.articles.forEach(function(art, ai) {
+        var artRead = userData.progress[lesson.id]
+            && userData.progress[lesson.id].articlesRead
+            && userData.progress[lesson.id].articlesRead[art.id];
+
         h += '<div class="reading-article" id="art-' + art.id + '">';
-        h += '<div class="article-cat">' + art.categoryLabel + '</div>';
-        h += '<div class="article-lesson">📖 ' + art.lessonRef + '</div>';
-        h += '<h3>' + art.icon + ' ' + art.title + '</h3>';
+
+        h += '<div class="article-header-bar" onclick="toggleArticle(\'' + art.id + '\')">';
+        h += '<div>'
+            + '<div class="article-cat">' + art.categoryLabel + '</div>'
+            + '<div class="article-lesson">📖 ' + art.lessonRef + '</div>'
+            + '<h3 style="margin:0">' + art.icon + ' ' + art.title
+            + (artRead ? '<span class="article-status-hint" style="color:#43a047">✅ 已讀</span>' : '<span class="article-status-hint" style="color:#999">📖 未讀</span>')
+            + '</h3>'
+            + '</div>';
+        h += '<span class="arrow" id="art-arrow-' + art.id + '">▼</span>';
+        h += '</div>';
+
+        h += '<div class="article-body-wrap" id="art-body-' + art.id + '">';
         h += '<div class="article-body">' + art.html + '</div>';
 
-        /* inline footnote popups (hidden by default) */
         if (art.footnotes && art.footnotes.length) {
             art.footnotes.forEach(function(fn) {
                 var book = bib[fn.bookKey];
                 h += '<div class="fn-popup" id="fnp-' + art.id + '-' + fn.num + '">'
-                   + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
-                   + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
+                    + '<span class="fn-close" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">✕</span>'
+                    + '<span class="fn-num">[' + fn.num + ']</span> ' + fn.text;
 
-                /* Book card inside popup */
                 if (book) {
                     h += '<div class="book-card">';
                     if (book.image) h += '<img src="' + book.image + '" alt="' + book.title + '">';
                     h += '<div class="book-card-info">'
-                       + '<div class="book-title">' + book.title + '</div>'
-                       + '<div class="book-author">' + book.author + '</div>'
-                       + '<div class="book-pub">' + book.publisher + ', ' + book.year
-                       + (book.series ? ' — ' + book.series : '') + '</div>';
+                        + '<div class="book-title">' + book.title + '</div>'
+                        + '<div class="book-author">' + book.author + '</div>'
+                        + '<div class="book-pub">' + book.publisher + ', ' + book.year
+                        + (book.series ? ' — ' + book.series : '') + '</div>';
                     if (book.link) h += '<a class="book-buy" href="' + book.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
-                    h += '</div></div>';  // .book-card-info, .book-card
+                    h += '</div></div>';
                 }
 
                 h += '<span class="fn-back" onclick="closeFn(\'' + art.id + '\',' + fn.num + ')">↑ 返回引文</span>'
-                   + '</div>';  // .fn-popup
+                    + '</div>';
             });
         }
-        h += '</div>';  // .reading-article
+
+        h += '<div style="text-align:center;margin:24px 0 16px">';
+        h += '<button class="btn-mark-read' + (artRead ? ' done' : '') + '" '
+            + 'onclick="markArticleRead(\'' + lesson.id + '\',\'' + art.id + '\')" '
+            + 'id="btn-read-' + art.id + '">';
+        h += (artRead ? '✅ 已完成閱讀此篇' : '📚 標記已完成閱讀此篇');
+        h += '</button></div>';
+
+        h += '</div>';
+        h += '</div>';
     });
 
-    /* ── Bibliography Section ── */
     h += '<div class="bib-section"><h3>📕 參考書目</h3>';
     for (var key in bib) {
         var b = bib[key];
         h += '<div class="book-card" id="bib-' + key + '">';
         if (b.image) h += '<img src="' + b.image + '" alt="' + b.title + '">';
         h += '<div class="book-card-info">'
-           + '<div class="book-title">' + b.title + '</div>'
-           + '<div class="book-author">' + b.author + '</div>'
-           + '<div class="book-pub">' + b.publisher + ', ' + b.address + ', ' + b.year
-           + (b.series ? '<br>Series: ' + b.series : '')
-           + (b.isbn ? '<br>ISBN: ' + b.isbn : '')
-           + '</div>';
+            + '<div class="book-title">' + b.title + '</div>'
+            + '<div class="book-author">' + b.author + '</div>'
+            + '<div class="book-pub">' + b.publisher + ', ' + b.address + ', ' + b.year
+            + (b.series ? '<br>Series: ' + b.series : '')
+            + (b.isbn ? '<br>ISBN: ' + b.isbn : '')
+            + '</div>';
         if (b.link) h += '<a class="book-buy" href="' + b.link + '" target="_blank" rel="noopener">📖 在 Logos 購買</a>';
         h += '</div></div>';
     }
-    h += '</div>';  // .bib-section
-    h += '</div>';  // .reading-page
+    h += '</div>';
+
+    h += '</div>';
     c.innerHTML = h;
 
-    /* ── Bind footnote clicks ── */
     c.querySelectorAll('.fn-mark').forEach(function(el) {
         el.addEventListener('click', function(e) {
             e.stopPropagation();
             var fnNum = el.getAttribute('data-fn');
-            // find parent article id
             var artEl = el.closest('.reading-article');
             var artId = artEl ? artEl.id.replace('art-', '') : '';
             var popup = document.getElementById('fnp-' + artId + '-' + fnNum);
             if (popup) {
-                // close all others first
-                c.querySelectorAll('.fn-popup.show').forEach(function(p){ p.classList.remove('show'); });
+                c.querySelectorAll('.fn-popup.show').forEach(function(p) { p.classList.remove('show'); });
                 popup.classList.add('show');
                 popup.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
@@ -1378,9 +1376,56 @@ function renderReading(lesson) {
 window.closeFn = function(artId, fnNum) {
     var popup = document.getElementById('fnp-' + artId + '-' + fnNum);
     if (popup) popup.classList.remove('show');
-    // scroll back to the footnote mark
     var mark = document.querySelector('#art-' + artId + ' .fn-mark[data-fn="' + fnNum + '"]');
     if (mark) mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+window.markArticleRead = function(lessonId, articleId) {
+    if (!userData.progress[lessonId]) userData.progress[lessonId] = {};
+    if (!userData.progress[lessonId].articlesRead) userData.progress[lessonId].articlesRead = {};
+
+    userData.progress[lessonId].articlesRead[articleId] = true;
+
+    var lesson = LESSONS.find(function(l) { return l.id === lessonId; });
+    if (lesson && lesson.articles) {
+        var allDone = lesson.articles.every(function(art) {
+            return userData.progress[lessonId].articlesRead
+                && userData.progress[lessonId].articlesRead[art.id];
+        });
+        userData.progress[lessonId].scriptureRead = allDone;
+    }
+
+    saveUserData();
+
+    var btn = document.getElementById('btn-read-' + articleId);
+    if (btn) { btn.classList.add('done'); btn.textContent = '✅ 已完成閱讀此篇'; }
+
+    // 更新標題旁邊的狀態提示
+    var artEl = document.getElementById('art-' + articleId);
+    if (artEl) {
+        var hint = artEl.querySelector('.article-status-hint');
+        if (hint) { hint.textContent = '✅ 已讀'; hint.style.color = '#43a047'; }
+    }
+
+    if (userData.progress[lessonId].scriptureRead) showReadingComplete();
+};
+
+function showReadingComplete() {
+    var existing = document.getElementById('reading-complete-msg');
+    if (existing) return;
+    var msg = document.createElement('div');
+    msg.id = 'reading-complete-msg';
+    msg.style.cssText = 'text-align:center;padding:16px;margin:16px auto;max-width:400px;'
+        + 'background:#e8f5e9;border-radius:12px;color:#2e7d32;font-weight:bold;font-size:16px;';
+    msg.textContent = '🏆 太棒了！你已完成所有課餘閱讀！';
+    var container = document.getElementById('lesson-detail');
+    if (container) container.appendChild(msg);
+}
+
+window.toggleArticle = function(artId) {
+    var body = document.getElementById('art-body-' + artId);
+    var arrow = document.getElementById('art-arrow-' + artId);
+    if (body && arrow) { body.classList.toggle('open'); arrow.classList.toggle('open'); }
 };
 
 </script>
