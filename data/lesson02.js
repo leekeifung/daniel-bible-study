@@ -85,6 +85,38 @@ window.LESSONS_DATA.push({
                 '<li>這<strong>不代表</strong>國王真正歸信（他是多神論者，只是把耶和華加入萬神殿）。</li>' +
                 '<li>但這證明了本章的目的：<strong>顯明唯有以色列的神擁有真正的智慧與權柄。</strong></li>' +
                 '</ul>'
+        },
+        // ── 加在 studyContent 陣列最後（第三項）──
+        {
+            title: '互動練習：巨像的國度配對',
+            icon: '🎯',
+            defaultOpen: false,
+            type: 'statue-drag',
+            html:
+                '<p style="margin:0 0 6px;color:#555;font-size:14px;">' +
+                '將右方的國度選項<strong>拖放</strong>（桌面）或<strong>點選</strong>（手機）到中間配對空格。' +
+                '七個選項、五個空格——因為<strong>希臘觀</strong>與<strong>羅馬觀</strong>使用不同組合，兩者都是合理的學術解讀，沒有唯一「正確」答案。</p>' +
+                '<p style="margin:0;font-size:13px;color:#888;">💡 桌面：拖放 ｜ 手機：先點選選項（高亮），再點空格放入 ｜ 點已填空格可清除</p>',
+            dragData: {
+                parts: [
+                    { id: 'gold',   emoji: '👑', label: '金頭' },
+                    { id: 'silver', emoji: '🪙', label: '銀胸臂' },
+                    { id: 'bronze', emoji: '🥉', label: '銅腹腰' },
+                    { id: 'iron',   emoji: '⚔️', label: '鐵腿／鐵泥腳' },
+                    { id: 'stone',  emoji: '🪨', label: '石頭' }
+                ],
+                options: [
+                    { id: 'babylon',     label: '巴比倫 / 尼布甲尼撒' },
+                    { id: 'media',       label: '瑪代（Media）' },
+                    { id: 'persia',      label: '波斯（Persia）' },
+                    { id: 'medo-persia', label: '瑪代－波斯（Medo-Persia）' },
+                    { id: 'greece',      label: '希臘（亞歷山大→王朝通婚）' },
+                    { id: 'rome',        label: '羅馬（含復興/延伸羅馬）' },
+                    { id: 'god',         label: '神的國度（永存）' }
+                ],
+                greekView: ['babylon', 'media',       'persia', 'greece', 'god'],
+                romanView: ['babylon', 'medo-persia', 'greece', 'rome',   'god']
+            }
         }
     ],
 
@@ -314,3 +346,308 @@ window.LESSONS_DATA.push({
         }
     ]
 });
+/* =====================================================
+   renderStatueDrag — 巨像國度配對互動練習渲染器
+   可由主程式在偵測到 section.type === 'statue-drag' 時呼叫：
+     window.renderStatueDrag(containerEl, section.dragData);
+   ===================================================== */
+window.renderStatueDrag = window.renderStatueDrag || function (container, dragData) {
+    var parts     = dragData.parts;
+    var options   = dragData.options;
+    var greekView = dragData.greekView;
+    var romanView = dragData.romanView;
+
+    /* ── state ── */
+    var slots      = new Array(parts.length).fill(null);
+    var selectedId = null;
+    var resultHtml = '';
+    var showResult = false;
+
+    /* ── inject scoped styles (once) ── */
+    if (!document.getElementById('sd-styles')) {
+        var s = document.createElement('style');
+        s.id = 'sd-styles';
+        s.textContent =
+            '.sd-layout{display:flex;gap:16px;margin-top:10px}' +
+            '.sd-pairs{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:stretch;flex:1;min-width:0}' +
+            '.sd-hdr{font-weight:700;font-size:13px;color:#666;padding-bottom:2px;border-bottom:1px solid #eee}' +
+            '.sd-part{padding:10px 12px;border-radius:10px;background:linear-gradient(135deg,#f8f9fa,#edf0f3);border:1px solid #dee2e6;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap}' +
+            '.sd-slot{padding:10px 14px;border-radius:10px;border:2px dashed #ced4da;background:#f8f9fa;display:flex;align-items:center;justify-content:center;font-size:13px;color:#adb5bd;cursor:pointer;transition:all .2s;min-height:44px}' +
+            '.sd-slot.filled{border:2px solid #74b9ff;background:#eaf4fd;color:#2d3436;font-weight:600;border-style:solid;cursor:grab}' +
+            '.sd-slot.drag-over{border-color:#0984e3;background:#bee3f8;transform:scale(1.02)}' +
+            '.sd-opts{display:flex;flex-direction:column;gap:6px;min-width:180px}' +
+            '.sd-opts-title{font-weight:700;font-size:13px;color:#666;padding-bottom:2px;border-bottom:1px solid #eee}' +
+            '.sd-chip{padding:8px 14px;border-radius:22px;background:#fff;border:1px solid #ddd;cursor:grab;font-weight:600;font-size:12px;transition:all .15s;user-select:none;text-align:center}' +
+            '.sd-chip:hover{box-shadow:0 3px 10px rgba(0,0,0,.08);border-color:#aaa}' +
+            '.sd-chip.sel{border:2px solid #0984e3;background:#dfe6fd;box-shadow:0 0 0 3px rgba(9,132,227,.18)}' +
+            '.sd-chip.used{opacity:.3;pointer-events:none;cursor:default;background:#f1f3f5}' +
+            '.sd-actions{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}' +
+            '.sd-btn{padding:8px 16px;border-radius:10px;border:1px solid #ddd;background:#fff;font-weight:700;cursor:pointer;font-size:13px;transition:background .15s}' +
+            '.sd-btn:hover{background:#f1f3f5}' +
+            '.sd-btn-p{background:#0984e3;color:#fff;border-color:#0984e3}' +
+            '.sd-btn-p:hover{background:#0770c2}' +
+            '.sd-result{margin-top:12px;padding:14px;border-radius:12px;border:1px solid #dee2e6;background:#f8f9fa;line-height:1.7;font-size:14px}' +
+            '.sd-note{margin-top:10px;padding:10px 12px;border-radius:8px;background:#fff9db;border:1px solid #ffe066;font-size:13px;color:#6c5200;line-height:1.6}' +
+            '.sd-tbl{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}' +
+            '.sd-tbl th,.sd-tbl td{padding:7px 8px;border:1px solid #dee2e6;text-align:left}' +
+            '.sd-tbl th{background:#f1f3f5;font-weight:700}' +
+            '@media(max-width:640px){' +
+                '.sd-layout{flex-direction:column;gap:12px}' +
+                '.sd-opts{flex-direction:row;flex-wrap:wrap}' +
+                '.sd-opts-title{width:100%}' +
+                '.sd-part{font-size:12px;padding:8px 10px}' +
+                '.sd-slot{font-size:12px;padding:8px 10px;min-height:38px}' +
+                '.sd-chip{font-size:11px;padding:6px 10px}' +
+            '}';
+        document.head.appendChild(s);
+    }
+
+    /* ── helpers ── */
+    function getLabel(id) {
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].id === id) return options[i].label;
+        }
+        return '';
+    }
+
+    /* ── render ── */
+    function render() {
+        container.innerHTML = '';
+
+        /* — main flex layout — */
+        var layout = document.createElement('div');
+        layout.className = 'sd-layout';
+
+        /* — left + middle: pairs grid — */
+        var pairs = document.createElement('div');
+        pairs.className = 'sd-pairs';
+
+        var h1 = document.createElement('div'); h1.className = 'sd-hdr'; h1.textContent = '巨像部分';
+        var h2 = document.createElement('div'); h2.className = 'sd-hdr'; h2.textContent = '你的配對';
+        pairs.appendChild(h1);
+        pairs.appendChild(h2);
+
+        parts.forEach(function (part, i) {
+            /* part cell */
+            var pEl = document.createElement('div');
+            pEl.className = 'sd-part';
+            pEl.innerHTML = part.emoji + ' ' + part.label;
+            pairs.appendChild(pEl);
+
+            /* slot cell */
+            var sEl = document.createElement('div');
+            sEl.className = 'sd-slot' + (slots[i] ? ' filled' : '');
+            sEl.textContent = slots[i] ? getLabel(slots[i]) : '拖放或點選';
+            sEl.dataset.idx = i;
+
+            /* if filled, allow dragging out */
+            if (slots[i]) {
+                sEl.draggable = true;
+                (function (idx) {
+                    sEl.addEventListener('dragstart', function (e) {
+                        e.dataTransfer.setData('text/plain', slots[idx]);
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+                })(i);
+            }
+
+            /* drop target */
+            sEl.addEventListener('dragover', function (e) { e.preventDefault(); sEl.classList.add('drag-over'); });
+            sEl.addEventListener('dragleave', function ()  { sEl.classList.remove('drag-over'); });
+            (function (idx) {
+                sEl.addEventListener('drop', function (e) {
+                    e.preventDefault(); sEl.classList.remove('drag-over');
+                    var id = e.dataTransfer.getData('text/plain');
+                    if (id) doDrop(idx, id);
+                });
+                sEl.addEventListener('click', function () {
+                    if (selectedId) { doDrop(idx, selectedId); selectedId = null; }
+                    else if (slots[idx]) { slots[idx] = null; showResult = false; render(); }
+                });
+            })(i);
+
+            pairs.appendChild(sEl);
+        });
+        layout.appendChild(pairs);
+
+        /* — right: options — */
+        var optsWrap = document.createElement('div');
+        optsWrap.className = 'sd-opts';
+
+        var oTitle = document.createElement('div');
+        oTitle.className = 'sd-opts-title';
+        oTitle.textContent = '可選國度';
+        optsWrap.appendChild(oTitle);
+
+        options.forEach(function (opt) {
+            var used = slots.indexOf(opt.id) !== -1;
+            var chip = document.createElement('div');
+            chip.className = 'sd-chip' + (used ? ' used' : '') + (selectedId === opt.id ? ' sel' : '');
+            chip.textContent = opt.label;
+            chip.draggable = !used;
+
+            if (!used) {
+                chip.addEventListener('dragstart', function (e) {
+                    e.dataTransfer.setData('text/plain', opt.id);
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                chip.addEventListener('click', function () {
+                    selectedId = (selectedId === opt.id) ? null : opt.id;
+                    render();
+                });
+            }
+            optsWrap.appendChild(chip);
+        });
+
+        /* drop back to options = remove from slot */
+        optsWrap.addEventListener('dragover', function (e) { e.preventDefault(); });
+        optsWrap.addEventListener('drop', function (e) {
+            e.preventDefault();
+            var id = e.dataTransfer.getData('text/plain');
+            var idx = slots.indexOf(id);
+            if (idx !== -1) { slots[idx] = null; showResult = false; render(); }
+        });
+
+        layout.appendChild(optsWrap);
+        container.appendChild(layout);
+
+        /* — action buttons — */
+        var actions = document.createElement('div');
+        actions.className = 'sd-actions';
+
+        var resetBtn = document.createElement('button');
+        resetBtn.className = 'sd-btn';
+        resetBtn.textContent = '🔄 重置';
+        resetBtn.onclick = function () { slots.fill(null); selectedId = null; showResult = false; render(); };
+        actions.appendChild(resetBtn);
+
+        var confirmBtn = document.createElement('button');
+        confirmBtn.className = 'sd-btn sd-btn-p';
+        confirmBtn.textContent = '✅ 確認配對';
+        confirmBtn.onclick = evaluate;
+        actions.appendChild(confirmBtn);
+
+        container.appendChild(actions);
+
+        /* — result — */
+        if (showResult) {
+            var rd = document.createElement('div');
+            rd.className = 'sd-result';
+            rd.innerHTML = resultHtml;
+            container.appendChild(rd);
+        }
+    }
+
+    /* ── drop logic ── */
+    function doDrop(slotIdx, itemId) {
+        /* remove from any current slot */
+        var ex = slots.indexOf(itemId);
+        if (ex !== -1) slots[ex] = null;
+        /* place (displaced item auto-returns to options) */
+        slots[slotIdx] = itemId;
+        showResult = false;
+        render();
+    }
+
+    /* ── evaluate ── */
+    function evaluate() {
+        if (slots.some(function (s) { return !s; })) {
+            resultHtml = '<p style="color:#d63031;font-weight:600;">⚠️ 請先填滿所有空格再確認！</p>';
+            showResult = true; render(); return;
+        }
+
+        var gM = 0, rM = 0;
+        for (var i = 0; i < slots.length; i++) {
+            if (slots[i] === greekView[i]) gM++;
+            if (slots[i] === romanView[i]) rM++;
+        }
+
+        var verdict, vColor;
+        if (gM === 5) {
+            verdict = '✅ 完全符合希臘觀（Widder 傾向的解讀）';
+            vColor  = '#00b894';
+        } else if (rM === 5) {
+            verdict = '✅ 完全符合羅馬觀（傳統派解讀）';
+            vColor  = '#0984e3';
+        } else {
+            var closer = gM > rM ? '希臘觀' : rM > gM ? '羅馬觀' : '兩者皆未完全符合';
+            verdict = '🔍 最接近' + closer + '（希臘觀 ' + gM + '/5，羅馬觀 ' + rM + '/5）';
+            vColor  = '#636e72';
+        }
+
+        var h = '<h4 style="margin:0 0 8px;">配對結果</h4>';
+        h += '<div style="display:inline-block;padding:5px 14px;border-radius:20px;background:#f1f3f5;font-weight:700;font-size:13px;color:' + vColor + ';">' + verdict + '</div>';
+
+        h += '<table class="sd-tbl"><tr><th>巨像</th><th>你的配對</th><th>希臘觀</th><th>羅馬觀</th></tr>';
+        parts.forEach(function (p, i) {
+            var gOk = (slots[i] === greekView[i]) ? ' ✅' : '';
+            var rOk = (slots[i] === romanView[i]) ? ' ✅' : '';
+            h += '<tr>';
+            h += '<td>' + p.emoji + ' ' + p.label + '</td>';
+            h += '<td><strong>' + getLabel(slots[i]) + '</strong></td>';
+            h += '<td>' + getLabel(greekView[i]) + gOk + '</td>';
+            h += '<td>' + getLabel(romanView[i]) + rOk + '</td>';
+            h += '</tr>';
+        });
+        h += '</table>';
+
+        h += '<div class="sd-note">💡 <strong>OT366 核心提醒：</strong>無論採取哪種觀點，Wendy Widder 提醒我們「不要見樹不見林」——重點不在辨認第二至第四國是誰，而在<strong>第五個國度——神永恆的國度</strong>，必打碎一切人類帝國，存到永遠！</div>';
+
+        resultHtml = h;
+        showResult = true;
+        render();
+    }
+
+    /* ── init ── */
+    render();
+};
+/* ── 自動初始化：當面板展開時注入互動練習 ── */
+(function autoInitStatueDrag() {
+    function tryInject() {
+        /* 找到 lesson02 的 dragData */
+        var dragData = null;
+        (window.LESSONS_DATA || []).forEach(function (l) {
+            if (l.id === 'lesson02') {
+                (l.studyContent || []).forEach(function (sec) {
+                    if (sec.type === 'statue-drag' && sec.dragData) {
+                        dragData = sec.dragData;
+                    }
+                });
+            }
+        });
+        if (!dragData || !window.renderStatueDrag) return;
+
+        /* 在 DOM 中搜尋已展開、包含指示文字但尚未注入的面板 */
+        var candidates = document.querySelectorAll('p');
+        for (var i = 0; i < candidates.length; i++) {
+            var p = candidates[i];
+            if (p.textContent.indexOf('將右方的國度選項') === -1) continue;
+
+            /* 找到指示段落所在的容器 */
+            var wrapper = p.parentElement;
+            if (!wrapper || wrapper.querySelector('.sd-layout')) continue;  /* 已注入則跳過 */
+
+            var exerciseDiv = document.createElement('div');
+            exerciseDiv.style.marginTop = '12px';
+            wrapper.appendChild(exerciseDiv);
+            window.renderStatueDrag(exerciseDiv, dragData);
+            return;  /* 成功注入，停止搜尋 */
+        }
+    }
+
+    /* 用 MutationObserver 監聽 DOM 變化（面板展開/摺疊） */
+    function startObserving() {
+        var observer = new MutationObserver(function () {
+            tryInject();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        /* 也立即嘗試一次，以防面板已經展開 */
+        tryInject();
+    }
+
+    if (document.body) {
+        startObserving();
+    } else {
+        document.addEventListener('DOMContentLoaded', startObserving);
+    }
+})();
