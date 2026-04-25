@@ -1017,6 +1017,17 @@ window.markRead = async function() {
 // ==========================================
 // QUESTIONS TAB
 // ==========================================
+// 🆕 輔助函式：初始化互動練習（在 innerHTML 設定後呼叫）
+function initInteractiveExercises(lesson) {
+    if (!lesson.studyContent) return;
+    lesson.studyContent.forEach((sec, i) => {
+        if (sec.type === 'statue-drag' && sec.dragData && window.renderStatueDrag) {
+            const mount = document.getElementById('statue-drag-mount-' + i);
+            if (mount) window.renderStatueDrag(mount, sec.dragData);
+        }
+    });
+}
+
 function renderQuestions(lesson) {
     const container = document.getElementById('tab-questions');
     if (!container) return;
@@ -1039,7 +1050,10 @@ function renderQuestions(lesson) {
                 + '<h3>' + sec.icon + ' ' + sec.title + '</h3>'
                 + '<span class="arrow' + (isOpen ? ' open' : '') + '" id="sarrow-' + i + '">▼</span>'
                 + '</div>'
-                + '<div class="intro-section-body' + (isOpen ? ' open' : '') + '" id="ssec-' + i + '">' + sec.html + '</div>'
+                + '<div class="intro-section-body' + (isOpen ? ' open' : '') + '" id="ssec-' + i + '">'
+                + sec.html
+                + (sec.type === 'statue-drag' ? '<div id="statue-drag-mount-' + i + '" style="margin-top:10px;"></div>' : '')   // 🆕 佔位 div
+                + '</div>'
                 + '</div>';
         });
         html += '</div>';
@@ -1048,6 +1062,7 @@ function renderQuestions(lesson) {
     if (!lesson.questions) {
         html += '<div class="coming-soon"><div class="icon">✏️</div><h3>討論問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
         container.innerHTML = html;
+        initInteractiveExercises(lesson);   // 🆕 初始化互動練習
         return;
     }
 
@@ -1077,6 +1092,7 @@ function renderQuestions(lesson) {
     });
     html += '</div>';
     container.innerHTML = html;
+    initInteractiveExercises(lesson);   // 🆕 初始化互動練習
 
     let saveTimers = {};
     container.querySelectorAll('textarea').forEach(ta => {
