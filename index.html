@@ -1038,26 +1038,26 @@ function initInteractiveExercises(lesson) {
     if (!lesson.studyContent) return;
     lesson.studyContent.forEach((sec, i) => {
         if (sec.type === 'statue-drag' && sec.dragData) {
-            // 標記這個 section index 需要延遲注入
             const bodyEl = document.getElementById('ssec-' + i);
-            if (bodyEl) bodyEl.dataset.needsDrag = 'true';
-            bodyEl.dataset.dragIdx = i;
+            if (bodyEl) {
+                bodyEl.dataset.needsDrag = 'true';
+                bodyEl.dataset.dragIdx = i;
+            }
         }
     });
 }
 
 function tryMountDrag(sectionIndex, lesson) {
-    const mount = document.getElementById('statue-drag-mount-' + sectionIndex);
-    if (!mount) { console.warn('[statue-drag] mount div not found:', sectionIndex); return; }
-    if (mount.dataset.mounted === 'true') return; // 已注入，跳過
+    var mount = document.getElementById('statue-drag-mount-' + sectionIndex);
+    if (!mount) { console.warn('[statue-drag] mount not found:', sectionIndex); return; }
+    if (mount.dataset.mounted === 'true') return;
 
-    const sec = lesson.studyContent[sectionIndex];
+    var sec = lesson.studyContent[sectionIndex];
     if (!sec || !sec.dragData || !window.renderStatueDrag) {
         console.warn('[statue-drag] missing data or renderer');
         return;
     }
-
-    console.log('[statue-drag] 注入互動練習到 section', sectionIndex);
+    console.log('[statue-drag] ✅ 注入互動練習 → section', sectionIndex);
     mount.dataset.mounted = 'true';
     window.renderStatueDrag(mount, sec.dragData);
 }
@@ -1086,7 +1086,7 @@ function renderQuestions(lesson) {
                 + '</div>'
                 + '<div class="intro-section-body' + (isOpen ? ' open' : '') + '" id="ssec-' + i + '">'
                 + sec.html
-                + (sec.type === 'statue-drag' ? '<div id="statue-drag-mount-' + i + '" style="margin-top:10px;"></div>' : '')   // 🆕 佔位 div
+                + (sec.type === 'statue-drag' ? '<div id="statue-drag-mount-' + i + '" style="margin-top:10px;"></div>' : '')
                 + '</div>'
                 + '</div>';
         });
@@ -1096,8 +1096,7 @@ function renderQuestions(lesson) {
     if (!lesson.questions) {
         html += '<div class="coming-soon"><div class="icon">✏️</div><h3>討論問題準備中</h3><p>請稍候，內容即將更新。</p></div>';
         container.innerHTML = html;
-        initInteractiveExercises(lesson);   // 🆕 初始化互動練習 現在只做「標記」，不實際注入
-        let saveTimers = {};
+        initInteractiveExercises(lesson);
         return;
     }
 
@@ -1127,7 +1126,7 @@ function renderQuestions(lesson) {
     });
     html += '</div>';
     container.innerHTML = html;
-    initInteractiveExercises(lesson);   // 🆕 初始化互動練習
+    initInteractiveExercises(lesson);
 
     let saveTimers = {};
     container.querySelectorAll('textarea').forEach(ta => {
@@ -1148,6 +1147,25 @@ function renderQuestions(lesson) {
 window.toggleRef = function(qid) {
     const el = document.getElementById('ref-' + qid);
     if (el) el.classList.toggle('show');
+};
+
+window.toggleStudySection = function(i) {
+    const body = document.getElementById('ssec-' + i);
+    const arrow = document.getElementById('sarrow-' + i);
+    if (body && arrow) {
+        body.classList.toggle('open');
+        arrow.classList.toggle('open');
+
+        // 🆕 展開時注入互動練習
+        if (body.classList.contains('open') && body.dataset.needsDrag === 'true') {
+            const lesson = window.LESSONS_DATA.find(l => l.id === currentLessonId);
+            if (lesson) {
+                requestAnimationFrame(function() {
+                    tryMountDrag(parseInt(body.dataset.dragIdx), lesson);
+                });
+            }
+        }
+    }
 };
 
 // ==========================================
