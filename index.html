@@ -25,7 +25,17 @@
         .navbar-user { display: flex; align-items: center; gap: 12px; font-size: 14px; }
         .btn-logout { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 14px; }
         .btn-logout:hover { background: rgba(255,255,255,0.3); }
-        .btn-back-nav { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 13px; white-space: nowrap; display: none; }
+.btn-back-nav {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    display: none;
+}
 .btn-back-nav:hover { background: rgba(255,255,255,0.3); }
 
         .auth-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
@@ -388,16 +398,15 @@
 </div>
 <div id="app" style="display:none">
     <nav class="navbar">
-    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
-        <div class="navbar-brand">📖 但以理書研經課程</div>
-        <div class="navbar-user">
-            <span id="user-name">👤</span>
-            <button class="btn-logout" onclick="doLogout()">登出</button>
-        </div>
+    <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+        <div class="navbar-brand" id="navbar-brand">📖 但以理書研經課程</div>
+        <button class="btn-back-nav" id="btn-back-nav" onclick="goBack()" style="display:none;">← 返回但以理書課程列表</button>
     </div>
-    <button class="btn-back-nav" id="btn-back-nav" onclick="goBack()" style="display:none;">← 返回課程列表</button>
+    <div class="navbar-user">
+        <span id="user-name">👤</span>
+        <button class="btn-logout" onclick="doLogout()">登出</button>
+    </div>
 </nav>
-
     <div id="dashboard-view" class="dashboard">
         <div class="progress-card">
             <h2>📊 學習進度</h2>
@@ -731,7 +740,8 @@ function buildLessonTabs(lesson) {
 // LESSON VIEW
 // ==========================================
 function openLesson(id) {
-    document.getElementById('btn-back-nav').style.display = 'inline-block'; // ★ 新增
+    document.getElementById('navbar-brand').style.display = 'none';
+    document.getElementById('btn-back-nav').style.display = 'inline-block';
     currentLessonId = id;
     const lesson = LESSONS.find(l => l.id === id);
     if (!lesson || lesson.comingSoon) return;
@@ -776,7 +786,8 @@ function openLesson(id) {
 }
 
 window.goBack = function() {
-    document.getElementById('btn-back-nav').style.display = 'none'; // ★ 新增
+    document.getElementById('navbar-brand').style.display = '';
+    document.getElementById('btn-back-nav').style.display = 'none';
     document.getElementById('lesson-view').style.display = 'none';
     document.getElementById('lesson-detail-wrapper').style.display = 'none';
     document.getElementById('dashboard-view').style.display = 'block';
