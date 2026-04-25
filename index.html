@@ -13,8 +13,6 @@
         .navbar-user { display: flex; align-items: center; gap: 12px; font-size: 14px; }
         .btn-logout { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 14px; }
         .btn-logout:hover { background: rgba(255,255,255,0.3); }
-        .btn-back-nav { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 13px; white-space: nowrap; display: none; }
-.btn-back-nav:hover { background: rgba(255,255,255,0.3); }
 
         .auth-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
         .auth-card { background: white; border-radius: 16px; overflow: hidden; width: 420px; max-width: 95vw; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
@@ -347,16 +345,13 @@
 </div>
 
 <div id="app" style="display:none">
-<nav class="navbar">
-    <div style="display:flex;align-items:center;gap:12px;">
+    <nav class="navbar">
         <div class="navbar-brand">📖 但以理書研經課程</div>
-        <button class="btn-back-nav" id="btn-back-nav" onclick="goBack()">← 返回課程列表</button>
-    </div>
-    <div class="navbar-user">
-        <span id="user-name">👤</span>
-        <button class="btn-logout" onclick="doLogout()">登出</button>
-    </div>
-</nav>
+        <div class="navbar-user">
+            <span id="user-name">👤</span>
+            <button class="btn-logout" onclick="doLogout()">登出</button>
+        </div>
+    </nav>
 
     <div id="dashboard-view" class="dashboard">
         <div class="progress-card">
@@ -396,17 +391,7 @@
 
     <!-- ★ 普通課程（經文 + 問題 + 測驗）頁面 -->
     <div id="lesson-view" class="lesson-view" style="display:none">
-        <div id="lesson-view" class="lesson-view" style="display:none">
-    <!-- 已移至 navbar，這裡不再需要 btn-back -->
-    <div id="lv-header" class="lesson-header"></div>
-    <div class="lesson-tabs" id="lv-tabs"></div>
-    <div id="lv-tab-panels"></div>
-</div>
-
-<div id="lesson-detail-wrapper" class="lesson-view" style="display:none">
-    <!-- 已移至 navbar，這裡不再需要 btn-back -->
-    <div id="lesson-detail"></div>
-</div>
+        <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
         <div id="lv-header" class="lesson-header"></div>
         <!-- ★ 動態 tabs：由 JS 的 buildLessonTabs() 填入 -->
         <div class="lesson-tabs" id="lv-tabs"></div>
@@ -415,17 +400,7 @@
 
     <!-- ★ 歷史 / 閱讀專用容器（已移入 #app 內部） -->
     <div id="lesson-detail-wrapper" class="lesson-view" style="display:none">
-        <div id="lesson-view" class="lesson-view" style="display:none">
-    <!-- 已移至 navbar，這裡不再需要 btn-back -->
-    <div id="lv-header" class="lesson-header"></div>
-    <div class="lesson-tabs" id="lv-tabs"></div>
-    <div id="lv-tab-panels"></div>
-</div>
-
-<div id="lesson-detail-wrapper" class="lesson-view" style="display:none">
-    <!-- 已移至 navbar，這裡不再需要 btn-back -->
-    <div id="lesson-detail"></div>
-</div>
+        <button class="btn-back" onclick="goBack()">← 返回課程列表</button>
         <div id="lesson-detail"></div>
     </div>
 </div>
@@ -715,7 +690,6 @@ function buildLessonTabs(lesson) {
 // LESSON VIEW
 // ==========================================
 function openLesson(id) {
-    document.getElementById('btn-back-nav').style.display = 'inline-block';  // ★ 加這行
     currentLessonId = id;
     const lesson = LESSONS.find(l => l.id === id);
     if (!lesson || lesson.comingSoon) return;
@@ -760,7 +734,6 @@ function openLesson(id) {
 }
 
 window.goBack = function() {
-    document.getElementById('btn-back-nav').style.display = 'none';  // ★ 加這行
     document.getElementById('lesson-view').style.display = 'none';
     document.getElementById('lesson-detail-wrapper').style.display = 'none';
     document.getElementById('dashboard-view').style.display = 'block';
