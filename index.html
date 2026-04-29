@@ -364,7 +364,66 @@
         width: auto;
     }
 }
+/* ═══════════════════════════════════════
+   INTERACTIVE HORIZONTAL TIMELINE (HTL)
+   ═══════════════════════════════════════ */
+.htl-section { background:#fff; border-radius:12px; padding:20px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,.08); position:relative; }
 
+.htl-scroll-outer { position:relative; }
+.htl-scroll-outer::after { content:''; position:absolute; right:0; top:0; bottom:0; width:36px; background:linear-gradient(to right,rgba(255,255,255,0),#fff); pointer-events:none; z-index:5; border-radius:0 12px 12px 0; }
+
+.htl-scroll-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px; }
+.htl-scroll-wrap::-webkit-scrollbar { height:5px; }
+.htl-scroll-wrap::-webkit-scrollbar-track { background:#f5f5f5; border-radius:3px; }
+.htl-scroll-wrap::-webkit-scrollbar-thumb { background:#ccc; border-radius:3px; }
+
+.htl-era { position:absolute; height:100%; border-radius:5px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:0 4px; }
+.htl-era-assyria  { background:rgba(156,39,176,.08); border:1px solid rgba(156,39,176,.22); }
+.htl-era-babylon  { background:rgba(78,52,46,.09);   border:1px solid rgba(78,52,46,.22);   }
+.htl-era-persia   { background:rgba(0,105,92,.09);   border:1px solid rgba(0,105,92,.22);   }
+
+.htl-lane { display:flex; align-items:center; margin-bottom:1px; }
+.htl-lane-label { flex-shrink:0; font-size:12px; font-weight:600; color:#555; display:flex; align-items:center; gap:3px; padding-right:6px; white-space:nowrap; }
+.htl-lane-track { flex:1; position:relative; height:34px; }
+.htl-lane-line { position:absolute; top:50%; left:0; right:0; height:1px; background:#ececec; }
+.htl-range { position:absolute; top:50%; transform:translateY(-50%); height:8px; border-radius:4px; border:1px solid; opacity:.35; pointer-events:none; }
+
+.htl-dot { position:absolute; top:50%; width:16px; height:16px; border-radius:50%; transform:translate(-50%,-50%); cursor:pointer; border:2.5px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.28); z-index:2; transition:transform .15s,box-shadow .15s; }
+.htl-dot::before { content:''; position:absolute; top:-10px; left:-10px; right:-10px; bottom:-10px; }
+.htl-dot:hover,.htl-dot.active { transform:translate(-50%,-50%) scale(1.55); box-shadow:0 3px 12px rgba(0,0,0,.4); z-index:3; }
+.htl-dot.active::after { content:''; position:absolute; top:-5px;left:-5px;right:-5px;bottom:-5px; border-radius:50%; border:2px solid; border-color:inherit; opacity:.4; animation:htl-ping .8s ease-out; }
+@keyframes htl-ping { 0%{transform:scale(1);opacity:.5} 100%{transform:scale(2.2);opacity:0} }
+
+.htl-axis { position:relative; height:22px; margin-top:4px; }
+.htl-year-tick { position:absolute; top:0; width:1px; height:5px; background:#ccc; }
+.htl-year-label { position:absolute; top:7px; transform:translateX(-50%); font-size:10px; color:#aaa; white-space:nowrap; }
+
+/* ── HTL Popup ── */
+.htl-overlay { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,.35); z-index:299; }
+.htl-overlay.show { display:block; animation:htl-fade .2s ease; }
+.htl-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:300; background:#fff; border-radius:16px; box-shadow:0 12px 48px rgba(0,0,0,.25); padding:22px 22px 18px; max-width:400px; width:calc(100vw - 32px); }
+.htl-popup.show { display:block; animation:htl-pop .25s ease; }
+.htl-popup-close { position:absolute; top:8px; right:12px; cursor:pointer; font-size:22px; color:#bbb; line-height:1; padding:4px; transition:color .15s; }
+.htl-popup-close:hover { color:#333; }
+.htl-popup-btn { display:inline-block; padding:10px 20px; background:linear-gradient(135deg,#4e342e,#6d4c41); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; transition:opacity .2s; }
+.htl-popup-btn:hover { opacity:.85; }
+.htl-popup-refs { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
+.htl-popup-ref-tag { font-size:11px; background:#f5f5f5; padding:2px 8px; border-radius:10px; color:#666; }
+@keyframes htl-fade { from{opacity:0} to{opacity:1} }
+@keyframes htl-pop { from{opacity:0;transform:translate(-50%,-50%) scale(.85)} to{opacity:1;transform:translate(-50%,-50%) scale(1)} }
+
+/* ── HTL Scroll hint ── */
+.htl-scroll-hint { display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; color:#bbb; margin-top:4px; animation:htl-hint-pulse 2s ease-in-out infinite; }
+@keyframes htl-hint-pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+@media(max-width:600px){
+    .htl-section { padding:14px; }
+    .htl-lane-label { font-size:11px; gap:2px; }
+    .htl-dot { width:14px; height:14px; border-width:2px; }
+    .htl-popup { padding:16px 16px 14px; border-radius:14px; }
+    .htl-popup-btn { padding:10px 16px; font-size:13px; width:100%; text-align:center; }
+    .htl-era { font-size:10px; }
+}
 
     </style>
 </head>
@@ -1313,14 +1372,160 @@ window.submitQuiz = async function() {
 };
 
 // ==========================================
-// HISTORY — 時間線渲染
+// HISTORY — 互動時間軸 + 垂直時間線
 // ==========================================
+
+/* ── Horizontal Timeline helpers ── */
+window.closeHTLPopup = function() {
+    var ov = document.getElementById('htl-overlay');
+    var pp = document.getElementById('htl-popup');
+    if (ov) ov.classList.remove('show');
+    if (pp) pp.classList.remove('show');
+    var wrap = document.getElementById('htl-scroll-wrap');
+    if (wrap) wrap.querySelectorAll('.htl-dot.active').forEach(function(d){ d.classList.remove('active'); });
+};
+
+window.scrollToTLEvent = function(i) {
+    window.closeHTLPopup();
+    var el = document.getElementById('tev-' + i);
+    if (!el) return;
+    if (!el.classList.contains('active')) el.classList.add('active');
+    setTimeout(function() {
+        el.scrollIntoView({ behavior:'smooth', block:'center' });
+        // brief highlight flash
+        el.style.transition = 'box-shadow .3s';
+        el.querySelector('.timeline-card').style.boxShadow = '0 0 0 3px rgba(78,52,46,.3)';
+        setTimeout(function() {
+            el.querySelector('.timeline-card').style.boxShadow = '';
+        }, 1500);
+    }, 250);
+    if (navigator.vibrate) navigator.vibrate(20);
+};
+
+window.toggleTLEvent = function(i) {
+    var el = document.getElementById('tev-' + i);
+    if (el) el.classList.toggle('active');
+};
+
 function renderHistory(lesson) {
     var c = document.getElementById('lesson-detail');
+    var cats = lesson.categories;
+    var events = lesson.events;
+
+    /* ── Horizontal timeline constants ── */
+    var TL_MIN = 705, TL_MAX = 525;
+    var PX_YR = 7;
+    var LBL_W = 82;
+    var TL_W = (TL_MIN - TL_MAX) * PX_YR;
+    var INNER_W = TL_W + LBL_W + 24;
+
+    function yToX(year) { return (TL_MIN - year) * PX_YR; }
+
+    var catOrder = ['king','exile','empire','prophet','temple'];
+    var evByCat = {};
+    catOrder.forEach(function(k){ evByCat[k] = []; });
+    events.forEach(function(ev, i){
+        ev._idx = i;
+        if (evByCat[ev.category]) evByCat[ev.category].push(ev);
+    });
+
     var h = '<div class="history-page">';
     h += '<h1>🗺️ ' + lesson.title + '</h1>';
     h += '<p class="subtitle">' + lesson.description + '</p>';
 
+    /* ════════════════════════════════════════
+       ★ Interactive Horizontal Timeline
+       ════════════════════════════════════════ */
+    h += '<div class="htl-section">';
+    h += '<div style="margin-bottom:10px;">';
+    h += '<h3 style="margin:0 0 4px;font-size:16px;color:#333;">📅 互動歷史時間軸</h3>';
+    h += '<p style="font-size:12px;color:#999;margin:0;">👆 點擊圓點查看事件摘要，再按「查看完整詳情」跳到下方時間線</p>';
+    h += '</div>';
+
+    h += '<div class="htl-scroll-outer">';
+    h += '<div class="htl-scroll-wrap" id="htl-scroll-wrap">';
+    h += '<div class="htl-inner" style="width:' + INNER_W + 'px;position:relative;padding:8px 16px 0 0;">';
+
+    /* ── Empire era bands ── */
+    var eras = [
+        { label:'亞述帝國',    start:700, end:612, cls:'htl-era-assyria' },
+        { label:'新巴比倫帝國', start:612, end:539, cls:'htl-era-babylon' },
+        { label:'波斯帝國',    start:539, end:525, cls:'htl-era-persia'  }
+    ];
+    h += '<div style="position:relative;height:24px;margin-left:' + LBL_W + 'px;margin-bottom:6px;">';
+    eras.forEach(function(era){
+        var l = yToX(era.start);
+        var w = yToX(era.end) - l;
+        h += '<div class="htl-era ' + era.cls + '" style="left:' + l + 'px;width:' + w + 'px;">' + era.label + '</div>';
+    });
+    h += '</div>';
+
+    /* ── Category swim lanes ── */
+    catOrder.forEach(function(ck){
+        var cat = cats[ck];
+        var evts = evByCat[ck];
+        if (!evts.length) return;
+
+        h += '<div class="htl-lane">';
+        h += '<div class="htl-lane-label" style="width:' + LBL_W + 'px;">'
+           + '<span style="font-size:14px;">' + cat.icon + '</span> ' + cat.label + '</div>';
+        h += '<div class="htl-lane-track">';
+        h += '<div class="htl-lane-line"></div>';
+
+        /* track duplicate years in same category */
+        var yearCount = {};
+        evts.forEach(function(ev){
+            var yr = ev.year;
+            if (!yearCount[yr]) yearCount[yr] = 0;
+            var dupOff = yearCount[yr] * 16;
+            yearCount[yr]++;
+
+            var x = yToX(yr) + dupOff;
+
+            /* range bar */
+            if (ev.endYear && ev.endYear < ev.year) {
+                var x2 = yToX(ev.endYear);
+                h += '<div class="htl-range" style="left:' + yToX(yr) + 'px;width:' + (x2 - yToX(yr)) + 'px;'
+                   + 'background:' + cat.bg + ';border-color:' + cat.color + ';"></div>';
+            }
+
+            /* dot */
+            h += '<div class="htl-dot" style="left:' + x + 'px;background:' + cat.color + ';border-color:' + cat.color + ';" '
+               + 'data-evi="' + ev._idx + '" '
+               + 'title="主前 ' + ev.year + ' 年 — ' + ev.title + '"></div>';
+        });
+
+        h += '</div></div>';
+    });
+
+    /* ── Year axis ── */
+    h += '<div class="htl-axis" style="margin-left:' + LBL_W + 'px;">';
+    for (var y = 700; y >= 530; y -= 10) {
+        var xp = yToX(y);
+        h += '<div class="htl-year-tick" style="left:' + xp + 'px;"></div>';
+        if (y % 20 === 0) {
+            h += '<div class="htl-year-label" style="left:' + xp + 'px;">' + y + '</div>';
+        }
+    }
+    h += '</div>';
+
+    h += '</div></div></div>'; /* htl-inner, htl-scroll-wrap, htl-scroll-outer */
+
+    /* scroll hint */
+    h += '<div class="htl-scroll-hint" id="htl-scroll-hint">← 左右滑動瀏覽更多事件 →</div>';
+
+    h += '</div>'; /* htl-section */
+
+    /* ── Popup overlay + card (fixed position) ── */
+    h += '<div class="htl-overlay" id="htl-overlay" onclick="closeHTLPopup()"></div>';
+    h += '<div class="htl-popup" id="htl-popup">';
+    h += '<div class="htl-popup-close" onclick="closeHTLPopup()">✕</div>';
+    h += '<div id="htl-popup-body"></div>';
+    h += '</div>';
+
+    /* ════════════════════════════════════════
+       📊 Prophet Activity Chart (unchanged)
+       ════════════════════════════════════════ */
     var minY = 700, maxY = 530, range = minY - maxY;
     h += '<div class="prophet-chart"><h3>📊 同時期先知的事奉年期</h3>';
     h += '<div class="prophet-year-axis"><span>主前 700</span><span>650</span><span>600</span><span>550</span></div>';
@@ -1336,15 +1541,20 @@ function renderHistory(lesson) {
     });
     h += '</div>';
 
+    /* ════════════════════════════════════════
+       Legend (unchanged)
+       ════════════════════════════════════════ */
     h += '<div class="timeline-legend">';
-    var cats = lesson.categories;
     for (var k in cats) {
         h += '<span class="legend-item"><span class="legend-dot" style="background:' + cats[k].color + '"></span>' + cats[k].icon + ' ' + cats[k].label + '</span>';
     }
     h += '</div>';
 
+    /* ════════════════════════════════════════
+       Vertical Timeline (unchanged)
+       ════════════════════════════════════════ */
     h += '<div class="timeline-container">';
-    lesson.events.forEach(function(ev, i) {
+    events.forEach(function(ev, i) {
         var cat = cats[ev.category];
         var dateStr = '主前 ' + ev.year + ' 年' + (ev.endYear ? ' – ' + ev.endYear + ' 年' : '');
         h += '<div class="timeline-event" id="tev-' + i + '" onclick="toggleTLEvent(' + i + ')">'
@@ -1381,13 +1591,80 @@ function renderHistory(lesson) {
             + '</div></div>';
     });
     h += '</div>';
-    h += '</div>';
-    c.innerHTML = h;
-}
+    h += '</div>'; /* history-page */
 
-window.toggleTLEvent = function(i) {
-    var el = document.getElementById('tev-' + i);
-    if (el) el.classList.toggle('active');
+    c.innerHTML = h;
+
+    /* ════════════════════════════════════════
+       ★ Post-render: attach HTL interactivity
+       ════════════════════════════════════════ */
+    var scrollWrap = document.getElementById('htl-scroll-wrap');
+    if (!scrollWrap) return;
+
+    /* Auto-scroll to ~620 BC (centres the dense 605 area in view) */
+    requestAnimationFrame(function(){
+        var target = yToX(630) - scrollWrap.offsetWidth / 2;
+        scrollWrap.scrollLeft = Math.max(0, target);
+    });
+
+    /* Hide scroll hint after first scroll */
+    var hintEl = document.getElementById('htl-scroll-hint');
+    scrollWrap.addEventListener('scroll', function onFirstScroll() {
+        if (hintEl) { hintEl.style.opacity = '0'; hintEl.style.transition = 'opacity .5s'; }
+        scrollWrap.removeEventListener('scroll', onFirstScroll);
+    }, { passive:true });
+
+    /* Click handler (event delegation) */
+    scrollWrap.addEventListener('click', function(e) {
+        var dot = e.target.closest('.htl-dot');
+        if (!dot) return;
+
+        var evi = parseInt(dot.dataset.evi);
+        var ev = events[evi];
+        if (!ev) return;
+
+        /* ── Haptic feedback ── */
+        if (navigator.vibrate) {
+            try { navigator.vibrate(35); } catch(ex){}
+        }
+
+        /* ── Highlight active dot ── */
+        scrollWrap.querySelectorAll('.htl-dot.active').forEach(function(d){ d.classList.remove('active'); });
+        dot.classList.add('active');
+
+        /* ── Build popup content ── */
+        var cat = cats[ev.category];
+        var pb = '';
+        pb += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
+        pb += '<span class="category-badge" style="background:' + cat.bg + ';color:' + cat.color + ';padding:4px 12px;font-size:12px;">' + cat.icon + ' ' + cat.label + '</span>';
+        pb += '<span style="font-size:13px;color:#888;">主前 ' + ev.year + ' 年' + (ev.endYear ? '–' + ev.endYear + ' 年' : '') + '</span>';
+        pb += '</div>';
+        pb += '<h4 style="margin:0 0 2px;font-size:18px;color:#222;line-height:1.4;">' + ev.title + '</h4>';
+        if (ev.titleEn) pb += '<div style="font-size:12px;color:#aaa;margin-bottom:10px;">' + ev.titleEn + '</div>';
+        else pb += '<div style="margin-bottom:10px;"></div>';
+        pb += '<p style="font-size:14px;color:#444;line-height:1.65;margin:0 0 10px;">' + ev.description + '</p>';
+
+        if (ev.keyFigures && ev.keyFigures.length) {
+            pb += '<div style="font-size:12px;color:#666;margin-bottom:8px;">👤 ';
+            pb += ev.keyFigures.slice(0, 3).join('、');
+            if (ev.keyFigures.length > 3) pb += ' 等';
+            pb += '</div>';
+        }
+
+        if (ev.references && ev.references.length) {
+            pb += '<div class="htl-popup-refs">';
+            ev.references.forEach(function(ref){ pb += '<span class="htl-popup-ref-tag">📖 ' + ref + '</span>'; });
+            pb += '</div>';
+        }
+
+        pb += '<div style="margin-top:14px;">';
+        pb += '<button class="htl-popup-btn" onclick="scrollToTLEvent(' + evi + ')">📜 查看完整詳情 ↓</button>';
+        pb += '</div>';
+
+        document.getElementById('htl-popup-body').innerHTML = pb;
+        document.getElementById('htl-overlay').classList.add('show');
+        document.getElementById('htl-popup').classList.add('show');
+    });
 };
 
 // ==========================================
