@@ -67,7 +67,7 @@
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson03')) return;
     window.LESSONS_DATA.push({
-        id: 'lesson03',
+        id: 'lesson05',
         title: '第三課',
         subtitle: '屬天視角的歷史——四獸與公綿羊/公山羊',
         ref: '但以理書 7:1-28, 8:1-27',
@@ -85,7 +85,7 @@
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson04')) return;
     window.LESSONS_DATA.push({
-        id: 'lesson04',
+        id: 'lesson06',
         title: '第四課',
         subtitle: '但以理的祈禱與七十個七',
         ref: '但以理書 9:1-27',
@@ -103,7 +103,7 @@
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson05')) return;
     window.LESSONS_DATA.push({
-        id: 'lesson05',
+        id: 'lesson07',
         title: '第五課',
         subtitle: '屬靈爭戰與南北朝的衝突',
         ref: '但以理書 10:1-11:45',
@@ -121,7 +121,7 @@
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson06')) return;
     window.LESSONS_DATA.push({
-        id: 'lesson06',
+        id: 'lesson08',
         title: '第六課',
         subtitle: '末世的結局與全書總結',
         ref: '但以理書 12:1-13',
