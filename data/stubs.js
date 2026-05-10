@@ -65,7 +65,7 @@
 
 // --- 第三課：但以理書 7 & 8 ---
 (function() {
-    if(window.LESSONS_DATA.some(l => l.id === 'lesson03')) return;
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson05')) return;
     window.LESSONS_DATA.push({
         id: 'lesson05',
         title: '第三課',
@@ -83,7 +83,7 @@
 
 // --- 第四課：但以理書 9 ---
 (function() {
-    if(window.LESSONS_DATA.some(l => l.id === 'lesson04')) return;
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson06')) return;
     window.LESSONS_DATA.push({
         id: 'lesson06',
         title: '第四課',
@@ -101,7 +101,7 @@
 
 // --- 第五課：但以理書 10 & 11 ---
 (function() {
-    if(window.LESSONS_DATA.some(l => l.id === 'lesson05')) return;
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson07')) return;
     window.LESSONS_DATA.push({
         id: 'lesson07',
         title: '第五課',
@@ -119,7 +119,7 @@
 
 // --- 第六課：但以理書 12 & 全書總結 ---
 (function() {
-    if(window.LESSONS_DATA.some(l => l.id === 'lesson06')) return;
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson08')) return;
     window.LESSONS_DATA.push({
         id: 'lesson08',
         title: '第六課',
