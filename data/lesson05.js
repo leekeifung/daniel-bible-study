@@ -126,7 +126,7 @@ window.LESSONS_DATA.push({
 '<p>關於第四獸是誰，學術界主要有兩種觀點（取決於如何計算前三個國度）：</p>' +
 '<ul>' +
 '<li><strong>羅馬觀點 (Roman View)：</strong>福音派傳統常見觀點。認為第四獸是羅馬帝國，小角可能指向敵基督或羅馬後的權勢。</li>' +
-'<li><strong>希臘觀點 (Greek View)：</strong>認為第四獸是希臘帝國，小角是安提阿哥四世 (Antiochus IV Epiphanes)。OT366 課程教授指出，許多福音派學者也支持第二種希臘觀點，認為其文本支持度更強。</li>' +
+'<li><strong>希臘觀點 (Greek View)：</strong>認為第四獸是希臘帝國，小角是安提阿古四世 (Antiochus IV Epiphanes)。OT366 課程教授指出，許多福音派學者也支持第二種希臘觀點，認為其文本支持度更強。</li>' +
 '</ul>' +
 '<div class="highlight-box">' +
 '<p><strong>💡 核心結論</strong></p>' +
