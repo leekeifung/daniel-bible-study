@@ -130,7 +130,7 @@ window.LESSONS_DATA.push({
 '<p>但對應的模式是：<strong>神始終掌權</strong>。邪惡被拴住了。祂必摧毀邪惡、建立祂的國度、與祂的聖民永遠一同掌權。</p>' +
 '<div class="highlight-box">' +
 '<p><strong>📘 但以理書的核心信息 (OT366 Segment 61)</strong></p>' +
-'<p>「The power of the book is that no matter how hellish the world may get—and it will—our God is on the throne. We can endure whatever suffering we face—and we will face suffering. Someday it will end... Take heart. Press on. Be faithful. That\'s what the book of Daniel is about.」</p>' +
+'<p>「這卷書的大能在此：無論這世界變得多麼險惡——而它確實會變糟——我們的神依然坐著為王。我們能忍受所面臨的任何苦難——而我們也注定會經歷苦難。苦難終有結束的一天……要放心壯膽，要努力向前，要至死忠心。這正是《但以理書》的核心要旨。」</p>' +
 '</div>'
         }
     ],
@@ -190,6 +190,7 @@ window.LESSONS_DATA.push({
         ],
 
         /* ---------- 應用題 ---------- */
+        
         application: [
             {
                 id: 'app1',
