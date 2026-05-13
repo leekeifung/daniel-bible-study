@@ -58,7 +58,7 @@ window.LESSONS_DATA.push({
         {
             title: '📋 第七章閱讀指南',
             icon: '📖',
-            defaultOpen: true,
+            defaultOpen: false,
             html: '<p style="margin:0 0 10px;color:#555;font-size:14px;">在閱讀經文時，請留意以下五個要點：</p>' +
 '<ol style="padding-left:20px;line-height:1.8;">' +
 '<li><strong>留意本章在全書的「樞紐」地位：</strong>文學結構上，它是 2-7 章亞蘭文交叉對稱（Chiasm）的結尾，呼應第 2 章的四國巨像；但在體裁上，它從 1-6 章的「歷史敘事」轉向了 8-12 章的「啟示文學」（Apocalyptic Literature）。</li>' +
