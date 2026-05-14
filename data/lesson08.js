@@ -242,7 +242,6 @@ window.LESSONS_DATA.push({
                 '右邊有較多選項（8 個選項、5 個空格）——不是所有選項都會被使用。</p>' +
                 '<p style="margin:0;font-size:13px;color:#888;">💡 桌面：拖放 ｜ 手機：先點選選項（高亮），再點空格放入 ｜ 點已填空格可清除</p>',
             dragData: {
-    /* ── 自訂標籤 ── */
     headerLeft:   '經文段落',
     headerRight:  '你的配對',
     resultHeader: '經文段落',
@@ -253,7 +252,6 @@ window.LESSONS_DATA.push({
     viewBFull:    '學者共識（歷史對應）',
     note: '💡 <strong>OT366 核心提醒 (Segment 82)：</strong>不要迷失在歷史人物的對號入座或末世日期的計算中。但以理書的信息是：<strong>神擁有絕對的主權</strong>，祂必終結一切邪惡，帶領祂的子民進入永恆的國度——「你必安息，到了末期，你必起來，享受你的福分。」(12:13)',
 
-    /* ── 原有資料不變 ── */
     parts: [
         { id: 'sec1', emoji: '①', label: '11:3-4「勇敢的王」' },
         { id: 'sec2', emoji: '②', label: '11:5-20「南方王」' },
@@ -261,7 +259,16 @@ window.LESSONS_DATA.push({
         { id: 'sec4', emoji: '④', label: '11:21「卑鄙的人」' },
         { id: 'sec5', emoji: '⑤', label: '12:1「天使長」' }
     ],
-    options: [ /* ... 不變 ... */ ],
+    options: [
+        { id: 'alexander',  label: '亞歷山大大帝' },
+        { id: 'ptolemies',  label: '多利買王朝（埃及）' },
+        { id: 'seleucids',  label: '西流基王朝（敘利亞）' },
+        { id: 'antiochus',  label: '安提阿哥四世' },
+        { id: 'michael',    label: '米迦勒' },
+        { id: 'nebuch',     label: '尼布甲尼撒' },
+        { id: 'cyrus',      label: '波斯王居魯士' },
+        { id: 'antichrist', label: '末世敵基督' }
+    ],
     greekView: ['alexander', 'ptolemies', 'seleucids', 'antiochus', 'michael'],
     romanView: ['alexander', 'ptolemies', 'seleucids', 'antiochus', 'michael']
 }
