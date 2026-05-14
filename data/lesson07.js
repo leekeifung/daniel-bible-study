@@ -166,7 +166,7 @@ window.LESSONS_DATA.push({
     viewAFull:    '希臘觀（歷史非彌賽亞觀）',
     viewBLabel:   '羅馬觀',
     viewBFull:    '羅馬觀（歷史彌賽亞觀）',
-    note: '💡 <strong>OT366 核心提醒：</strong>無論採取哪種觀點，Wendy Widder 提醒我們「不要見樹不見林」——重點不在辨認第二至第四國是誰，而在<strong>第五個國度——神永恆的國度</strong>，必打碎一切人類帝國，存到永遠！',
+    note: '💡 <strong>OT366 核心提醒：</strong>禱告對信仰生活至關重要、神是人類歷史的主宰、悔改是與神和好的先決條件、神忠於祂拯救和恢復子民的聖約應許。',
 
     parts: [
         { id: 'issue1', emoji: '①', label: '「出令」是指？' },
