@@ -158,30 +158,29 @@ window.LESSONS_DATA.push({
                 '<strong>末世彌賽亞觀</strong>或<strong>歷史非彌賽亞觀</strong>都是合理的學術解讀。</p>' +
                 '<p style="margin:0;font-size:13px;color:#888;">💡 桌面：拖放 ｜ 手機：先點選選項（高亮），再點空格放入 ｜ 點已填空格可清除</p>',
             dragData: {
-                parts: [
-                    { id: 'issue1', emoji: '①', label: '「出令」是指？' },
-                    { id: 'issue2', emoji: '②', label: '7 與 62 的讀法？' },
-                    { id: 'issue3', emoji: '③', label: '第一位受膏者？' },
-                    { id: 'issue4', emoji: '④', label: '第二位受膏者？' },
-                    { id: 'issue5', emoji: '⑤', label: '第七十個七？' }
-                ],
-                options: [
-                    { id: 'jeremiah',      label: '耶利米的預言（神的話）' },
-                    { id: 'artaxerxes',    label: '波斯君王的詔書（王的令）' },
-                    { id: 'combined',      label: '合併讀為 69 個七' },
-                    { id: 'separate',      label: '分開讀為 7 + 62' },
-                    { id: 'cyrus',         label: '古列 (或所羅巴伯/約書亞)' },
-                    { id: 'jesus',         label: '耶穌基督' },
-                    { id: 'onias',         label: '大祭司奧尼亞三世' },
-                    { id: 'antiochus',     label: '安提阿古四世時期(主前 167-164 年)' },
-                    { id: 'future',        label: '公元 70 年(羅馬提多毀滅聖殿)' },
-                    { id: 'jesus-cut',     label: '耶穌基督(被釘十字架/剪除)' }
-                ],
-                // 末世彌賽亞觀（字面派）的配對
-                greekView: ['jeremiah', 'separate', 'cyrus', 'onias', 'antiochus'],
-                // 歷史非彌賽亞觀（字面派）的配對
-                romanView: ['artaxerxes', 'combined', 'jesus', 'jesus-cut', 'future']
-            }
+    /* ── 自訂標籤 ── */
+    headerLeft:   '解釋難題',
+    headerRight:  '你的配對',
+    resultHeader: '解釋難題',
+    optionsTitle: '可選解釋',
+    viewALabel:   '希臘觀',
+    viewAFull:    '希臘觀（歷史非彌賽亞觀）',
+    viewBLabel:   '羅馬觀',
+    viewBFull:    '羅馬觀（歷史彌賽亞觀）',
+    note: '💡 <strong>OT366 核心提醒 (Segment 76)：</strong>無論採取哪種觀點，但以理書第九章的核心信息是一致的：<strong>禱告</strong>對信仰生活至關重要、<strong>神掌管</strong>人類歷史、<strong>悔改</strong>是與神和好的先決條件、<strong>神忠於祂的約</strong>，必拯救和恢復祂的子民。即使經文的細節不確定，這些核心真理卻是清楚的。',
+
+    /* ── 原有資料不變 ── */
+    parts: [
+        { id: 'issue1', emoji: '①', label: '「出令」是指？' },
+        { id: 'issue2', emoji: '②', label: '7 與 62 的讀法？' },
+        { id: 'issue3', emoji: '③', label: '第一位受膏者？' },
+        { id: 'issue4', emoji: '④', label: '第二位受膏者？' },
+        { id: 'issue5', emoji: '⑤', label: '第七十個七？' }
+    ],
+    options: [ /* ... 不變 ... */ ],
+    greekView: ['jeremiah', 'separate', 'cyrus', 'onias', 'antiochus'],
+    romanView: ['artaxerxes', 'combined', 'jesus', 'jesus-cut', 'future']
+}
         }
     ],
 
