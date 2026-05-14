@@ -119,7 +119,7 @@ window.LESSONS_DATA.push({
 '<li><strong>② 「7」與「62」分開還是合併？</strong>——合併讀為 69 個七（指向基督）；分開讀為兩段（7 指歸回，62 指後續時期）。</li>' +
 '<li><strong>③ 第一位「受膏者」(v.25) 是誰？</strong>——古列/所羅巴伯/約書亞？還是耶穌？</li>' +
 '<li><strong>④ 第二位「受膏者」(v.26) 是誰？</strong>——耶穌（被釘十字架）？還是大祭司奧尼亞三世（主前 171 年被殺）？</li>' +
-'<li><strong>⑤ 第七十個七何時發生？</strong>——安提阿哥四世時期（歷史觀）？基督時代至主後 70 年（歷史彌賽亞觀）？還是未來末世（末世論觀）？</li>' +
+'<li><strong>⑤ 第七十個七何時發生？</strong>——安提阿古四世時期（歷史觀）？基督時代至主後 70 年（歷史彌賽亞觀）？還是未來末世（末世論觀）？</li>' +
 '</ul>' +
 '</div>' +
 '<h4 style="color:#00897b;margin:16px 0 8px;">4. 主要解釋觀點的總覽 (Segments 72-75)</h4>' +
@@ -130,7 +130,7 @@ window.LESSONS_DATA.push({
 '</ul></li>' +
 '<li><strong>II. 歷史觀點 (Historical)：</strong>所有事件已在歷史中應驗。<ul>' +
 '<li>A. 彌賽亞觀（羅馬觀）：70 個七止於主後 70 年羅馬毀滅耶路撒冷。</li>' +
-'<li>B. 非彌賽亞觀（馬加比觀）：(1) 字面派；(2) 象徵派。70 個七止於安提阿哥四世。</li>' +
+'<li>B. 非彌賽亞觀（馬加比觀）：(1) 字面派；(2) 象徵派。70 個七止於安提阿古四世。</li>' +
 '</ul></li>' +
 '</ul>' +
 '<div class="highlight-box">' +
@@ -167,20 +167,20 @@ window.LESSONS_DATA.push({
                 ],
                 options: [
                     { id: 'jeremiah',      label: '耶利米的預言（神的話）' },
-                    { id: 'artaxerxes',    label: '亞達薛西的詔書（王的令）' },
+                    { id: 'artaxerxes',    label: '波斯君王的詔書（王的令）' },
                     { id: 'combined',      label: '合併讀為 69 個七' },
                     { id: 'separate',      label: '分開讀為 7 + 62' },
-                    { id: 'cyrus',         label: '古列 / 所羅巴伯' },
+                    { id: 'cyrus',         label: '古列 (或所羅巴伯/約書亞)' },
                     { id: 'jesus',         label: '耶穌基督' },
                     { id: 'onias',         label: '大祭司奧尼亞三世' },
-                    { id: 'antiochus',     label: '安提阿哥四世時期' },
-                    { id: 'future',        label: '未來末世（敵基督）' },
-                    { id: 'jesus-cut',     label: '耶穌（被釘十字架）' }
+                    { id: 'antiochus',     label: '安提阿古四世時期(主前 167-164 年)' },
+                    { id: 'future',        label: '公元 70 年(羅馬提多毀滅聖殿)' },
+                    { id: 'jesus-cut',     label: '耶穌基督(被釘十字架/剪除)' }
                 ],
                 // 末世彌賽亞觀（字面派）的配對
-                greekView: ['artaxerxes', 'combined', 'jesus', 'jesus-cut', 'future'],
+                greekView: ['jeremiah', 'separate', 'cyrus', 'onias', 'antiochus'],
                 // 歷史非彌賽亞觀（字面派）的配對
-                romanView: ['jeremiah', 'separate', 'cyrus', 'onias', 'antiochus']
+                romanView: ['artaxerxes', 'combined', 'jesus', 'jesus-cut', 'future']
             }
         }
     ],
@@ -223,7 +223,7 @@ window.LESSONS_DATA.push({
                 id: 'int2',
                 text: '關於 v.25-26 的「受膏者」，OT366 介紹了多種觀點。請討論以下兩種主要觀點，以及無論採取哪種觀點，經文傳遞了什麼共同的信息：\n• 觀點 A（歷史/馬加比觀）：受膏者指當時的歷史人物（如古列或奧尼亞三世）\n• 觀點 B（末世/彌賽亞觀）：受膏者指耶穌基督',
                 hint: 'OT366 (Segment 76) 的結論提到：無論哪種觀點，核心信息是一致的。想想什麼是「不受觀點影響」的確定真理。',
-                reference: '<b>【觀點 A：歷史/馬加比觀】</b><br>• 第一位受膏者 (v.25) = 古列（被擄歸回的領袖）<br>• 第二位受膏者 (v.26)「被剪除」 = 大祭司奧尼亞三世（主前 171 年被殺）<br>• 第七十個七 = 安提阿哥四世的恐怖統治（主前 167-164）<br>• 優點：與第 8 章的歷史指涉一致；不需要合併 7+62<br><br><b>【觀點 B：末世/彌賽亞觀】</b><br>• 受膏者 (v.25-26) = 耶穌基督<br>• 「被剪除」= 十字架受難<br>• 第七十個七 = 末世大災難/敵基督的統治<br>• 優點：與新約對但以理書的引用一致（太 24:15）<br><br><b>【共同的核心信息 (Segment 76)】</b><br>OT366 總結：無論哪種觀點——<br>① <b>禱告</b>在信仰生活中至關重要<br>② <b>神掌管</b>人類歷史的進程<br>③ <b>悔改</b>是與神和好的前提<br>④ <b>神忠於祂的約</b>，必拯救祂的子民<br><br>「The complexity of this text should caution us against being dogmatic about any one position.」'
+                reference: '<b>【觀點 A：歷史/馬加比觀】</b><br>• 第一位受膏者 (v.25) = 古列（被擄歸回的領袖）<br>• 第二位受膏者 (v.26)「被剪除」 = 大祭司奧尼亞三世（主前 171 年被殺）<br>• 第七十個七 = 安提阿古四世的恐怖統治（主前 167-164）<br>• 優點：與第 8 章的歷史指涉一致；不需要合併 7+62<br><br><b>【觀點 B：末世/彌賽亞觀】</b><br>• 受膏者 (v.25-26) = 耶穌基督<br>• 「被剪除」= 十字架受難<br>• 第七十個七 = 末世大災難/敵基督的統治<br>• 優點：與新約對但以理書的引用一致（太 24:15）<br><br><b>【共同的核心信息 (Segment 76)】</b><br>OT366 總結：無論哪種觀點——<br>① <b>禱告</b>在信仰生活中至關重要<br>② <b>神掌管</b>人類歷史的進程<br>③ <b>悔改</b>是與神和好的前提<br>④ <b>神忠於祂的約</b>，必拯救祂的子民<br><br>「The complexity of this text should caution us against being dogmatic about any one position.」'
             },
             {
                 id: 'int3',
@@ -368,7 +368,7 @@ window.LESSONS_DATA.push({
                 { left: '難題二：7 與 62', right: '合併讀為 69 還是分開讀？' },
                 { left: '難題三：第一位受膏者', right: '古列/所羅巴伯還是耶穌？' },
                 { left: '難題四：第二位受膏者', right: '耶穌（十架）還是奧尼亞三世？' },
-                { left: '難題五：第七十個七', right: '安提阿哥時期還是未來末世？' }
+                { left: '難題五：第七十個七', right: '安提阿古時期還是未來末世？' }
             ]
         }
     ]
