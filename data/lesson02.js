@@ -423,7 +423,7 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
             '.sd-tbl{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}' +
             '.sd-tbl th,.sd-tbl td{padding:7px 8px;border:1px solid #dee2e6;text-align:left}' +
             '.sd-tbl th{background:#f1f3f5;font-weight:700}' +
-            '@media(max-width:1200px){' +
+            '@media(max-width:640px){' +
                 '.sd-layout{flex-direction:column;gap:12px}' +
                 '.sd-opts{flex-direction:row;flex-wrap:wrap}' +
                 '.sd-opts-title{width:100%}' +
