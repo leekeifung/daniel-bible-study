@@ -135,14 +135,14 @@ window.LESSONS_DATA.push({
 '</ul>' +
 '<div class="highlight-box">' +
 '<p><strong>💡 OT366 的核心提醒 (Segment 76)</strong></p>' +
-'<p>「Whether the 490 years are literal or symbolic, whether they are an apocalyptic report of events current with the original readers of Daniel or they are a prophecy of Jesus\' advents, the message of Dan 9 is consistent with the rest of the book:</p>' +
+'<p>「無論這 490 年是字面上的還是象徵性的，無論它們是針對但以理書最初讀者當時事件的啟示性紀錄，還是對耶穌降臨的預言，但以理書第九章的信息都與全書的其他部分保持一致：</p>' +
 '<ol>' +
-'<li><strong>Prayer</strong> is vital to the life of faith.</li>' +
-'<li><strong>God is sovereign</strong> ruler of human history.</li>' +
-'<li><strong>Repentance</strong> is an essential prerequisite for reconciliation with God.</li>' +
-'<li><strong>God is faithful</strong> to His covenantal promises to deliver and restore His people.</li>' +
+'<li><strong>禱告</strong>對信仰生活至關重要。</li>' +
+'<li><strong>神是主宰</strong>人類歷史的最高統治者。</li>' +
+'<li><strong>悔改</strong>是與神和好的必要先決條件。</li>' +
+'<li><strong>神是信實的</strong>，必成就祂拯救與恢復其子民的聖約應許。</li>' +
 '</ol>' +
-'<p>These matters are clear even when the details of the text may not be.」</p>' +
+'<p>即使經文的細節可能不夠清晰，這些真理卻是顯而易見的。」</p>' +
 '</div>'
         },
         // ── 互動練習：七十個七的觀點配對 ──
