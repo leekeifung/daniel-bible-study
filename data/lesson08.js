@@ -142,7 +142,7 @@ window.LESSONS_DATA.push({
 '<p><strong>🔍 OT366 關於屬靈爭戰的兩點觀察</strong></p>' +
 '<ul>' +
 '<li><strong>天上與地上的鏡像：</strong>靈界的爭戰似乎反映了（或影響了）地上的政治局勢。我們是更大宇宙故事的一部分，而神始終掌權。</li>' +
-'<li><strong>⚠️ 謹慎的提醒：</strong>這類描述在聖經中<b>極為罕見</b>。OT366 明確警告：「We should be careful not to speak where God has been silent.」我們不應試圖繪製「靈界地圖」或推測未啟示的細節。信徒的任務是<b>順服已知的真理</b>，而非研究魔鬼的層級。</li>' +
+'<li><strong>⚠️ 謹慎的提醒：</strong>這類描述在聖經中<b>極為罕見</b>。OT366 明確警告：「我們當謹慎，不應在主尚未啟示的領域妄言。」我們不應試圖繪製「靈界地圖」或推測未啟示的細節。信徒的任務是<b>順服已知的真理</b>，而非研究魔鬼的層級。</li>' +
 '</ul>' +
 '</div>' +
 '<h4 style="color:#00897b;margin:16px 0 8px;">3. 但以理的身體反應</h4>' +
