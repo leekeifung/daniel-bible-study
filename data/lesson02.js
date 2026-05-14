@@ -368,7 +368,7 @@ window.LESSONS_DATA.push({
     ]
 });
 /* =====================================================
-   renderStatueDrag — 巨像國度配對互動練習渲染器
+   renderStatueDrag — 通用觀點配對互動練習渲染器
    可由主程式在偵測到 section.type === 'statue-drag' 時呼叫：
      window.renderStatueDrag(containerEl, section.dragData);
    ===================================================== */
@@ -377,6 +377,17 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
     var options   = dragData.options;
     var greekView = dragData.greekView;
     var romanView = dragData.romanView;
+
+    /* ── configurable labels (lesson02 defaults for backward compat) ── */
+    var headerLeft   = dragData.headerLeft   || '巨像部分';
+    var headerRight  = dragData.headerRight  || '你的配對';
+    var resultHeader = dragData.resultHeader || '巨像';
+    var optionsTitle = dragData.optionsTitle || '可選國度';
+    var viewALabel   = dragData.viewALabel   || '希臘觀';
+    var viewAFull    = dragData.viewAFull    || '希臘觀（Widder 傾向的解讀）';
+    var viewBLabel   = dragData.viewBLabel   || '羅馬觀';
+    var viewBFull    = dragData.viewBFull    || '羅馬觀（傳統派解讀）';
+    var resultNote   = dragData.note         || '💡 <strong>OT366 核心提醒：</strong>無論採取哪種觀點，Wendy Widder 提醒我們「不要見樹不見林」——重點不在辨認第二至第四國是誰，而在<strong>第五個國度——神永恆的國度</strong>，必打碎一切人類帝國，存到永遠！';
 
     /* ── state ── */
     var slots      = new Array(parts.length).fill(null);
@@ -435,33 +446,28 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
     function render() {
         container.innerHTML = '';
 
-        /* — main flex layout — */
         var layout = document.createElement('div');
         layout.className = 'sd-layout';
 
-        /* — left + middle: pairs grid — */
         var pairs = document.createElement('div');
         pairs.className = 'sd-pairs';
 
-        var h1 = document.createElement('div'); h1.className = 'sd-hdr'; h1.textContent = '巨像部分';
-        var h2 = document.createElement('div'); h2.className = 'sd-hdr'; h2.textContent = '你的配對';
+        var h1 = document.createElement('div'); h1.className = 'sd-hdr'; h1.textContent = headerLeft;
+        var h2 = document.createElement('div'); h2.className = 'sd-hdr'; h2.textContent = headerRight;
         pairs.appendChild(h1);
         pairs.appendChild(h2);
 
         parts.forEach(function (part, i) {
-            /* part cell */
             var pEl = document.createElement('div');
             pEl.className = 'sd-part';
             pEl.innerHTML = part.emoji + ' ' + part.label;
             pairs.appendChild(pEl);
 
-            /* slot cell */
             var sEl = document.createElement('div');
             sEl.className = 'sd-slot' + (slots[i] ? ' filled' : '');
             sEl.textContent = slots[i] ? getLabel(slots[i]) : '拖放或點選';
             sEl.dataset.idx = i;
 
-            /* if filled, allow dragging out */
             if (slots[i]) {
                 sEl.draggable = true;
                 (function (idx) {
@@ -472,7 +478,6 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
                 })(i);
             }
 
-            /* drop target */
             sEl.addEventListener('dragover', function (e) { e.preventDefault(); sEl.classList.add('drag-over'); });
             sEl.addEventListener('dragleave', function ()  { sEl.classList.remove('drag-over'); });
             (function (idx) {
@@ -491,13 +496,12 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
         });
         layout.appendChild(pairs);
 
-        /* — right: options — */
         var optsWrap = document.createElement('div');
         optsWrap.className = 'sd-opts';
 
         var oTitle = document.createElement('div');
         oTitle.className = 'sd-opts-title';
-        oTitle.textContent = '可選國度';
+        oTitle.textContent = optionsTitle;
         optsWrap.appendChild(oTitle);
 
         options.forEach(function (opt) {
@@ -520,7 +524,6 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
             optsWrap.appendChild(chip);
         });
 
-        /* drop back to options = remove from slot */
         optsWrap.addEventListener('dragover', function (e) { e.preventDefault(); });
         optsWrap.addEventListener('drop', function (e) {
             e.preventDefault();
@@ -532,7 +535,6 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
         layout.appendChild(optsWrap);
         container.appendChild(layout);
 
-        /* — action buttons — */
         var actions = document.createElement('div');
         actions.className = 'sd-actions';
 
@@ -550,7 +552,6 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
 
         container.appendChild(actions);
 
-        /* — result — */
         if (showResult) {
             var rd = document.createElement('div');
             rd.className = 'sd-result';
@@ -561,10 +562,8 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
 
     /* ── drop logic ── */
     function doDrop(slotIdx, itemId) {
-        /* remove from any current slot */
         var ex = slots.indexOf(itemId);
         if (ex !== -1) slots[ex] = null;
-        /* place (displaced item auto-returns to options) */
         slots[slotIdx] = itemId;
         showResult = false;
         render();
@@ -577,29 +576,30 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
             showResult = true; render(); return;
         }
 
+        var total = parts.length;
         var gM = 0, rM = 0;
-        for (var i = 0; i < slots.length; i++) {
+        for (var i = 0; i < total; i++) {
             if (slots[i] === greekView[i]) gM++;
             if (slots[i] === romanView[i]) rM++;
         }
 
         var verdict, vColor;
-        if (gM === 5) {
-            verdict = '✅ 完全符合希臘觀（Widder 傾向的解讀）';
+        if (gM === total) {
+            verdict = '✅ 完全符合' + viewAFull;
             vColor  = '#00b894';
-        } else if (rM === 5) {
-            verdict = '✅ 完全符合羅馬觀（傳統派解讀）';
+        } else if (rM === total) {
+            verdict = '✅ 完全符合' + viewBFull;
             vColor  = '#0984e3';
         } else {
-            var closer = gM > rM ? '希臘觀' : rM > gM ? '羅馬觀' : '兩者皆未完全符合';
-            verdict = '🔍 最接近' + closer + '（希臘觀 ' + gM + '/5，羅馬觀 ' + rM + '/5）';
+            var closer = gM > rM ? viewALabel : rM > gM ? viewBLabel : '兩者皆未完全符合';
+            verdict = '🔍 最接近' + closer + '（' + viewALabel + ' ' + gM + '/' + total + '，' + viewBLabel + ' ' + rM + '/' + total + '）';
             vColor  = '#636e72';
         }
 
         var h = '<h4 style="margin:0 0 8px;">配對結果</h4>';
         h += '<div style="display:inline-block;padding:5px 14px;border-radius:20px;background:#f1f3f5;font-weight:700;font-size:13px;color:' + vColor + ';">' + verdict + '</div>';
 
-        h += '<table class="sd-tbl"><tr><th>巨像</th><th>你的配對</th><th>希臘觀</th><th>羅馬觀</th></tr>';
+        h += '<table class="sd-tbl"><tr><th>' + resultHeader + '</th><th>你的配對</th><th>' + viewALabel + '</th><th>' + viewBLabel + '</th></tr>';
         parts.forEach(function (p, i) {
             var gOk = (slots[i] === greekView[i]) ? ' ✅' : '';
             var rOk = (slots[i] === romanView[i]) ? ' ✅' : '';
@@ -612,7 +612,7 @@ window.renderStatueDrag = window.renderStatueDrag || function (container, dragDa
         });
         h += '</table>';
 
-        h += '<div class="sd-note">💡 <strong>OT366 核心提醒：</strong>無論採取哪種觀點，Wendy Widder 提醒我們「不要見樹不見林」——重點不在辨認第二至第四國是誰，而在<strong>第五個國度——神永恆的國度</strong>，必打碎一切人類帝國，存到永遠！</div>';
+        h += '<div class="sd-note">' + resultNote + '</div>';
 
         resultHtml = h;
         showResult = true;
