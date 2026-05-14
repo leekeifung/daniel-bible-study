@@ -189,11 +189,11 @@ window.LESSONS_DATA.push({
 '</ul>' +
 '<div class="highlight-box">' +
 '<p><strong>🔭 預言的「望遠鏡效應」(Telescoping)</strong></p>' +
-'<p>OT366 (Segment 80) 引用 Tremper Longman 的精彩比喻：「正如詩篇中理想的大衛王根基於歷史的大衛卻<b>預期了</b>彌賽亞的榮耀，但以理書末後的惡王根基於歷史的安提阿古卻<b>預期了</b>敵基督的恐怖。」</p>' +
+'<p>OT366 引用 Tremper Longman 的精彩比喻：「正如詩篇中理想的大衛王根基於歷史的大衛卻<b>預期了</b>彌賽亞的榮耀，但以理書末後的惡王根基於歷史的安提阿古卻<b>預期了</b>敵基督的恐怖。」</p>' +
 '<p>但以理書展示了一個<b>邪惡升級的模式</b>：尼布甲尼撒 → 伯沙撒 → 安提阿古四世 → ？（敵基督）。我們不應驚訝歷史上的「小角」不是最壞的——更壞的還在後頭。但同樣，神的主權也在每一階段彰顯。</p>' +
 '</div>' +
 '<h4 style="color:#00897b;margin:16px 0 8px;">2. 復活與大艱難 (12:1-4)</h4>' +
-'<p>OT366 (Segment 81) 指出：12:1-4 是<strong>舊約中最清晰的復活經文之一</strong>。</p>' +
+'<p>OT366  指出：12:1-4 是<strong>舊約中最清晰的復活經文之一</strong>。</p>' +
 '<ul>' +
 '<li><strong>米迦勒站起來</strong>：保護神的百姓度過前所未有的「大艱難」。</li>' +
 '<li><strong>復活是雙向的</strong>：「睡在塵埃中的，必有多人醒過來；其中有得永生的，有受羞辱永遠被憎惡的。」(12:2)</li>' +
@@ -212,7 +212,7 @@ window.LESSONS_DATA.push({
             icon: '🌍',
             defaultOpen: false,
             html: '<h4 style="color:#00897b;margin:0 0 8px;">全書回顧：從被擄到永恆國度</h4>' +
-'<p>OT366 最後一講 (Segment 82) 以全書的宏觀視角作結。以下是 Wendy Widder 的核心總結：</p>' +
+'<p>參考OT366 Wendy 以全書的宏觀視角作結。以下是 Wendy Widder 的核心總結：</p>' +
 '<div class="highlight-box">' +
 '<p><strong>📖 但以理書的核心信息</strong></p>' +
 '<ul>' +
@@ -250,7 +250,7 @@ window.LESSONS_DATA.push({
     viewAFull:    '學者共識（歷史對應）',
     viewBLabel:   '學者共識',
     viewBFull:    '學者共識（歷史對應）',
-    note: '💡 <strong>OT366 核心提醒 (Segment 82)：</strong>不要迷失在歷史人物的對號入座或末世日期的計算中。但以理書的信息是：<strong>神擁有絕對的主權</strong>，祂必終結一切邪惡，帶領祂的子民進入永恆的國度——「你必安息，到了末期，你必起來，享受你的福分。」(12:13)',
+    note: '💡 <strong>OT366 核心提醒：</strong>不要迷失在歷史人物的對號入座或末世日期的計算中。但以理書的信息是：<strong>神擁有絕對的主權</strong>，祂必終結一切邪惡，帶領祂的子民進入永恆的國度——「你必安息，到了末期，你必起來，享受你的福分。」(12:13)',
 
     parts: [
         { id: 'sec1', emoji: '①', label: '11:3-4「勇敢的王」' },
@@ -305,14 +305,14 @@ window.LESSONS_DATA.push({
         interpretation: [
             {
                 id: 'int1',
-                text: 'OT366 (Segment 77) 提醒我們：對於屬靈爭戰，聖經給予的細節極少，「the rarity of such description should caution us against saying too much」。\n(a) 為什麼過度關注靈界的細節可能是危險或不必要的？\n(b) 我們應如何在「承認靈界真實性」與「專注於順服神」之間取得平衡？',
-                hint: 'OT366 (Segment 77)：「It is not our task to try mapping and charting that world so that we can better fight it... Our task as believers is obedience to what we do know very clearly from Scripture.」',
+                text: 'OT366 提醒我們：對於屬靈爭戰，聖經給予的細節極少，「the rarity of such description should caution us against saying too much」。\n(a) 為什麼過度關注靈界的細節可能是危險或不必要的？\n(b) 我們應如何在「承認靈界真實性」與「專注於順服神」之間取得平衡？',
+                hint: 'OT366 ：「It is not our task to try mapping and charting that world so that we can better fight it... Our task as believers is obedience to what we do know very clearly from Scripture.」',
                 reference: '<b>(a)【為什麼過度關注可能危險？】</b><br>OT366 (Segment 77) 給出明確的理由：<br>① 聖經對靈界的描述<b>極為罕見</b>——這本身就是一個警告：神選擇不多說。<br>② 我們的任務不是繪製「靈界地圖」(mapping the spiritual world)，而是順服已知的真理。<br>③ 過度關注魔鬼可能導致我們<b>忽略了順服的本分</b>，或產生不健康的恐懼和猜測。<br><br><b>(b)【如何取得平衡？】</b><br>OT366 的建議：<br>① <b>承認</b>：靈界是真實的（保羅說「我們不是與屬血氣的爭戰」）。<br>② <b>不猜測</b>：「Let us be careful not to speak where God has been silent.」聖經偶爾掀開帷幕讓我們窺見，但沒有給我們詳細的地圖。<br>③ <b>專注本分</b>：但以理的回應是什麼？<b>禱告、禁食、持續等候</b>——他沒有試圖「捆綁波斯的魔君」，而是繼續忠信地尋求神。這就是我們的榜樣。'
             },
             {
                 id: 'int2',
                 text: '但以理書呈現了一個「邪惡升級」的模式：從尼布甲尼撒（驕傲但最終悔改）→ 伯沙撒（褻瀆，當夜被殺）→ 安提阿古四世（迫害聖民、褻瀆聖殿）→ 11:36 起的「自高自大的王」（可能指向末世敵基督）。\n(a) 這種模式會讓你感到絕望嗎？為什麼？\n(b) 12:1-3 的「復活」觀念如何徹底改變我們對「失敗」與「死亡」的看法？',
-                hint: 'OT366 (Segment 80) 引用 Longman：「Just as the ideal king of the Psalms was grounded in the Davidic reality but anticipated the Messianic glory, so the wicked king of the end of Daniel is grounded in the Antiochene reality but anticipated the horror of the Antichrist.」但邪惡升級的同時，神的得勝也在升級。',
+                hint: 'OT366  引用 Longman：「Just as the ideal king of the Psalms was grounded in the Davidic reality but anticipated the Messianic glory, so the wicked king of the end of Daniel is grounded in the Antiochene reality but anticipated the horror of the Antichrist.」但邪惡升級的同時，神的得勝也在升級。',
                 reference: '<b>(a)【會絕望嗎？】</b><br>OT366 (Segment 80) 承認這個模式：事情會「from bad to worse—and perhaps, worst」。但同時指出：<br>• 但以理書每一次展示邪惡的升級，都同時展示<b>神主權的彰顯</b>。<br>• 尼布甲尼撒被降卑；伯沙撒當夜被殺；安提阿古「結局到了，無人能幫助他」(11:45)。<br>• <b>邪惡有神所定的期限</b>——「直到主的憤怒結束」(11:36)。<br><br>所以，模式不只是「惡越來越壞」，而是「<b>惡越來越壞，但神的審判也越來越徹底</b>」，直到最終的全面勝利。<br><br><b>(b)【復活如何改變一切？】</b><br>12:1-3 的復活應許是「遊戲規則的改變者」(game changer)：<br>• 在 11:33-35，忠信者「因刀劍、火燒而仆倒」——看似失敗。<br>• 但 12:2-3 說他們將「<b>醒過來</b>」「得<b>永生</b>」「發光如<b>星</b>」。<br>• 這意味著：<b>殉道不是失敗，死亡不是終局</b>。<br>• OT366 (Segment 81)：「There will be vindication and reward eventually.」最終必有公義的伸冤和獎賞。<br><br>對當時面對安提阿古迫害的猶太信徒而言，這是唯一能讓他們甘願赴死的盼望：死後有復活。'
             },
             {
@@ -353,7 +353,7 @@ window.LESSONS_DATA.push({
         // ── 選擇題 (MC) ── 5 題
         {
             type: 'mc',
-            q: '根據 OT366 (Segment 77)，但以理書 10-12 章是全書中最長的單元。天使被攔阻了多少天才到達但以理面前？',
+            q: '根據 OT366 ，但以理書 10-12 章是全書中最長的單元。天使被攔阻了多少天才到達但以理面前？',
             opts: [
                 '7 天',
                 '14 天',
@@ -386,7 +386,7 @@ window.LESSONS_DATA.push({
         },
         {
             type: 'mc',
-            q: '根據 OT366 (Segment 79)，11:21 的「卑鄙的人」是指誰？',
+            q: '根據 OT366 ，11:21 的「卑鄙的人」是指誰？',
             opts: [
                 '尼布甲尼撒',
                 '伯沙撒',
