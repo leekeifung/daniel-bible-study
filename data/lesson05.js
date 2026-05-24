@@ -1,5 +1,5 @@
 // ==========================================
-// lesson05.js — 第三課：四獸的異象與人子
+// lesson05.js — 第五課：四獸的異象與人子
 // 但以理書 7:1-28
 // 對應 OT366 Unit 8 (Segments 51-57)
 // ==========================================
@@ -7,7 +7,7 @@
 window.LESSONS_DATA = window.LESSONS_DATA || [];
 window.LESSONS_DATA.push({
     id: 'lesson05',
-    title: '第三課',
+    title: '第五課',
     subtitle: '四獸的異象與人子',
     ref: '但以理書 7:1-28',
     date: '5月24日',
