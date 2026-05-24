@@ -1,5 +1,5 @@
 // ==========================================
-// lesson06.js — 第四課：公綿羊與公山羊
+// lesson06.js — 第六課：公綿羊與公山羊
 // 但以理書 8:1-27
 // 對應 OT366 Unit 9 (Segments 58-61)
 // ==========================================
@@ -7,7 +7,7 @@
 window.LESSONS_DATA = window.LESSONS_DATA || [];
 window.LESSONS_DATA.push({
     id: 'lesson06',
-    title: '第四課',
+    title: '第六課',
     subtitle: '公綿羊與公山羊',
     ref: '但以理書 8:1-27',
     date: '5月31日',
