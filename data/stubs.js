@@ -63,17 +63,17 @@
     });
 })();
 
-// --- 第三課：但以理書 7 & 8 ---
+// --- 第五課：但以理書 7 ---
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson05')) return;
     window.LESSONS_DATA.push({
         id: 'lesson05',
         title: '第三課',
-        subtitle: '屬天視角的歷史——四獸與公綿羊/公山羊',
-        ref: '但以理書 7:1-28, 8:1-27',
-        date: '5月24日',
-        description: '進入啟示文學。將第7章與第8章合併講解，連結回第2章的巨像（The Big Picture）。參考 OT366 Unit 8 & 9。',
-        chapterTitle: '但以理書第七至八章',
+        subtitle: '四獸的異象與人子',
+        ref: '但以理書 7:1-28',
+    date: '5月24日',
+        description: '進入啟示文學（Apocalyptic Literature）。但以理書第7章是整卷書的「樞紐」（Hinge），完成亞蘭文交叉結構（Chiasm），同時開啟後半部的啟示異象。以天上的視角揭示四獸、天上法庭與「像人子的」。參考 OT366 Unit 8。',
+    chapterTitle: '但以理書第七章',
         comingSoon: true,
         verses: [],
         questions: null,
@@ -81,16 +81,34 @@
     });
 })();
 
-// --- 第四課：但以理書 9 ---
+// --- 第六課：但以理書 8 ---
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson06')) return;
     window.LESSONS_DATA.push({
         id: 'lesson06',
-        title: '第四課',
-        subtitle: '但以理的祈禱與七十個七',
-        ref: '但以理書 9:1-27',
+        title: '第六課',
+        subtitle: '公綿羊與公山羊',
+        ref: '但以理書 8:1-27',
         date: '5月31日',
-        description: '探討耶利米書的70年、但以理的認罪禱告，以及「七十個七」的末世論與歷史性詮釋。參考 OT366 Unit 10。',
+        description: '但以理的第二個異象。語言從亞蘭文轉回希伯來文，焦點從世界帝國的興衰轉向神子民、聖殿與聖地的命運。天使加百列明確指出公綿羊是瑪代波斯、公山羊是希臘，小角則是褻瀆聖殿的暴君。對應 OT366 Unit 9。',
+        chapterTitle: '但以理書第八章',
+        comingSoon: true,
+        verses: [],
+        questions: null,
+        quiz: []
+    });
+})();
+
+// --- 第七課：但以理書 9 ---
+(function() {
+    if(window.LESSONS_DATA.some(l => l.id === 'lesson07')) return;
+    window.LESSONS_DATA.push({
+        id: 'lesson07',
+        title: '第七課',
+        subtitle: '禱告與七十個七',
+        ref: '但以理書 9:1-27',
+        date: '6月21日',
+        description: '但以理書中最獨特的一章——從異象轉向禱告。但以理研讀耶利米書後發出長篇認罪代求，神的回應卻超越他的預期：不僅七十年，而是「七十個七」。本章後半段被稱為舊約學術界的「泥沼」(The Dismal Swamp)。對應 OT366 Unit 10。',
         chapterTitle: '但以理書第九章',
         comingSoon: true,
         verses: [],
@@ -99,35 +117,17 @@
     });
 })();
 
-// --- 第五課：但以理書 10 & 11 ---
-(function() {
-    if(window.LESSONS_DATA.some(l => l.id === 'lesson07')) return;
-    window.LESSONS_DATA.push({
-        id: 'lesson07',
-        title: '第五課',
-        subtitle: '屬靈爭戰與南北朝的衝突',
-        ref: '但以理書 10:1-11:45',
-        date: '6月21日',
-        description: '屬靈爭戰的背景以及南方王與北方王的詳細歷史預言。參考 OT366 Unit 11 前半。',
-        chapterTitle: '但以理書第十至十一章',
-        comingSoon: true,
-        verses: [],
-        questions: null,
-        quiz: []
-    });
-})();
-
-// --- 第六課：但以理書 12 & 全書總結 ---
+// --- 第八課：但以理書 10-12 & 全書總結 ---
 (function() {
     if(window.LESSONS_DATA.some(l => l.id === 'lesson08')) return;
     window.LESSONS_DATA.push({
         id: 'lesson08',
-        title: '第六課',
-        subtitle: '末世的結局與全書總結',
-        ref: '但以理書 12:1-13',
-        date: '6月28日',
-        description: '復活的神學以及全書總結——將第1-6章的敘事與第7-12章的預言結合，帶出對今日信徒的意義。參考 OT366 Unit 11 後半 & Conclusion。',
-        chapterTitle: '但以理書第十二章',
+    title: '第八課',
+    subtitle: '末後的爭戰與復活',
+    ref: '但以理書 10:1-12:13',
+    date: '6月28日',
+    description: '但以理書的最後三章——全書最長的異象單元。第 10 章揭開靈界爭戰的帷幕，第 11 章以極精細的「歷史劇本」描述南方王與北方王的角力，第 12 章則以舊約中最清晰的復活應許作為全書終結。對應 OT366 Unit 11 (Segments 77-82)。',
+    chapterTitle: '但以理書第十至十二章',
         comingSoon: true,
         verses: [],
         questions: null,
