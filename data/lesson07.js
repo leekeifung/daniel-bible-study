@@ -1,5 +1,5 @@
 // ==========================================
-// lesson07.js — 第五課：禱告與七十個七
+// lesson07.js — 第七課：禱告與七十個七
 // 但以理書 9:1-27
 // 對應 OT366 Unit 10 (Segments 62-76)
 // ==========================================
@@ -7,10 +7,10 @@
 window.LESSONS_DATA = window.LESSONS_DATA || [];
 window.LESSONS_DATA.push({
     id: 'lesson07',
-    title: '第五課',
+    title: '第七課',
     subtitle: '禱告與七十個七',
     ref: '但以理書 9:1-27',
-    date: '6月7日',
+    date: '6月21日',
     description: '但以理書中最獨特的一章——從異象轉向禱告。但以理研讀耶利米書後發出長篇認罪代求，神的回應卻超越他的預期：不僅七十年，而是「七十個七」。本章後半段被稱為舊約學術界的「泥沼」(The Dismal Swamp)。對應 OT366 Unit 10。',
     chapterTitle: '但以理書第九章',
     isSelfStudy: false,
