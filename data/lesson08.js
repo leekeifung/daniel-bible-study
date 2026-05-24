@@ -1,5 +1,5 @@
 // ==========================================
-// lesson08.js — 第六課：末後的爭戰與復活
+// lesson08.js — 第八課：末後的爭戰與復活
 // 但以理書 10:1 - 12:13
 // 對應 OT366 Unit 11 (Segments 77-82)
 // ==========================================
@@ -7,10 +7,10 @@
 window.LESSONS_DATA = window.LESSONS_DATA || [];
 window.LESSONS_DATA.push({
     id: 'lesson08',
-    title: '第六課',
+    title: '第八課',
     subtitle: '末後的爭戰與復活',
     ref: '但以理書 10:1-12:13',
-    date: '6月21日',
+    date: '6月28日',
     description: '但以理書的最後三章——全書最長的異象單元。第 10 章揭開靈界爭戰的帷幕，第 11 章以極精細的「歷史劇本」描述南方王與北方王的角力，第 12 章則以舊約中最清晰的復活應許作為全書終結。對應 OT366 Unit 11 (Segments 77-82)。',
     chapterTitle: '但以理書第十至十二章',
     isSelfStudy: false,
