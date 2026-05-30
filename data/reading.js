@@ -285,6 +285,31 @@ window.LESSONS_DATA.push({
                 }
             ]
         },
+        {
+            id: 'art-map-daniel',
+            lessonRef: '但以理書地圖',
+            title: '但以理書時期地圖（小先知書中以色列地之外各地）',
+            icon: '🗺️',
+            category: 'map',
+            categoryLabel: '地圖 Map',
+            html:
+                '<figure style="margin:0; padding:0; text-align:center;">' +
+                    '<img src="https://biblegeography.holylight.org.tw/images/index/condensedbible/map/104.GIF" ' +
+                         'alt="但圖一 (104) 小先知書中以色列地之外各地 — 但以理書 (605–530 BC)" ' +
+                         'style="max-width:100%; height:auto; border:1px solid #e5e7eb; border-radius:4px;" />' +
+                    '<figcaption style="font-size:0.95rem; color:#374151; margin-top:0.35rem;">' +
+                        '但圖一 (104) 小先知書中以色列地之外各地｜但以理書 (主前 605–530 年)' +
+                    '</figcaption>' +
+                '</figure>' +
+                '<p style="margin-top:0.75rem;">' +
+                '但以理於主前 605 年被擄到巴比倫，因學問才能過人，受巴比倫王重用，' +
+                '並在巴比倫滅亡後仍被波斯王信任，仕途超過七十五年。在外邦環境中，' +
+                '他信仰面臨異教壓力，仍不惜性命堅守律法：專心祈禱、素食自守、拒拜偶像、' +
+                '避免任何玷污，成為生活在外邦的信徒典範。雖書中未詳述，他對被擄猶大人' +
+                '想必多所照顧；古列王釋放猶大人歸國，他也盡了一份力。' +
+                '</p>',
+            footnotes: []
+        },
         // ↑ 日後可在此處添加更多文章
         // { id: 'art2', lessonRef: '但以理書第七章', title: '...', ... }
     ]
