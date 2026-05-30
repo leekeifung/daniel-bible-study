@@ -1088,15 +1088,14 @@ function initInteractiveExercises(lesson) {
     lesson.studyContent.forEach((sec, i) => {
         if (sec.type === 'statue-drag' && sec.dragData) {
             const mount = document.getElementById('statue-drag-mount-' + i);
-            console.log('[statue-drag] 嘗試注入 section', i,
-                '| mount:', !!mount,
-                '| renderStatueDrag:', !!window.renderStatueDrag);
             if (mount && window.renderStatueDrag) {
                 window.renderStatueDrag(mount, sec.dragData);
-                console.log('[statue-drag] ✅ 注入成功！');
-            } else {
-                console.warn('[statue-drag] ⚠️ 注入失敗！',
-                    'mount=', mount, 'renderStatueDrag=', window.renderStatueDrag);
+            }
+        }
+        if (sec.type === 'four-empires-drag' && sec.fourEmpiresData) {
+            const mount = document.getElementById('four-empires-mount-' + i);
+            if (mount && window.renderFourEmpiresDrag) {
+                window.renderFourEmpiresDrag(mount, sec.fourEmpiresData);
             }
         }
     });
@@ -1130,6 +1129,7 @@ function renderQuestions(lesson) {
                 + '<div class="intro-section-body' + (isOpen ? ' open' : '') + '" id="ssec-' + i + '">'
                 + sec.html
                 + (sec.type === 'statue-drag' ? '<div id="statue-drag-mount-' + i + '" style="margin-top:10px;"></div>' : '')
++ (sec.type === 'four-empires-drag' ? '<div id="four-empires-mount-' + i + '" style="margin-top:10px;"></div>' : '')
                 + '</div>'
                 + '</div>';
         });
