@@ -67,10 +67,8 @@ window.LESSONS_DATA.push({
             image: 'https://files.amberfile.com/v1/assets/16822628/optimized?w=500&m=limit&h=508',
             link: 'https://www.logos.com/product/389476/the-book-of-daniel-chapters-1-6',
             bibtex: '@book{Buster_Walton_2025,\n  address={Grand Rapids, MI},\n  series={New International Commentary on the Old and New Testament},\n  title={The Book of Daniel, Chapters 1–6},\n  publisher={William B. Eerdmans Publishing Company},\n  author={Buster, Aubrey E. and Walton, John H.},\n  editor={Young, E. J. and Harrison, R. K. and Hubbard, Robert L., Jr. and Arnold, Bill T.},\n  year={2025},\n  collection={New International Commentary on the Old and New Testament}\n}'
-        }
-        // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
-    },
-    widder2023: {
+        },
+        widder2023: {
             id: 'widder2023',
             author: 'Wendy Widder',
             title: 'Daniel: God’s Kingdom Will Endure',
@@ -83,6 +81,9 @@ window.LESSONS_DATA.push({
             link: 'https://www.logos.com/product/389476/the-book-of-daniel-chapters-1-6',
             bibtex: '@book{Widder_2023,\n  address={Grand Rapids, MI},\n  series={Zondervan Exegetical Commentary on the Old Testament},\n  title={Daniel: God’s Kingdom Will Endure},\n  publisher={Zondervan Academic},\n  author={Widder, Wendy},\n  editor={Block, Daniel I.},\n  year={2023},\n  collection={Zondervan Exegetical Commentary on the Old Testament}\n}'
         },
+        // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
+    },
+    
 
     /* ──────────────────────────────
        閱讀文章 (Articles)
