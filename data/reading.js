@@ -81,6 +81,19 @@ window.LESSONS_DATA.push({
             link: 'https://www.logos.com/product/246891/daniel-a-discourse-analysis-of-the-hebrew-bible',
             bibtex: '@book{Widder_2023,\n  address={Grand Rapids, MI},\n  series={Zondervan Exegetical Commentary on the Old Testament},\n  title={Daniel: God’s Kingdom Will Endure},\n  publisher={Zondervan Academic},\n  author={Widder, Wendy},\n  editor={Block, Daniel I.},\n  year={2023},\n  collection={Zondervan Exegetical Commentary on the Old Testament}\n}'
         },
+        widder2026: {
+            id: 'widder2026',
+            author: 'Wendy L. Widder',
+            title: 'Old Testament Prophets: The Covenant Conscience of God’s People',
+            series: 'Scripture Connections',
+            publisher: 'B&H Academic',
+            address: 'Brentwood, TN',
+            year: 2026,
+            isbn: '9781087747408',
+            image: 'https://files.amberfile.com/v1/assets/16987465/optimized?w=500&m=limit&h=508',
+            link: 'https://www.logos.com/product/396406/old-testament-prophets-the-covenant-conscience-of-gods-people',
+            bibtex: '@book{Widder_2026,\n  address={Brentwood, TN},\n  series={Scripture Connections},\n  title={Old Testament Prophets: The Covenant Conscience of God’s People},\n  publisher={B&H Academic},\n  author={Widder, Wendy},\n  editor={Schnittjer, Gary Edward and Strauss, Mark L.},\n  year={2026},\n  collection={Scripture Connections}\n}'
+        },
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
     },
     
@@ -250,7 +263,28 @@ window.LESSONS_DATA.push({
                     text: 'Wendy Widder, <em>Daniel: God’s Kingdom Will Endure</em>, ed. Daniel I. Block, Zondervan Exegetical Commentary on the Old Testament (Grand Rapids, MI: Zondervan Academic, 2023), 434–437.'
                 }
             ]
-        }
+        },
+        {
+            id: 'art7',
+            lessonRef: '但以理書第二章與全書',
+            title: '聖經貫串：但以理與整本敘事的連結',
+            icon: '🔗',
+            category: 'theology',
+            categoryLabel: '神學主題 Theological Theme',
+            html:
+                '<p>但以理書與整本聖經故事的連結，體現在對類似人物的呼應、敘事空檔的補足，以及君王範式的塑造。<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p><strong>其一，人物與情節的呼應：</strong>第二章的但以理，刻意呼應創世記 41 章約瑟在法老前的故事。兩位外邦君王都因神所賜的夢而煩惱；埃及與巴比倫的術士都無法解夢，卻有被擄的希伯來人能解。約瑟與但以理都將智慧歸於神，並因此受高位賞賜。更重要的是，兩個故事都展現以色列的神超越列國諸神的主權：在創世記，神掌管埃及的天候與農作（創 41:25–32）；在但以理書，神掌管列國興衰（但 2:20–23；2:36–45）。</p>' +
+                '<p><strong>其二，填補舊約敘事的空白：</strong>列王紀與歷代志結尾，猶大君王與百姓被擄；以斯拉、尼希米記述主前 539 年居魯士詔令後歸回之事。但以理書就處在這兩大事件之間，如同以西結，讓讀者窺見被擄歲月。書中特別追蹤耶和華聖殿器皿的命運（但 1:1–2；5:1–4, 22–24；王下 24–25；代下 36:15–21；拉 1:7–10）。這些器皿「承載著百姓盼望神記念並恢復他們」（耶 27:16–22），而這期待隨居魯士的詔令應驗。</p>' +
+                '<p><strong>其三，塑造王權的範式：</strong>耶和華是萬王之王，卻將大權託付給人間君王，期望他們公正照管子民，也要求他們承認權柄的來源。在但以理書 2–4 章，神如此教導尼布甲尼撒，他最終承認：「現在我尼布甲尼撒讚美、尊崇、榮耀天上的王，因為他一切作為都是真實，他的道路也公平，行事驕傲的人他能降卑。」（但以理書 4:37，和合本修訂版）尼布甲尼撒成為「外邦君王應當成為的範式」。相反地，伯沙撒飲用聖器、褻瀆以色列的神，成為敵對與褻慢神的外邦王典型。在但以理書中，伯沙撒最壞的後繼者是安提阿古四世以比法尼斯；在聖經宏大敘事裡，最終的對應者則是敵基督（如帖撒羅尼迦後書 2:3）。</p>',
+            footnotes: [
+                {
+                    num: 1,
+                    bookKey: 'widder2026',
+                    page: '104–105',
+                    text: 'Wendy Widder, <em>Old Testament Prophets: The Covenant Conscience of God’s People</em>, ed. Gary Edward Schnittjer and Mark L. Strauss, Scripture Connections (Brentwood, TN: B&H Academic, 2026), 104–105.'
+                }
+            ]
+        },
         // ↑ 日後可在此處添加更多文章
         // { id: 'art2', lessonRef: '但以理書第七章', title: '...', ... }
     ]
