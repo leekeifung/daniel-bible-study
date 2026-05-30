@@ -70,6 +70,19 @@ window.LESSONS_DATA.push({
         }
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
     },
+    widder2023: {
+            id: 'widder2023',
+            author: 'Wendy Widder',
+            title: 'Daniel: God’s Kingdom Will Endure',
+            series: 'Zondervan Exegetical Commentary on the Old Testament',
+            publisher: 'Zondervan Academic',
+            address: 'Grand Rapids, MI',
+            year: 2023,
+            isbn: '',
+            image: 'https://files.logoscdn.com/v1/assets/14563960/optimized?w=500&m=limit&h=508',
+            link: 'https://www.logos.com/product/389476/the-book-of-daniel-chapters-1-6',
+            bibtex: '@book{Widder_2023,\n  address={Grand Rapids, MI},\n  series={Zondervan Exegetical Commentary on the Old Testament},\n  title={Daniel: God’s Kingdom Will Endure},\n  publisher={Zondervan Academic},\n  author={Widder, Wendy},\n  editor={Block, Daniel I.},\n  year={2023},\n  collection={Zondervan Exegetical Commentary on the Old Testament}\n}'
+        },
 
     /* ──────────────────────────────
        閱讀文章 (Articles)
@@ -212,6 +225,28 @@ window.LESSONS_DATA.push({
                     bookKey: 'busterWalton2025',
                     page: '176–178',
                     text: 'Aubrey E. Buster and John H. Walton, <em>The Book of Daniel, Chapters 1–6</em>, ed. E. J. Young et al., New International Commentary on the Old and New Testament (Grand Rapids, MI: William B. Eerdmans Publishing Company, 2025), 176–178.'
+                }
+            ]
+        },
+        {
+            id: 'art6',
+            lessonRef: '但以理書第八章',
+            title: '深入解讀：「早晚」異象中的歷史',
+            icon: '🕊️',
+            category: 'theology',
+            categoryLabel: '神學主題 Theological Theme',
+            html:
+                '<p>加百列的解釋聚焦於異象中最重要的核心——讀者也應如此。本章已在註釋中先行處理。不像第七章被 Goldingay 比作「可開放多重詮釋的印象派畫作」，第八章的異象更像「在畫面上直接寫了名字的政治漫畫」，用來確保讀者明白。也正如政治漫畫，異象喚起許多畫面之外的意象與聯想。以下的解讀以歷史記錄對應加百列的說明而展開。<sup class="fn-mark" data-fn="1">1</sup></p>' +
+                '<p>雙角的公綿羊代表居魯士。其崛起始於米底帝國之下相對渺小的附庸——波斯。後來他反叛並擊敗米底王亞斯提亞吉（Astyages），把強盛的米底併入米底—波斯聯合帝國（主前 550 年）。此後，這隻公羊向西（巴比倫、敘利亞、小亞細亞）、向北（亞美尼亞、斯基泰、裏海區域）、向南（埃及、古實）擴張。米波也向東進入印度，但異象未提及東向的圖像——或許因為猶太流亡者未及印度，或因對猶太人而言波斯本是「東方」（參以賽亞書 41:2），故東向擴張對讀者並不重要。</p>' +
+                '<p>單角的公山羊代表馬其頓王亞歷山大大帝（生於主前 356 年），其父腓力二世曾征服臨近的希臘城邦，使馬其頓由邊陲強化為霸權。腓力夢想擊敗波斯、稱霸天下，但在主前 336 年遇刺，其二十歲的兒子繼位。短短五年內，亞歷山大征服波斯，版圖從希臘直抵印度。主前 323 年他病逝，年僅三十二歲。無繼承人的帝國遂被四位將領瓜分——「那折斷的角，另有四角興起代替……只是權勢不及它」（但 8:22）。這些「繼業者」（Diadochi）各有建樹，但異象略過他們與其後約一百五十年的歷史，聚焦於塞琉古王朝第八任統治者：那「較小的角」，幾乎一致被認定為安提阿古四世以比法尼斯（在位主前 175–164 年）。他自稱「顯現神」，甚至在應印宙斯的錢幣上刻自己的像。</p>' +
+                '<p>安提阿古機巧上位，取代侄子底米丟。即位後，他向南（埃及，參《馬加比一》1:16–20）、向東（帕提亞，參《馬加比一》3:27–37；6:1–4）、以及「榮美之地」進軍，後者在其晚期承受極大敵意。他迫害猶太人與其生活方式、攻擊耶路撒冷聖殿，動機至少有三：其一，他繼承了龐大國債，遂尋求聖殿庫銀、稅收與賄賂以減債；其二，猶大本就是火藥庫，一派盼採納希化，另一派堅持維持信仰與文化特色。安提阿古鼓吹希化，改革派容易被其花言巧語與恩惠吸引；而保守派拒絕任何威脅身分的「改革」。其三，主前 168 年他在埃及受辱，遂把怒火轉向能勝過的對象——猶太教與猶太人。此前他曾殺害猶太人、掠奪聖殿；但在埃及受挫後，主前 167 年他直接將猶太教定為犯罪，將聖殿改為異教神廟，大肆屠城與縱火。外邦祭司向宙斯獻上豬與不潔之物；節期、安息日、割禮被禁；妥拉卷軸被焚，持有者被殺（參《馬加比一》1:20–57）。許多猶太人寧死不拜宙斯（如《馬加比二》7 章）。</p>' +
+                '<p>若「二千三百個『早晚』」（但 8:14 下）指具體時程，常見兩種理解：其一，二千三百日約等於六年，自大祭司俄尼亞三世於主前 170 年遇害起，至主前 164 年馬加比起義後聖殿重新奉獻止；其二，若計二千三百為日夜各算一次，則約一千一百五十天，迫害起點可定於主前 167 年安提阿古在埃及受挫之後。歷史層面看，「非因人手」的滅亡（8:25；參 NIV「不是因人力」）指安提阿古死於意外或疾病，而非戰死；神學層面則強調：他的日子在神手中，神一命定，壓迫者必被粉碎。</p>',
+            footnotes: [
+                {
+                    num: 1,
+                    bookKey: 'widder2023',
+                    page: '434–437',
+                    text: 'Wendy Widder, <em>Daniel: God’s Kingdom Will Endure</em>, ed. Daniel I. Block, Zondervan Exegetical Commentary on the Old Testament (Grand Rapids, MI: Zondervan Academic, 2023), 434–437.'
                 }
             ]
         }
