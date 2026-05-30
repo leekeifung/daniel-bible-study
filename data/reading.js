@@ -295,10 +295,10 @@ window.LESSONS_DATA.push({
             html:
                 '<figure style="margin:0; padding:0; text-align:center;">' +
                     '<img src="https://biblegeography.holylight.org.tw/images/index/condensedbible/map/104.GIF" ' +
-                         'alt="但圖一 (104) 小先知書中以色列地之外各地 — 但以理書 (605–530 BC)" ' +
+                         'alt="但以理書時期地圖： 小先知書中以色列地之外各地 — 但以理書 (605–530 BC)" ' +
                          'style="max-width:100%; height:auto; border:1px solid #e5e7eb; border-radius:4px;" />' +
                     '<figcaption style="font-size:0.95rem; color:#374151; margin-top:0.35rem;">' +
-                        '但圖一 (104) 小先知書中以色列地之外各地｜但以理書 (主前 605–530 年)' +
+                        '但以理書時期地圖：小先知書中以色列地之外各地｜但以理書 (主前 605–530 年)' +
                     '</figcaption>' +
                 '</figure>' +
                 '<p style="margin-top:0.75rem;">' +
