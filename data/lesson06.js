@@ -132,7 +132,70 @@ window.LESSONS_DATA.push({
 '<p><strong>📘 但以理書的核心信息 (OT366 Segment 61)</strong></p>' +
 '<p>「這卷書的大能在此：無論這世界變得多麼險惡——而它確實會變糟——我們的神依然坐著為王。我們能忍受所面臨的任何苦難——而我們也注定會經歷苦難。苦難終有結束的一天……要放心壯膽，要努力向前，要至死忠心。這正是《但以理書》的核心要旨。」</p>' +
 '</div>'
-        }
+        },
+        // ── 加在 studyContent 陣列最後（第 5 項）──
+{
+    title: '互動練習：但以理書 2、7、8 章對照表',
+    icon: '🎯',
+    defaultOpen: false,
+    type: 'four-empires-drag',
+    html:
+        '<p style="margin:0 0 6px;color:#555;font-size:14px;">' +
+        '<strong>第一階段：</strong>將選項<strong>點選</strong>放入「羅馬觀」與「希臘觀」欄位（選項可重複使用）。<br>' +
+        '<strong>第二階段：</strong>確認後，加入第八章的動物象徵對應。</p>' +
+        '<p style="margin:0;font-size:13px;color:#888;">💡 點選上方選項（高亮），再點空格放入 ｜ 點已填空格可清除</p>',
+    fourEmpiresData: {
+        rows: [
+            { dan2: '金頭',   dan2Emoji: '👑', dan7: '獅子',   dan7Emoji: '🦁' },
+            { dan2: '銀胸臂', dan2Emoji: '🪙', dan7: '熊',     dan7Emoji: '🐻' },
+            { dan2: '銅腹腰', dan2Emoji: '🥉', dan7: '豹',     dan7Emoji: '🐆' },
+            { dan2: '鐵與泥', dan2Emoji: '⚔️', dan7: '第四獸', dan7Emoji: '🐉' },
+            { dan2: '',       dan2Emoji: '',   dan7: '小角',   dan7Emoji: '📍' }
+        ],
+        stage1Options: [
+            { id: 'babylon',      label: '巴比倫' },
+            { id: 'medo-persia',  label: '瑪代波斯' },
+            { id: 'media',        label: '瑪代' },
+            { id: 'persia',       label: '波斯' },
+            { id: 'greece',       label: '希臘' },
+            { id: 'rome',         label: '羅馬' },
+            { id: 'out-of-rome',  label: '出自羅馬' },
+            { id: 'out-of-greece',label: '出自希臘' }
+        ],
+        stage1Answers: {
+            roman: ['babylon', 'medo-persia', 'greece', 'rome', 'out-of-rome'],
+            greek: ['babylon', 'media', 'persia', 'greece', 'out-of-greece']
+        },
+        stage2Options: [
+            { id: 'ram',         label: '🐏 公綿羊 [ram]' },
+            { id: 'ram-horns',   label: '🐏 兩角/公綿羊 [ram/two horns]' },
+            { id: 'goat',        label: '🐐 公山羊 [goat]' },
+            { id: 'ant-iv',      label: '👹 安提阿古四世 [Ant. IV Epi.]' },
+            { id: 'out-of-goat', label: '🐐 出自公山羊 [out of the goat]' }
+        ],
+        stage2Slots: [
+            { col: 'dan7',  row: 4 },
+            { col: 'roman', row: 1 },
+            { col: 'roman', row: 2 },
+            { col: 'roman', row: 4 },
+            { col: 'greek', row: 1 },
+            { col: 'greek', row: 2 },
+            { col: 'greek', row: 3 },
+            { col: 'greek', row: 4 }
+        ],
+        stage2Answers: {
+            'dan7-4':  'ant-iv',
+            'roman-1': 'ram',
+            'roman-2': 'goat',
+            'roman-4': 'out-of-goat',
+            'greek-1': 'ram-horns',
+            'greek-2': 'ram-horns',
+            'greek-3': 'goat',
+            'greek-4': 'out-of-goat'
+        },
+        note: '💡 <strong>OT366 核心提醒 (Segment 61)：</strong>無論採取哪種觀點，重點不在辨認第二至第四國是誰，而在<strong>第五個國度——神永恆的國度</strong>。但以理書的力量是：「Take heart. Press on. Be faithful.」'
+    }
+}
     ],
 
     // ============================================================
@@ -340,3 +403,407 @@ window.LESSONS_DATA.push({
         }
     ]
 });
+/* =====================================================
+   renderFourEmpiresDrag — 但以理書 2/7/8 章對照表互動
+   由主程式在偵測到 section.type === 'four-empires-drag' 時呼叫：
+     window.renderFourEmpiresDrag(containerEl, section.fourEmpiresData);
+   ===================================================== */
+window.renderFourEmpiresDrag = window.renderFourEmpiresDrag || function (container, data) {
+    var rows = data.rows;
+    var s1Opts = data.stage1Options;
+    var s1Ans = data.stage1Answers;
+    var s2Opts = data.stage2Options;
+    var s2Slots = data.stage2Slots;
+    var s2Ans = data.stage2Answers;
+
+    /* ── state ── */
+    var stage = 1;
+    var s1Roman = new Array(5).fill(null);
+    var s1Greek = new Array(5).fill(null);
+    var s2Filled = {}; // key: 'col-row', value: option id
+    var selected = null; // currently selected option id
+    var s1Result = null; // null | {romanOk, greekOk}
+    var s2Result = null;
+
+    /* ── inject scoped styles ── */
+    if (!document.getElementById('fe-styles')) {
+        var s = document.createElement('style');
+        s.id = 'fe-styles';
+        s.textContent =
+            '.fe-wrap{margin-top:10px}' +
+            '.fe-stage-title{font-size:15px;font-weight:700;color:#1a237e;margin:12px 0 8px;display:flex;align-items:center;gap:6px}' +
+            '.fe-stage-title.s2{color:#0d47a1}' +
+            '.fe-opts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;padding:10px;background:#f9fafb;border-radius:10px}' +
+            '.fe-opts.s2{background:#e3f2fd}' +
+            '.fe-chip{padding:7px 14px;border-radius:20px;background:#fff;border:1.5px solid #ddd;cursor:pointer;font-weight:600;font-size:12px;transition:all .15s;user-select:none}' +
+            '.fe-chip:hover{box-shadow:0 2px 8px rgba(0,0,0,.08);border-color:#aaa}' +
+            '.fe-chip.sel{border:2px solid #1a237e;background:#e8eaf6;box-shadow:0 0 0 3px rgba(26,35,126,.15)}' +
+            '.fe-chip.s2{border-color:#1565c0;background:#e3f2fd}' +
+            '.fe-chip.s2.sel{border:2px solid #0d47a1;background:#bbdefb;box-shadow:0 0 0 3px rgba(13,71,161,.15)}' +
+            '.fe-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}' +
+            '.fe-tbl th{padding:8px 6px;background:#f1f3f5;border:1px solid #dee2e6;font-weight:700;text-align:center;font-size:12px;color:#555}' +
+            '.fe-tbl td{padding:6px;border:1px solid #dee2e6;text-align:center;vertical-align:middle}' +
+            '.fe-tbl td.given{background:#fafafa;font-weight:600;color:#333;font-size:12px}' +
+            '.fe-slot{min-height:36px;padding:6px 10px;border-radius:8px;border:2px dashed #ced4da;background:#f8f9fa;cursor:pointer;transition:all .2s;font-size:12px;color:#adb5bd;display:flex;align-items:center;justify-content:center;gap:4px}' +
+            '.fe-slot.filled{border:2px solid #74b9ff;background:#eaf4fd;color:#2d3436;font-weight:600;border-style:solid}' +
+            '.fe-slot.locked{border:1px solid #dee2e6;background:#f1f3f5;color:#333;cursor:default;font-weight:600}' +
+            '.fe-tag-slot{display:inline-flex;align-items:center;padding:3px 8px;border-radius:12px;border:1.5px dashed #64b5f6;background:#e3f2fd;cursor:pointer;font-size:11px;color:#90a4ae;margin-top:4px;min-width:50px;justify-content:center;transition:all .15s}' +
+            '.fe-tag-slot.filled{border:1.5px solid #1565c0;background:#bbdefb;color:#0d47a1;font-weight:600;border-style:solid}' +
+            '.fe-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}' +
+            '.fe-btn{padding:8px 16px;border-radius:10px;border:1px solid #ddd;background:#fff;font-weight:700;cursor:pointer;font-size:13px;transition:background .15s}' +
+            '.fe-btn:hover{background:#f1f3f5}' +
+            '.fe-btn-p{background:#1a237e;color:#fff;border-color:#1a237e}' +
+            '.fe-btn-p:hover{background:#283593}' +
+            '.fe-btn-s2{background:#0d47a1;color:#fff;border-color:#0d47a1}' +
+            '.fe-btn-s2:hover{background:#0a3d91}' +
+            '.fe-result{margin-top:12px;padding:14px;border-radius:12px;border:1px solid #dee2e6;background:#f8f9fa;line-height:1.7;font-size:13px}' +
+            '.fe-note{margin-top:10px;padding:10px 12px;border-radius:8px;background:#fff9db;border:1px solid #ffe066;font-size:13px;color:#6c5200;line-height:1.6}' +
+            '.fe-ok{color:#2e7d32}' +
+            '.fe-no{color:#c62828}' +
+            '@media(max-width:640px){' +
+                '.fe-tbl{font-size:11px}' +
+                '.fe-tbl th,.fe-tbl td{padding:4px 3px}' +
+                '.fe-slot{font-size:11px;min-height:30px;padding:4px 6px}' +
+                '.fe-chip{font-size:11px;padding:5px 10px}' +
+                '.fe-tag-slot{font-size:10px;padding:2px 6px}' +
+            '}';
+        document.head.appendChild(s);
+    }
+
+    /* ── helpers ── */
+    function getS1Label(id) {
+        for (var i = 0; i < s1Opts.length; i++) { if (s1Opts[i].id === id) return s1Opts[i].label; }
+        return '';
+    }
+    function getS2Label(id) {
+        for (var i = 0; i < s2Opts.length; i++) { if (s2Opts[i].id === id) return s2Opts[i].label; }
+        return '';
+    }
+
+    /* ── render ── */
+    function render() {
+        container.innerHTML = '';
+        var wrap = document.createElement('div');
+        wrap.className = 'fe-wrap';
+
+        if (stage === 1) renderStage1(wrap);
+        else renderStage2(wrap);
+
+        container.appendChild(wrap);
+    }
+
+    /* ══════════ STAGE 1 ══════════ */
+    function renderStage1(wrap) {
+        // title
+        var title = document.createElement('div');
+        title.className = 'fe-stage-title';
+        title.innerHTML = '📊 第一階段：填入帝國名稱（選項可重複使用）';
+        wrap.appendChild(title);
+
+        // options
+        var optsDiv = document.createElement('div');
+        optsDiv.className = 'fe-opts';
+        s1Opts.forEach(function (opt) {
+            var chip = document.createElement('span');
+            chip.className = 'fe-chip' + (selected === opt.id ? ' sel' : '');
+            chip.textContent = opt.label;
+            chip.onclick = function () {
+                selected = (selected === opt.id) ? null : opt.id;
+                render();
+            };
+            optsDiv.appendChild(chip);
+        });
+        wrap.appendChild(optsDiv);
+
+        // table
+        var tbl = document.createElement('table');
+        tbl.className = 'fe-tbl';
+        tbl.innerHTML = '<thead><tr><th>但以理書 2 章</th><th>但以理書 7 章</th><th>羅馬觀 (Roman View)</th><th>希臘觀 (Greek View)</th></tr></thead>';
+        var tbody = document.createElement('tbody');
+
+        rows.forEach(function (row, i) {
+            var tr = document.createElement('tr');
+
+            // Dan 2
+            var td1 = document.createElement('td');
+            td1.className = 'given';
+            td1.textContent = (row.dan2Emoji ? row.dan2Emoji + ' ' : '') + row.dan2;
+            tr.appendChild(td1);
+
+            // Dan 7
+            var td2 = document.createElement('td');
+            td2.className = 'given';
+            td2.textContent = (row.dan7Emoji ? row.dan7Emoji + ' ' : '') + row.dan7;
+            tr.appendChild(td2);
+
+            // Roman slot
+            var td3 = document.createElement('td');
+            var slot3 = document.createElement('div');
+            slot3.className = 'fe-slot' + (s1Roman[i] ? ' filled' : '');
+            slot3.textContent = s1Roman[i] ? getS1Label(s1Roman[i]) : '點選放入';
+            slot3.onclick = function () {
+                if (selected && !s1Roman[i]) { s1Roman[i] = selected; selected = null; s1Result = null; render(); }
+                else if (s1Roman[i]) { s1Roman[i] = null; s1Result = null; render(); }
+                else if (selected) { s1Roman[i] = selected; selected = null; s1Result = null; render(); }
+            };
+            td3.appendChild(slot3);
+            tr.appendChild(td3);
+
+            // Greek slot
+            var td4 = document.createElement('td');
+            var slot4 = document.createElement('div');
+            slot4.className = 'fe-slot' + (s1Greek[i] ? ' filled' : '');
+            slot4.textContent = s1Greek[i] ? getS1Label(s1Greek[i]) : '點選放入';
+            slot4.onclick = function () {
+                if (selected && !s1Greek[i]) { s1Greek[i] = selected; selected = null; s1Result = null; render(); }
+                else if (s1Greek[i]) { s1Greek[i] = null; s1Result = null; render(); }
+                else if (selected) { s1Greek[i] = selected; selected = null; s1Result = null; render(); }
+            };
+            td4.appendChild(slot4);
+            tr.appendChild(td4);
+
+            tbody.appendChild(tr);
+        });
+        tbl.appendChild(tbody);
+        wrap.appendChild(tbl);
+
+        // actions
+        var actions = document.createElement('div');
+        actions.className = 'fe-actions';
+
+        var resetBtn = document.createElement('button');
+        resetBtn.className = 'fe-btn';
+        resetBtn.textContent = '🔄 重置';
+        resetBtn.onclick = function () { s1Roman.fill(null); s1Greek.fill(null); selected = null; s1Result = null; render(); };
+        actions.appendChild(resetBtn);
+
+        var confirmBtn = document.createElement('button');
+        confirmBtn.className = 'fe-btn fe-btn-p';
+        confirmBtn.textContent = '✅ 確認第一階段';
+        confirmBtn.onclick = evaluateStage1;
+        actions.appendChild(confirmBtn);
+        wrap.appendChild(actions);
+
+        // result
+        if (s1Result) {
+            var rd = document.createElement('div');
+            rd.className = 'fe-result';
+            rd.innerHTML = s1Result;
+            wrap.appendChild(rd);
+        }
+    }
+
+    function evaluateStage1() {
+        var empty = s1Roman.some(function (v) { return !v; }) || s1Greek.some(function (v) { return !v; });
+        if (empty) {
+            s1Result = '<p style="color:#d63031;font-weight:600;">⚠️ 請先填滿所有空格再確認！</p>';
+            render(); return;
+        }
+
+        var rOk = 0, gOk = 0;
+        for (var i = 0; i < 5; i++) {
+            if (s1Roman[i] === s1Ans.roman[i]) rOk++;
+            if (s1Greek[i] === s1Ans.greek[i]) gOk++;
+        }
+
+        var h = '<h4 style="margin:0 0 8px;">第一階段結果</h4>';
+        h += '<p><strong>羅馬觀：</strong>' + rOk + '/5 ' + (rOk === 5 ? '<span class="fe-ok">✅ 完全正確</span>' : '<span class="fe-no">需要調整</span>') + '</p>';
+        h += '<p><strong>希臘觀：</strong>' + gOk + '/5 ' + (gOk === 5 ? '<span class="fe-ok">✅ 完全正確</span>' : '<span class="fe-no">需要調整</span>') + '</p>';
+
+        if (rOk === 5 && gOk === 5) {
+            h += '<p style="color:#2e7d32;font-weight:700;margin-top:8px;">🎉 兩個觀點都正確！進入第二階段 →</p>';
+            s1Result = h;
+            render();
+            setTimeout(function () { stage = 2; selected = null; render(); }, 1200);
+        } else {
+            h += '<table class="fe-tbl" style="margin-top:8px"><tr><th></th><th>你的答案</th><th>正確（羅馬觀）</th><th>正確（希臘觀）</th></tr>';
+            for (var i = 0; i < 5; i++) {
+                h += '<tr>';
+                h += '<td class="given">' + rows[i].dan7Emoji + ' ' + rows[i].dan7 + '</td>';
+                h += '<td>' + getS1Label(s1Roman[i]) + (s1Roman[i] === s1Ans.roman[i] ? ' ✅' : ' ❌') + ' / ' + getS1Label(s1Greek[i]) + (s1Greek[i] === s1Ans.greek[i] ? ' ✅' : ' ❌') + '</td>';
+                h += '<td>' + getS1Label(s1Ans.roman[i]) + '</td>';
+                h += '<td>' + getS1Label(s1Ans.greek[i]) + '</td>';
+                h += '</tr>';
+            }
+            h += '</table>';
+            h += '<p style="margin-top:8px;font-size:12px;color:#888;">修正後再次確認，或直接繼續：</p>';
+            h += '<button class="fe-btn fe-btn-p" onclick="this.parentElement.parentElement.querySelector(\'[data-force-s2]\').click()" style="margin-top:4px;font-size:12px;padding:6px 12px;">跳至第二階段 →</button>';
+            // hidden button to force stage 2
+            s1Result = h;
+            render();
+            // add force button listener
+            var forceEl = container.querySelector('[data-force-s2]');
+            if (!forceEl) {
+                var hidden = document.createElement('button');
+                hidden.setAttribute('data-force-s2', '1');
+                hidden.style.display = 'none';
+                hidden.onclick = function () {
+                    // use correct answers for display
+                    s1Roman = s1Ans.roman.slice();
+                    s1Greek = s1Ans.greek.slice();
+                    stage = 2; selected = null; render();
+                };
+                container.appendChild(hidden);
+            }
+        }
+    }
+
+    /* ══════════ STAGE 2 ══════════ */
+    function renderStage2(wrap) {
+        // title
+        var title = document.createElement('div');
+        title.className = 'fe-stage-title s2';
+        title.innerHTML = '📖 第二階段：加入第八章的對應（點選藍色選項，再點表中的藍色空格）';
+        wrap.appendChild(title);
+
+        // options
+        var optsDiv = document.createElement('div');
+        optsDiv.className = 'fe-opts s2';
+        s2Opts.forEach(function (opt) {
+            var chip = document.createElement('span');
+            chip.className = 'fe-chip s2' + (selected === opt.id ? ' sel' : '');
+            chip.textContent = opt.label;
+            chip.onclick = function () {
+                selected = (selected === opt.id) ? null : opt.id;
+                render();
+            };
+            optsDiv.appendChild(chip);
+        });
+        wrap.appendChild(optsDiv);
+
+        // table
+        var tbl = document.createElement('table');
+        tbl.className = 'fe-tbl';
+        tbl.innerHTML = '<thead><tr><th>但以理書 2 章</th><th>但以理書 7 章</th><th>羅馬觀 (Roman View)</th><th>希臘觀 (Greek View)</th></tr></thead>';
+        var tbody = document.createElement('tbody');
+
+        rows.forEach(function (row, i) {
+            var tr = document.createElement('tr');
+
+            // Dan 2
+            var td1 = document.createElement('td');
+            td1.className = 'given';
+            td1.textContent = (row.dan2Emoji ? row.dan2Emoji + ' ' : '') + row.dan2;
+            tr.appendChild(td1);
+
+            // Dan 7 (may have stage2 slot)
+            var td2 = document.createElement('td');
+            td2.className = 'given';
+            var dan7Html = (row.dan7Emoji ? row.dan7Emoji + ' ' : '') + row.dan7;
+            td2.innerHTML = dan7Html;
+            var s2key_d7 = 'dan7-' + i;
+            if (s2Ans[s2key_d7] !== undefined) {
+                var tag = createS2Tag(s2key_d7);
+                td2.appendChild(tag);
+            }
+            tr.appendChild(td2);
+
+            // Roman (locked with possible stage2 tag)
+            var td3 = document.createElement('td');
+            var lockDiv3 = document.createElement('div');
+            lockDiv3.className = 'fe-slot locked';
+            lockDiv3.textContent = getS1Label(s1Roman[i]);
+            td3.appendChild(lockDiv3);
+            var s2key_r = 'roman-' + i;
+            if (s2Ans[s2key_r] !== undefined) {
+                var tag2 = createS2Tag(s2key_r);
+                td3.appendChild(tag2);
+            }
+            tr.appendChild(td3);
+
+            // Greek (locked with possible stage2 tag)
+            var td4 = document.createElement('td');
+            var lockDiv4 = document.createElement('div');
+            lockDiv4.className = 'fe-slot locked';
+            lockDiv4.textContent = getS1Label(s1Greek[i]);
+            td4.appendChild(lockDiv4);
+            var s2key_g = 'greek-' + i;
+            if (s2Ans[s2key_g] !== undefined) {
+                var tag3 = createS2Tag(s2key_g);
+                td4.appendChild(tag3);
+            }
+            tr.appendChild(td4);
+
+            tbody.appendChild(tr);
+        });
+        tbl.appendChild(tbody);
+        wrap.appendChild(tbl);
+
+        // actions
+        var actions = document.createElement('div');
+        actions.className = 'fe-actions';
+
+        var resetBtn = document.createElement('button');
+        resetBtn.className = 'fe-btn';
+        resetBtn.textContent = '🔄 重置第二階段';
+        resetBtn.onclick = function () { s2Filled = {}; selected = null; s2Result = null; render(); };
+        actions.appendChild(resetBtn);
+
+        var backBtn = document.createElement('button');
+        backBtn.className = 'fe-btn';
+        backBtn.textContent = '← 回到第一階段';
+        backBtn.onclick = function () { stage = 1; selected = null; s1Result = null; s2Result = null; s2Filled = {}; render(); };
+        actions.appendChild(backBtn);
+
+        var confirmBtn = document.createElement('button');
+        confirmBtn.className = 'fe-btn fe-btn-s2';
+        confirmBtn.textContent = '✅ 確認第二階段';
+        confirmBtn.onclick = evaluateStage2;
+        actions.appendChild(confirmBtn);
+        wrap.appendChild(actions);
+
+        // result
+        if (s2Result) {
+            var rd = document.createElement('div');
+            rd.className = 'fe-result';
+            rd.innerHTML = s2Result;
+            wrap.appendChild(rd);
+        }
+    }
+
+    function createS2Tag(key) {
+        var tag = document.createElement('div');
+        tag.className = 'fe-tag-slot' + (s2Filled[key] ? ' filled' : '');
+        tag.textContent = s2Filled[key] ? getS2Label(s2Filled[key]) : '第八章?';
+        tag.onclick = function (e) {
+            e.stopPropagation();
+            if (selected && !s2Filled[key]) { s2Filled[key] = selected; selected = null; s2Result = null; render(); }
+            else if (s2Filled[key]) { s2Filled[key] = null; s2Result = null; render(); }
+            else if (selected) { s2Filled[key] = selected; selected = null; s2Result = null; render(); }
+        };
+        return tag;
+    }
+
+    function evaluateStage2() {
+        var keys = Object.keys(s2Ans);
+        var empty = keys.some(function (k) { return !s2Filled[k]; });
+        if (empty) {
+            s2Result = '<p style="color:#d63031;font-weight:600;">⚠️ 請先填滿所有藍色空格再確認！</p>';
+            render(); return;
+        }
+
+        var ok = 0;
+        keys.forEach(function (k) { if (s2Filled[k] === s2Ans[k]) ok++; });
+        var total = keys.length;
+
+        var h = '<h4 style="margin:0 0 8px;">第二階段結果：' + ok + '/' + total + '</h4>';
+        if (ok === total) {
+            h += '<p class="fe-ok" style="font-weight:700;">🎉 全部正確！你已完整理解但以理書 2、7、8 章的對照關係。</p>';
+        } else {
+            h += '<table class="fe-tbl" style="margin-top:8px"><tr><th>位置</th><th>你的答案</th><th>正確答案</th><th></th></tr>';
+            keys.forEach(function (k) {
+                var isOk = s2Filled[k] === s2Ans[k];
+                var parts = k.split('-');
+                var colName = parts[0] === 'dan7' ? '但 7 小角' : (parts[0] === 'roman' ? '羅馬觀 第' + (parseInt(parts[1]) + 1) + '列' : '希臘觀 第' + (parseInt(parts[1]) + 1) + '列');
+                h += '<tr><td>' + colName + '</td><td>' + getS2Label(s2Filled[k]) + '</td><td>' + getS2Label(s2Ans[k]) + '</td><td>' + (isOk ? '✅' : '❌') + '</td></tr>';
+            });
+            h += '</table>';
+        }
+        h += '<div class="fe-note">' + data.note + '</div>';
+        s2Result = h;
+        render();
+    }
+
+    /* ── init ── */
+    render();
+};
