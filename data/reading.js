@@ -78,7 +78,7 @@ window.LESSONS_DATA.push({
             year: 2023,
             isbn: '',
             image: 'https://files.logoscdn.com/v1/assets/14563960/optimized?w=500&m=limit&h=508',
-            link: 'https://www.logos.com/product/389476/the-book-of-daniel-chapters-1-6',
+            link: 'https://www.logos.com/product/246891/daniel-a-discourse-analysis-of-the-hebrew-bible',
             bibtex: '@book{Widder_2023,\n  address={Grand Rapids, MI},\n  series={Zondervan Exegetical Commentary on the Old Testament},\n  title={Daniel: God’s Kingdom Will Endure},\n  publisher={Zondervan Academic},\n  author={Widder, Wendy},\n  editor={Block, Daniel I.},\n  year={2023},\n  collection={Zondervan Exegetical Commentary on the Old Testament}\n}'
         },
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
