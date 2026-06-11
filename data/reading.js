@@ -94,6 +94,19 @@ window.LESSONS_DATA.push({
             link: 'https://www.logos.com/product/396406/old-testament-prophets-the-covenant-conscience-of-gods-people',
             bibtex: '@book{Widder_2026,\n  address={Brentwood, TN},\n  series={Scripture Connections},\n  title={Old Testament Prophets: The Covenant Conscience of God’s People},\n  publisher={B&H Academic},\n  author={Widder, Wendy},\n  editor={Schnittjer, Gary Edward and Strauss, Mark L.},\n  year={2026},\n  collection={Scripture Connections}\n}'
         },
+        cook2026: {
+    id: 'cook2026',
+    author: 'Stephen L. Cook',
+    title: 'Daniel',
+    series: 'Baker Commentary on the Old Testament Prophetic Books',
+    publisher: 'Baker Academic: A Division of Baker Publishing Group',
+    address: 'Grand Rapids, MI',
+    year: 2026,
+    isbn: '9781493453160',
+    image: 'https://files.amberfile.com/v1/assets/17474707/optimized?w=250&m=limit&h=254',
+    link: 'https://www.logos.com/product/417746/daniel',
+    bibtex: '@book{Cook_2026,\n  address={Grand Rapids, MI},\n  series={Baker Commentary on the Old Testament Prophetic Books},\n  title={Daniel},\n  publisher={Baker Academic: A Division of Baker Publishing Group},\n  author={Cook, Stephen L.},\n  editor={Boda, Mark J. and McConville, J. Gordon},\n  year={2026},\n  collection={Baker Commentary on the Old Testament Prophetic Books}\n}'
+},
         // ↑ 日後可在此處添加更多書目，例如 widder2023: { ... }, tanner2020: { ... }
     },
     
@@ -285,6 +298,58 @@ window.LESSONS_DATA.push({
                 }
             ]
         },
+        {
+    id: 'art-dan-excursus4',
+    lessonRef: '但以理書 9:24–26（受膏者）',
+    title: '撒迦利亞與昆蘭中的將死受膏者',
+    icon: '📜',
+    category: 'excursus',
+    categoryLabel: '註釋 Excursus',
+    html:
+        '<figure style="margin:0; padding:0; text-align:center;">' +
+            '<img src="https://files.amberfile.com/v1/assets/17474707/optimized?w=250&m=limit&h=254" ' +
+                 'alt="Stephen L. Cook, Daniel (Baker Commentary on the Old Testament Prophetic Books)" ' +
+                 'style="max-width:100%; height:auto; border:1px solid #e5e7eb; border-radius:4px;" />' +
+            '<figcaption style="font-size:0.95rem; color:#374151; margin-top:0.35rem;">' +
+                'Stephen L. Cook, <em>Daniel</em>（Baker Commentary on the Old Testament Prophetic Books）' +
+            '</figcaption>' +
+        '</figure>' +
+        '<p style="margin-top:0.75rem;">' +
+        '《但以理書》常回響並擴展早先的聖經異象與啟示，' +
+        '因此可以在撒迦利亞書 13:7–9 的「被擊打的牧人」中，' +
+        '尋找但 9:26a 「將被剪除的受膏者」的前例。該段是波斯時期的啟示預言，' +
+        '神召喚刀劍攻擊「我的牧人」，這牧人應是末世受膏的猶大統治者。' +
+        '詞組 geber ʿămîtî（撒 13:7）可能暗示此人兼具力量、英勇，且與神相親。' +
+        '牧者被殺後，患難展開，羊群被剪除；熬煉帶來重生群體，' +
+        '如但 9 所述，經由對立轉化（enantiodromia），試煉導向贖罪與公義（9:24；參 11:35；12:10）。' +
+        '<sup class="fn-mark" data-fn="1">1</sup>' +
+        '</p>' +
+        '<p><strong>昆蘭的受苦彌賽亞圖像：</strong>《自我頌揚詩》描繪一位受苦的彌賽亞，' +
+        '與撒 13:7–9 的良善牧者相似；此人被神高舉，在天使中獨特卻被藐視、受虐，' +
+        '類似賽 53 的「耶和華的僕人」，「擔當一切憂患」「受苦」且成為典範。' +
+        '作為受苦的彌賽亞，他被高舉到天上一個以色列諸王也無法聲稱的寶座。</p>' +
+        '<p><strong>《麥基洗德註釋》（11Q13）的詮釋：</strong>11Q13 視但 9:24–26 為未竟的彌賽亞預言，' +
+        '並援引但 9:25–26、賽 52:7、賽 61:1–2 來解讀但以理的禧年年表。' +
+        '它把但 9:25–26 的「受膏者」認為是天上的救贖者，既是被神化的「麥基洗德」（創 14:18；詩 110:4），' +
+        '也是賽 61:2–3 的理想僕人；神的最終審判發生在七十個七末，稱為十個禧年（490 年）。</p>' +
+        '<p><strong>兩位受膏者與末世連結：</strong>但 9:24–26a 有兩位受膏者，11Q13 指向第二位、即將被剪除者，' +
+        '因其出現在七十個七的尾聲。該註釋透過多重賽 61:1–3 的呼應，' +
+        '把但 9:26a 的人物與「耶和華的僕人」連結；像但 9:26 的人物，僕人被殺（賽 53:8–9）。</p>' +
+        '<p><strong>彌賽亞禧年與贖罪：</strong>註釋稱此人為「[靈的彌]賽亞」（源於賽 61:1），' +
+        '他安慰錫安一切哀哭的人（賽 61:2–3），宣講神的拯救佳音（賽 61:1–2），即啟示性的禧年。' +
+        '禧年的核心包含贖罪——「被擄的人將在第十個禧年開始的贖罪日被釋放、免罪」（11Q13 ii 6–8）。' +
+        '加百列應許但以理，七十個七將終止罪惡、除淨罪孽，並「帶來永遠的義」（但 9:24）。' +
+        '賽 53:11–12 清楚表明，僕人的死帶來贖罪；賽 53:8 與但 9:26a 是否指向同一贖罪之死？' +
+        '11Q13 的作者似乎如此認為。</p>',
+    footnotes: [
+        {
+            num: 1,
+            bookKey: 'cook2026',
+            page: '295–297',
+            text: 'Stephen L. Cook, Daniel, ed. Mark J. Boda and J. Gordon McConville, Baker Commentary on the Old Testament Prophetic Books (Grand Rapids, MI: Baker Academic: A Division of Baker Publishing Group, 2026), 295–297.'
+        }
+    ]
+},
         {
             id: 'art-map-daniel',
             lessonRef: '但以理書地圖',
