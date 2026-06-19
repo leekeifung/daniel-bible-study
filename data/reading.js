@@ -306,14 +306,6 @@ window.LESSONS_DATA.push({
     category: 'excursus',
     categoryLabel: '註釋 Excursus',
     html:
-        '<figure style="margin:0; padding:0; text-align:center;">' +
-            '<img src="https://files.amberfile.com/v1/assets/17474707/optimized?w=250&m=limit&h=254" ' +
-                 'alt="Stephen L. Cook, Daniel (Baker Commentary on the Old Testament Prophetic Books)" ' +
-                 'style="max-width:100%; height:auto; border:1px solid #e5e7eb; border-radius:4px;" />' +
-            '<figcaption style="font-size:0.95rem; color:#374151; margin-top:0.35rem;">' +
-                'Stephen L. Cook, <em>Daniel</em>（Baker Commentary on the Old Testament Prophetic Books）' +
-            '</figcaption>' +
-        '</figure>' +
         '<p style="margin-top:0.75rem;">' +
         '《但以理書》常回響並擴展早先的聖經異象與啟示，' +
         '因此可以在撒迦利亞書 13:7–9 的「被擊打的牧人」中，' +
