@@ -125,7 +125,7 @@ window.LESSONS_DATA.push({
 '<div class="highlight-box">' +
 '<p><strong>⚠️ 五個決定你解釋方向的問題</strong></p>' +
 '<ul>' +
-'<li><strong>① 「出令」(v.25) 是指什麼？</strong>——神的話（耶利米的預言）還是王的詔書（古列/亞達薛西）？</li>' +
+'<li><strong>① 「出令(命令)」(v.25) 是指什麼？</strong>——神的話（耶利米的預言）還是王的詔書（古列/亞達薛西）？</li>' +
 '<li><strong>② 「7」與「62」分開還是合併？</strong>——合併讀為 69 個七（指向基督）；分開讀為兩段（7 指歸回，62 指後續時期）。</li>' +
 '<li><strong>③ 第一位「受膏者」(v.25) 是誰？</strong>——古列/所羅巴伯/約書亞？還是耶穌？</li>' +
 '<li><strong>④ 第二位「受膏者」(v.26) 是誰？</strong>——耶穌（被釘十字架）？還是大祭司奧尼亞三世（主前 171 年被殺）？</li>' +
@@ -180,7 +180,7 @@ window.LESSONS_DATA.push({
     note: '💡 <strong>OT366 核心提醒：</strong>禱告對信仰生活至關重要、神是人類歷史的主宰、悔改是與神和好的先決條件、神忠於祂拯救和恢復子民的聖約應許。',
 
     parts: [
-        { id: 'issue1', emoji: '①', label: '「出令」是指？' },
+        { id: 'issue1', emoji: '①', label: '「出令(命令)」是指？' },
         { id: 'issue2', emoji: '②', label: '7 與 62 的讀法？' },
         { id: 'issue3', emoji: '③', label: '第一位受膏者？' },
         { id: 'issue4', emoji: '④', label: '第二位受膏者？' },
@@ -383,7 +383,7 @@ window.LESSONS_DATA.push({
             type: 'match',
             q: '請將五個解釋難題與其核心問題配對：',
             pairs: [
-                { left: '難題一：出令', right: '是神的話（耶利米）還是王的詔書？' },
+                { left: '難題一：出令(命令)', right: '是神的話（耶利米）還是王的詔書？' },
                 { left: '難題二：7 與 62', right: '合併讀為 69 還是分開讀？' },
                 { left: '難題三：第一位受膏者', right: '古列/所羅巴伯還是耶穌？' },
                 { left: '難題四：第二位受膏者', right: '耶穌（十架）還是奧尼亞三世？' },
