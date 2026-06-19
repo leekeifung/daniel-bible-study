@@ -163,10 +163,11 @@ window.LESSONS_DATA.push({
     headerRight:  '你的配對',
     resultHeader: '解釋難題',
     optionsTitle: '可選解釋',
-    viewALabel:   '希臘觀',
-    viewAFull:    '希臘觀（歷史非彌賽亞觀）',
+    viewALabel:   '馬加比觀', // 修正：與 OT366 Sec 75 術語一致
+    viewAFull:    '歷史非彌賽亞觀（馬加比/安提阿觀）', // 修正：精確對應源文分類
     viewBLabel:   '羅馬觀',
     viewBFull:    '羅馬觀（歷史彌賽亞觀）',
+    translationNote: '💡 註：本課程經文採用 RCUV。解經邏輯參考 OT366 對 NASB/ESV 的翻譯比較（如「受膏者」譯法與「七+六十二」斷句）。',
     note: '💡 <strong>OT366 核心提醒：</strong>禱告對信仰生活至關重要、神是人類歷史的主宰、悔改是與神和好的先決條件、神忠於祂拯救和恢復子民的聖約應許。',
 
     parts: [
