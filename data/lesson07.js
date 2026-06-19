@@ -58,7 +58,7 @@ window.LESSONS_DATA.push({
             icon: '📖',
             defaultOpen: false,
             html: '<h4 style="color:#00897b;margin:0 0 8px;">1. 第九章的三個獨特之處</h4>' +
-'<p>OT366 (Segment 62) 指出第九章在全書中非常獨特：</p>' +
+'<p>OT366 指出第九章在全書中非常獨特：</p>' +
 '<ul>' +
 '<li><strong>沒有來自政權的威脅：</strong>不同於前幾章的火窯或獅子坑，本章的起點是但以理安靜地研讀經卷。</li>' +
 '<li><strong>包含長篇禱告：</strong>這是書中唯一記錄了但以理具體禱告內容（長達 16 節）的章節。在第 2 章我們知道他禱告，卻不知內容；在第 6 章我們看到他禱告，卻沒聽到禱詞。唯有本章完整記載。</li>' +
@@ -67,7 +67,7 @@ window.LESSONS_DATA.push({
 '<h4 style="color:#00897b;margin:16px 0 8px;">2. 但以理研讀耶利米書 (9:1-2)</h4>' +
 '<p>時間是大流士元年（約主前 539 年），巴比倫已亡。但以理從書卷中讀到耶利米的預言：耶路撒冷荒涼的年數為<strong>七十年</strong>（參耶 25:11-12; 29:10）。</p>' +
 '<div class="highlight-box">' +
-'<p><strong>📘 「七十年」的三種理解 (Segment 64)</strong></p>' +
+'<p><strong>📘 「七十年」的三種理解 </strong></p>' +
 '<ul>' +
 '<li><strong>字面意義：</strong>從 605 年（第一次被擄）到 539 年（巴比倫滅亡）= 66 年，接近 70。</li>' +
 '<li><strong>整數/約數：</strong>如詩篇 90:10「人一生的年日是七十歲」，代表一個完整的壽命週期。</li>' +
@@ -75,13 +75,13 @@ window.LESSONS_DATA.push({
 '</ul>' +
 '</div>' +
 '<h4 style="color:#00897b;margin:16px 0 8px;">3. 但以理的回應：認罪是恢復的前提</h4>' +
-'<p>OT366 (Segment 63) 指出：但以理不只是在「等」七十年期滿，他研讀了耶利米的信（耶 29:12-13），發現恢復的條件不只是時間到了，還需要<strong>認罪與尋求神</strong>。因此，但以理作為百姓的代表，做了耶利米所說的事——禱告、認罪、尋求神。</p>'
+'<p>OT366 指出：但以理不只是在「等」七十年期滿，他研讀了耶利米的信（耶 29:12-13），發現恢復的條件不只是時間到了，還需要<strong>認罪與尋求神</strong>。因此，但以理作為百姓的代表，做了耶利米所說的事——禱告、認罪、尋求神。</p>'
         },
         {
             title: '但以理的認罪禱告 (9:3-19)',
             icon: '🙏',
             defaultOpen: false,
-            html: '<h4 style="color:#00897b;margin:0 0 8px;">1. 禱告的結構 (Segment 65)</h4>' +
+            html: '<h4 style="color:#00897b;margin:0 0 8px;">1. 禱告的結構 </h4>' +
 '<ul>' +
 '<li><strong>呼求 (Invocation, v.4)：</strong>呼求耶和華，大而可畏的神、守約施慈愛的神。</li>' +
 '<li><strong>認罪 (Confession, v.5-11a)：</strong>從宮殿到街頭，從君王到百姓——所有人都犯了罪。一位學者估計，這篇禱告有 85% 是引用舊約經文。</li>' +
@@ -104,14 +104,14 @@ window.LESSONS_DATA.push({
             icon: '📜',
             defaultOpen: false,
             html: '<h4 style="color:#00897b;margin:0 0 8px;">1. 舊約學術界的「泥沼」(The Dismal Swamp)</h4>' +
-'<p>OT366 (Segment 66) 坦言：這段經文是「the dismal swamp of OT scholarship」——舊約研究中最困難的泥沼之一。但 Widder 教授鼓勵我們不要因此而懼怕，而是帶著謙卑進入。</p>' +
+'<p>OT366 坦言：這段經文是「the dismal swamp of OT scholarship」——舊約研究中最困難的泥沼之一。但 Widder 教授鼓勵我們不要因此而懼怕，而是帶著謙卑進入。</p>' +
 '<h4 style="color:#00897b;margin:16px 0 8px;">2. 核心概念：七十個七 (Seventy Weeks)</h4>' +
 '<ul>' +
 '<li><strong>含義：</strong>學者普遍同意「七十個七」= 70 × 7 = <strong>490 年</strong>（參利 25:8 的「七個安息年」= 7×7=49 年）。但 490 是字面還是象徵，有爭議。</li>' +
 '<li><strong>六重目的 (v.24)：</strong>前三個消極（止住罪過、除淨罪惡、贖盡罪孽）+ 後三個積極（引進永義、封住異象、膏至聖所）。Joyce Baldwin 觀察到：前三個回應但以理的認罪，後三個指向神的救贖計劃。</li>' +
 '<li><strong>時間結構：</strong>7 + 62 + 1 = 70 個七。</li>' +
 '</ul>' +
-'<h4 style="color:#00897b;margin:16px 0 8px;">3. 五個關鍵解釋難題 (Segments 67-71)</h4>' +
+'<h4 style="color:#00897b;margin:16px 0 8px;">3. 五個關鍵解釋難題 </h4>' +
 '<div class="highlight-box">' +
 '<p><strong>⚠️ 五個決定你解釋方向的問題</strong></p>' +
 '<ul>' +
@@ -122,7 +122,7 @@ window.LESSONS_DATA.push({
 '<li><strong>⑤ 第七十個七何時發生？</strong>——安提阿古四世時期（歷史觀）？基督時代至主後 70 年（歷史彌賽亞觀）？還是未來末世（末世論觀）？</li>' +
 '</ul>' +
 '</div>' +
-'<h4 style="color:#00897b;margin:16px 0 8px;">4. 主要解釋觀點的總覽 (Segments 72-75)</h4>' +
+'<h4 style="color:#00897b;margin:16px 0 8px;">4. 主要解釋觀點的總覽 </h4>' +
 '<ul>' +
 '<li><strong>I. 末世論觀點 (Eschatological)：</strong>部分事件已應驗，部分尚在未來。<ul>' +
 '<li>A. 彌賽亞觀：耶穌是受膏者。(1) 字面派／時代論；(2) 象徵派。</li>' +
@@ -134,7 +134,7 @@ window.LESSONS_DATA.push({
 '</ul></li>' +
 '</ul>' +
 '<div class="highlight-box">' +
-'<p><strong>💡 OT366 的核心提醒 (Segment 76)</strong></p>' +
+'<p><strong>💡 OT366 的核心提醒 </strong></p>' +
 '<p>「無論這 490 年是字面上的還是象徵性的，無論它們是針對但以理書最初讀者當時事件的啟示性紀錄，還是對耶穌降臨的預言，但以理書第九章的信息都與全書的其他部分保持一致：</p>' +
 '<ol>' +
 '<li><strong>禱告</strong>對信仰生活至關重要。</li>' +
@@ -202,7 +202,7 @@ window.LESSONS_DATA.push({
             {
                 id: 'obs1',
                 text: '在第 2 節，但以理讀先知書時發現了什麼？這促使他做了什麼行動 (v.3)？他為什麼不只是「等」七十年期滿，還需要禱告？',
-                hint: '參考耶利米書 29:12-13 的條件。OT366 (Segment 63) 問：除了時間到了，恢復還需要什麼前提？',
+                hint: '參考耶利米書 29:12-13 的條件。OT366  問：除了時間到了，恢復還需要什麼前提？',
                 reference: '<b>【發現】</b>但以理從耶利米的書卷中得知：耶路撒冷荒涼的年數為<b>七十年</b> (v.2)。此時已是大流士元年（約主前 539 年），巴比倫已經滅亡——耶利米預言的「巴比倫受罰」已經應驗了。<br><br><b>【行動】</b>v.3：他「面向主上帝，禁食，披麻蒙灰，懇切禱告祈求」。<br><br><b>【為什麼不只是「等」？】</b>OT366 (Segment 63) 精確指出：但以理回去重讀耶利米書 29:12-13，發現恢復的條件不只是「時間到了」，還需要百姓<b>「禱告、認罪、尋求神」</b>。耶利米說「你們要呼求我……尋求我，若專心尋求我，就必尋見」。但以理意識到：巴比倫雖已滅亡，百姓卻還沒有做耶利米所說的事。於是他作為百姓的代表，去做了耶利米所要求的。'
             },
             {
@@ -224,20 +224,20 @@ window.LESSONS_DATA.push({
             {
                 id: 'int1',
                 text: '但以理原本在為耶利米預言的「七十年」期滿而禱告，希望流亡能結束。但神的回應卻是「七十個七」（490 年）。\n(a) 為什麼單單結束地理上的被擄（回歸耶路撒冷）還不夠？\n(b) 這對「被擄」的本質告訴我們什麼？',
-                hint: 'OT366 (Segment 66) 指出：「The answer he receives is that exile will end, but far worse is on the horizon.」想想 v.24 的六重目的——需要解決的是什麼層面的問題？',
-                reference: '<b>(a)【為什麼不夠？】</b><br>OT366 (Segment 66) 指出：「Daniel is praying for the end of exile, but the answer he receives is that exile will end, but <b>far worse is on the horizon</b>. The seventy years of exile are just a precursor to what Gabriel calls seventy weeks.」<br><br>神的回應揭示：以色列的根本問題不是「地理上離開了耶路撒冷」，而是<b>深層的罪惡</b>。七十年的流亡不足以解決根本問題。「七十個七」是為了徹底處理罪（止住罪過、贖盡罪孽 v.24）——這是一個比「回家」大得多的計劃。<br><br><b>(b)【被擄的本質】</b><br>「被擄」不僅是離開家園，更是與神的關係破裂。即使百姓回到耶路撒冷、重建聖殿，如果罪的問題沒有根本解決，他們仍然在屬靈意義上「被擄」。七十個七的計劃指向的是徹底的救贖——「引進永恆的公義」。'
+                hint: 'OT366  指出：「The answer he receives is that exile will end, but far worse is on the horizon.」想想 v.24 的六重目的——需要解決的是什麼層面的問題？',
+                reference: '<b>(a)【為什麼不夠？】</b><br>OT366 指出：「Daniel is praying for the end of exile, but the answer he receives is that exile will end, but <b>far worse is on the horizon</b>. The seventy years of exile are just a precursor to what Gabriel calls seventy weeks.」<br><br>神的回應揭示：以色列的根本問題不是「地理上離開了耶路撒冷」，而是<b>深層的罪惡</b>。七十年的流亡不足以解決根本問題。「七十個七」是為了徹底處理罪（止住罪過、贖盡罪孽 v.24）——這是一個比「回家」大得多的計劃。<br><br><b>(b)【被擄的本質】</b><br>「被擄」不僅是離開家園，更是與神的關係破裂。即使百姓回到耶路撒冷、重建聖殿，如果罪的問題沒有根本解決，他們仍然在屬靈意義上「被擄」。七十個七的計劃指向的是徹底的救贖——「引進永恆的公義」。'
             },
             {
                 id: 'int2',
                 text: '關於 v.25-26 的「受膏者」，OT366 介紹了多種觀點。請討論以下兩種主要觀點，以及無論採取哪種觀點，經文傳遞了什麼共同的信息：\n• 觀點 A（歷史/馬加比觀）：受膏者指當時的歷史人物（如古列或奧尼亞三世）\n• 觀點 B（末世/彌賽亞觀）：受膏者指耶穌基督',
-                hint: 'OT366 (Segment 76) 的結論提到：無論哪種觀點，核心信息是一致的。想想什麼是「不受觀點影響」的確定真理。',
+                hint: 'OT366 的結論提到：無論哪種觀點，核心信息是一致的。想想什麼是「不受觀點影響」的確定真理。',
                 reference: '<b>【觀點 A：歷史/馬加比觀】</b><br>• 第一位受膏者 (v.25) = 古列（被擄歸回的領袖）<br>• 第二位受膏者 (v.26)「被剪除」 = 大祭司奧尼亞三世（主前 171 年被殺）<br>• 第七十個七 = 安提阿古四世的恐怖統治（主前 167-164）<br>• 優點：與第 8 章的歷史指涉一致；不需要合併 7+62<br><br><b>【觀點 B：末世/彌賽亞觀】</b><br>• 受膏者 (v.25-26) = 耶穌基督<br>• 「被剪除」= 十字架受難<br>• 第七十個七 = 末世大災難/敵基督的統治<br>• 優點：與新約對但以理書的引用一致（太 24:15）<br><br><b>【共同的核心信息 (Segment 76)】</b><br>OT366 總結：無論哪種觀點——<br>① <b>禱告</b>在信仰生活中至關重要<br>② <b>神掌管</b>人類歷史的進程<br>③ <b>悔改</b>是與神和好的前提<br>④ <b>神忠於祂的約</b>，必拯救祂的子民<br><br>「The complexity of this text should caution us against being dogmatic about any one position.」'
             },
             {
                 id: 'int3',
                 text: '但以理求的是「恢復」（結束被擄），神給的卻是「一個比預期更長、更複雜的時間表」。\n(a) 這種「禱告的答案超出預期」的模式，對我們理解神如何回應禱告有什麼啟發？\n(b) 經文學者 Ernest Lucas 說 v.26-27 的語言是「sufficiently allusive」（足夠含糊）——為什麼神不給一個清晰的時間表？',
                 hint: '想想：如果神直接說「再等 490 年」，這對當時的但以理有幫助嗎？含糊性是否反而保留了信息的跨時代適用性？',
-                reference: '<b>(a)【禱告答案超出預期】</b><br>OT366 (Segment 66) 形容這是「a rather peculiar answer」（相當奇特的回答）。但以理期待的是：巴比倫已亡，七十年快到了，該回家了！但神的回應是：你所盼望的恢復只是序幕，更大的故事還在展開。<br><br>這提醒我們：神的「回答」常常比我們的「問題」更大。我們問「什麼時候結束？」神回答「我正在做一件遠超你想像的事。」這不是忽視禱告，而是<b>以更宏大的計劃來回應</b>。<br><br><b>(b)【含糊性的目的】</b><br>OT366 (Segment 71) 引用 Ernest Lucas：「The language of vv. 26-27 is <b>sufficiently allusive</b> to permit the reapplication of these verses to later situations where the same pattern is appearing in history.」<br><br>含糊性是設計的——它使得這段經文可以<b>跨時代適用</b>：對馬加比時代的猶太人有意義、對面對羅馬逼迫的初代教會有意義、對末世的信徒也有意義。如果給出精確的時間表，反而會限縮經文的力量。<br><br>但以理書的目的不是讓我們畫出完美的末世圖表，而是讓每個時代受苦的信徒都能抓住核心真理：<b>神掌管歷史，邪惡有期限，救贖必完成</b>。'
+                reference: '<b>(a)【禱告答案超出預期】</b><br>OT366 形容這是「a rather peculiar answer」（相當奇特的回答）。但以理期待的是：巴比倫已亡，七十年快到了，該回家了！但神的回應是：你所盼望的恢復只是序幕，更大的故事還在展開。<br><br>這提醒我們：神的「回答」常常比我們的「問題」更大。我們問「什麼時候結束？」神回答「我正在做一件遠超你想像的事。」這不是忽視禱告，而是<b>以更宏大的計劃來回應</b>。<br><br><b>(b)【含糊性的目的】</b><br>OT366 (Segment 71) 引用 Ernest Lucas：「The language of vv. 26-27 is <b>sufficiently allusive</b> to permit the reapplication of these verses to later situations where the same pattern is appearing in history.」<br><br>含糊性是設計的——它使得這段經文可以<b>跨時代適用</b>：對馬加比時代的猶太人有意義、對面對羅馬逼迫的初代教會有意義、對末世的信徒也有意義。如果給出精確的時間表，反而會限縮經文的力量。<br><br>但以理書的目的不是讓我們畫出完美的末世圖表，而是讓每個時代受苦的信徒都能抓住核心真理：<b>神掌管歷史，邪惡有期限，救贖必完成</b>。'
             }
         ],
 
@@ -247,19 +247,19 @@ window.LESSONS_DATA.push({
                 id: 'app1',
                 text: '但以理沒有說「主啊，原諒他們」，而是說「我們犯罪作惡」。當我們看到教會、社會或國家的問題時，我們傾向於指責他人，還是像但以理一樣，將自己視為群體的一部分，承擔屬靈的責任？請嘗試為你的家庭、小組或教會做一個「我們」式的代求禱告。',
                 hint: '代求者的姿態是「我是這個群體的一員」，而非「我是旁觀者」。想想你的教會或家庭有什麼需要悔改的方面——你願意用「我們」來承認嗎？',
-                reference: '<b>引導方向：</b><br>OT366 (Segment 65) 指出：「Daniel acts very much like an OT prophet. He represents the people before God... He takes their action and behavior on himself.」<br><br>我們常常用「他們」來描述問題：「他們的教會太世俗」、「他們的年輕人不敬虔」、「他們的領袖有問題」。但但以理示範了不同的態度——<b>站在「我們」的位置</b>。<br><br><b>具體應用：</b><br>本週嘗試為你的群體（家庭、教會、城市）做一個「我們」式的禱告：<br>• 「主啊，<b>我們</b>的教會已經不冷不熱了……」<br>• 「主啊，<b>我們</b>的家庭沒有好好尊重彼此……」<br>• 不是控告特定的人，而是承擔群體的屬靈責任。<br><br>這不是虛偽地為自己沒做的事認罪，而是以代求者的心腸，與群體站在一起。'
+                reference: '<b>引導方向：</b><br>OT366  指出：「Daniel acts very much like an OT prophet. He represents the people before God... He takes their action and behavior on himself.」<br><br>我們常常用「他們」來描述問題：「他們的教會太世俗」、「他們的年輕人不敬虔」、「他們的領袖有問題」。但但以理示範了不同的態度——<b>站在「我們」的位置</b>。<br><br><b>具體應用：</b><br>本週嘗試為你的群體（家庭、教會、城市）做一個「我們」式的禱告：<br>• 「主啊，<b>我們</b>的教會已經不冷不熱了……」<br>• 「主啊，<b>我們</b>的家庭沒有好好尊重彼此……」<br>• 不是控告特定的人，而是承擔群體的屬靈責任。<br><br>這不是虛偽地為自己沒做的事認罪，而是以代求者的心腸，與群體站在一起。'
             },
             {
                 id: 'app2',
                 text: '但以理禱告的動力不是「我們的舒適」，而是「祢自己榮耀的名」(v.17, 19)。檢視你最近的一個迫切禱告——你是為了脫離困境，還是為了讓神的名在你的處境中得榮耀？試著調整你的禱告詞，以「神的名」為核心理由。',
                 hint: '想想：如果你的禱告加上「好讓祢的名在我的處境中被尊崇」，這會如何改變你的禱告方向和態度？',
-                reference: '<b>引導方向：</b><br>OT366 (Segment 65) 說：「I love Daniel\'s rationale for why God should do this. God should do this for <b>His sake</b>—for His city, His temple, His people, His reputation.」<br><br>大多數時候我們的禱告是以「自我」為中心：求脫離困境、求得到祝福、求問題解決。這些都不錯，但但以理示範了更深層的禱告動力：<b>為了神的名</b>。<br><br><b>具體應用：</b><br>嘗試這樣禱告：<br>• 「主啊，求祢醫治我的家庭關係，好讓<b>祢的名</b>在我的家人面前被尊崇。」<br>• 「主啊，求祢供應我的工作需要，好讓<b>祢的信實</b>在我的同事面前被見證。」<br>• 「主啊，不是因為我配得，而是因為<b>祢的名</b>被稱在我身上。」<br><br>當禱告的中心從「我的需要」轉向「祢的榮耀」，我們會發現禱告獲得了新的力量和方向。'
+                reference: '<b>引導方向：</b><br>OT366  說：「I love Daniel\'s rationale for why God should do this. God should do this for <b>His sake</b>—for His city, His temple, His people, His reputation.」<br><br>大多數時候我們的禱告是以「自我」為中心：求脫離困境、求得到祝福、求問題解決。這些都不錯，但但以理示範了更深層的禱告動力：<b>為了神的名</b>。<br><br><b>具體應用：</b><br>嘗試這樣禱告：<br>• 「主啊，求祢醫治我的家庭關係，好讓<b>祢的名</b>在我的家人面前被尊崇。」<br>• 「主啊，求祢供應我的工作需要，好讓<b>祢的信實</b>在我的同事面前被見證。」<br>• 「主啊，不是因為我配得，而是因為<b>祢的名</b>被稱在我身上。」<br><br>當禱告的中心從「我的需要」轉向「祢的榮耀」，我們會發現禱告獲得了新的力量和方向。'
             },
             {
                 id: 'app3',
                 text: '關於「七十個七」的細節，學者們爭論不休。OT366 提醒我們不要對單一立場過於武斷 (dogmatic)。這教導我們在面對聖經難題或末世預言時應保持什麼態度？這種態度如何幫助你在信徒之間保持合一？',
-                hint: 'OT366 (Segment 76)：「The complexity of this text and its many interrelated issues should caution us against being dogmatic about any one position.」',
-                reference: '<b>引導方向：</b><br>OT366 (Segment 71) 明確說：「The purpose of this revelation was <b>not</b> to give a script for the end of history. If we read it for that, we miss the power of the passage.」<br><br>又說 (Segment 76)：「The complexity of this text should <b>caution us against being dogmatic</b> about any one position. This is not a clear, perspicuous section of the Bible.」<br><br><b>具體應用：</b><br>① <b>對自己</b>：對末世預言的細節保持謙卑。不要把「我的解經立場」等同於「絕對真理」。<br>② <b>對別人</b>：不要因為弟兄姊妹對末世的看法不同（前千禧年/後千禧年/無千禧年/被提時間等）就論斷他們的信仰。<br>③ <b>抓住核心</b>：無論觀點如何，四個核心真理是不變的——禱告至關重要、神掌管歷史、悔改是和好的前提、神信守祂的約。<br><br>但以理書的力量不在於精確的時間表，而在於呼召我們信靠那位掌管歷史的神。讓「確定的核心」給你平安，讓「不確定的細節」讓你謙卑。'
+                hint: 'OT366 ：「The complexity of this text and its many interrelated issues should caution us against being dogmatic about any one position.」',
+                reference: '<b>引導方向：</b><br>OT366  明確說：「The purpose of this revelation was <b>not</b> to give a script for the end of history. If we read it for that, we miss the power of the passage.」<br><br>又說 (Segment 76)：「The complexity of this text should <b>caution us against being dogmatic</b> about any one position. This is not a clear, perspicuous section of the Bible.」<br><br><b>具體應用：</b><br>① <b>對自己</b>：對末世預言的細節保持謙卑。不要把「我的解經立場」等同於「絕對真理」。<br>② <b>對別人</b>：不要因為弟兄姊妹對末世的看法不同（前千禧年/後千禧年/無千禧年/被提時間等）就論斷他們的信仰。<br>③ <b>抓住核心</b>：無論觀點如何，四個核心真理是不變的——禱告至關重要、神掌管歷史、悔改是和好的前提、神信守祂的約。<br><br>但以理書的力量不在於精確的時間表，而在於呼召我們信靠那位掌管歷史的神。讓「確定的核心」給你平安，讓「不確定的細節」讓你謙卑。'
             }
         ]
     },
