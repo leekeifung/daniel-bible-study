@@ -368,17 +368,30 @@ window.LESSONS_DATA.push({
             ]
         },
         {
-            type: 'match',
-            q: '請將「七十個七」(v.24) 的六重目的分為「消除罪」和「成就義」兩組：',
-            pairs: [
-                { left: '止住罪過', right: '消除罪（消極）' },
-                { left: '除淨罪惡', right: '消除罪（消極）' },
-                { left: '贖盡罪孽', right: '消除罪（消極）' },
-                { left: '引進永恆的公義', right: '成就義（積極）' },
-                { left: '封住異象和預言', right: '成就義（積極）' },
-                { left: '膏至聖所', right: '成就義（積極）' }
-            ]
-        },
+    type: 'match', // 若您的前端支援，可改為 'categorize'；若強制 match 亦可沿用
+    q: '請將「七十個七」(v.24) 的六重目的分為「消除罪」和「成就義」兩組：',
+    
+    // 📦 選項池：前端只需渲染此陣列，確保用戶永遠只看到這兩個選擇
+    categories: [
+        { id: 'neg', label: '消除罪（消極）' },
+        { id: 'pos', label: '成就義（積極）' }
+    ],
+    
+    // 📝 待分類項目：前端逐項綁定 categories 的下拉選單或拖放區
+    items: [
+        { id: 'i1', text: '止住罪過', correct: 'neg' },
+        { id: 'i2', text: '除淨罪惡', correct: 'neg' },
+        { id: 'i3', text: '贖盡罪孽', correct: 'neg' },
+        { id: 'i4', text: '引進永恆的公義', correct: 'pos' },
+        { id: 'i5', text: '封住異象和預言', correct: 'pos' },
+        { id: 'i6', text: '膏至聖所', correct: 'pos' }
+    ],
+    
+    // ✅ 驗證邏輯（若您的系統需要）
+    validate: (userSelections) => {
+        return userSelections.every(item => item.category === item.correct);
+    }
+},
         {
             type: 'match',
             q: '請將五個解釋難題與其核心問題配對：',
